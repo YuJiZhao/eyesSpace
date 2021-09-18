@@ -37,9 +37,10 @@ copy:
 # social settings (社交圖標設置)
 # formal:
 #   icon: link || the description
-# social:
-#   fab fa-github: https://github.com/xxxxx || Github
-#   fas fa-envelope: 792734338@qq.com || Email
+social:
+  fab fa-cuttlefish: https://blog.csdn.net/tongkongyu || CSDN
+  fas fa-spider: https://greasyfork.org/zh-CN/users/763055-yujizhao || Greasyfork
+  fab fa-goodreads-g: https://gitee.com/eyesblog || Gitee
 
 # search (搜索)
 # --------------------------------------

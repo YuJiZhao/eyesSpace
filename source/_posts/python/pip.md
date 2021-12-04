@@ -1,7 +1,7 @@
 ---
 title: python的库文件管理(pip的使用)
 date: 2021-07-06 17:58:08
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/9.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/9.jpg
 tags: 
   - pip
   - 文件

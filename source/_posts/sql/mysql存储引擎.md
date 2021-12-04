@@ -1,7 +1,7 @@
 ---
 title: MySQL存储引擎
 date: 2021-09-27 20:29:35
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/43.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/43.jpg
 tags:
   - 存储引擎
 categories: sql

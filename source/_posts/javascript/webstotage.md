@@ -1,7 +1,7 @@
 ---
 title: Web Stotage——本地储存详解及案例
 date: 2021-06-11 11:38:05
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/29.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/29.jpg
 tags: 
   - Stotage
 categories: javascript

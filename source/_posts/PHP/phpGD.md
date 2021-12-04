@@ -1,7 +1,7 @@
 ---
 title: PHP之GD图像处理
 date: 2021-07-28 15:35:02
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/16.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/16.jpg
 tags: 
   - 图像
   - GD库

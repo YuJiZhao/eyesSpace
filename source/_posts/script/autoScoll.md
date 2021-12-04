@@ -1,7 +1,7 @@
 ---
 title: 页面自动滚动脚本
 date: 2021-05-02 14:53:37
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/7.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/7.jpg
 tags:
   - 脚本
 categories: 脚本

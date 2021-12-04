@@ -1,7 +1,7 @@
 ---
 title: thinkphp模型
 date: 2021-08-28 17:19:35
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/15.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/15.jpg
 tags: 
   - thinkphp
   - 模型

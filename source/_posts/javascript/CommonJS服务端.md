@@ -1,7 +1,7 @@
 ---
 title: Commonjs基于服务器端(node)的运用
 date: 2021-05-28 20:29:52
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/18.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/18.jpg
 tags: 
   - CommonJS
   - 模块化

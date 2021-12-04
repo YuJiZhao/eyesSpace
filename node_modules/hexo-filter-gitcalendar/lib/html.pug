@@ -1,0 +1,19 @@
+case theme
+  when 'butterfly'
+    .recent-post-item(style='width:100%;height:auto;padding:10px;')
+      include gitcalendar.pug 
+  when 'volantis'
+    .post.post-v3.white-box.reveal.shadow(style='width:100%;height:auto;padding:10px;')
+      include gitcalendar.pug 
+  when 'matery'
+    .container
+      .card(style='width:100%;height:auto;padding:10px;')
+        include gitcalendar.pug 
+  when 'mengd'
+    div(style='width:auto;height:auto;margin:10px 30px;')
+      include gitcalendar.pug 
+  default
+    container
+      include gitcalendar.pug 
+ 
+    

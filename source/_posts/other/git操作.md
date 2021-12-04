@@ -1,7 +1,7 @@
 ---
 title: git操作
 date: 2021-08-15 20:58:58
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/006.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/006.jpg
 tags: 
   - git
 categories: 其他

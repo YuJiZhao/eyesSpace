@@ -1,7 +1,7 @@
 ---
 title: wordcloud绘制词云彩
 date: 2021-10-11 15:09:11
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/59.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/59.jpg
 tags:
   - wordcloud
 categories: python

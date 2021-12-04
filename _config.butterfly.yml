@@ -2,16 +2,17 @@
 # --------------------------------------
 
 # format: name: link || icon
-# # sub-menu
+# sub-menu
 # name || icon:
 #   name: link || icon
 
 menu:
   主页: / || fas fa-home
   说说: /artitalk/ || fas fa-comment
+  音乐: /music/ || fa fa-music
+  视频: /video/ || fa fa-play-circle
   时间轴: /archives/ || fas fa-archive
-  标签: /tags/ || fas fa-tags
-  分类: /categories/ || fas fa-folder-open
+  留言: /comments/ || fa fa-edit
 
 # Hide the child menu items in mobile sidebar
 hide_sidebar_menu_child: false
@@ -89,38 +90,38 @@ favicon: /img/favicon.ico
 
 # Avatar (頭像)
 avatar:
-  img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/avatar.png
+  img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/avatar.png
   effect: false
 
 # Disable all banner image
 disable_top_img: false
 
 # The banner image of home page
-index_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/index.jpg
+index_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/cover/index.jpg
 
 # If the banner of page not setting, it will show the top_img
-default_top_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/default.jpg
+default_top_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/cover/default.jpg
 
 # The banner image of archive page
-archive_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/archive.jpg
+archive_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/cover/archive.jpg
 
 # If the banner of tag page not setting, it will show the top_img
 # note: tag page, not tags page (子標籤頁面的 top_img)
-tag_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/71.jpg
+tag_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/cover/71.jpg
 
 # The banner image of tag page
 # format:
 #  - tag name: xxxxx
-tag_per_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/71.jpg
+tag_per_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/cover/71.jpg
 
 # If the banner of category page not setting, it will show the top_img
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/37.jpg
+category_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/cover/37.jpg
 
 # The banner image of category page
 # format:
 #  - category name: xxxxx
-category_per_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/37.jpg
+category_per_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/cover/37.jpg
 
 cover:
   # display the cover or not (是否顯示文章封面)
@@ -132,18 +133,18 @@ cover:
   position: both
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
   default_cover:
-    - https://pic.imgdb.cn/item/6124d45f44eaada7398faddd.jpg
+    - https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/cover/default2.jpg
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
-  flink: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/friend_404.gif
-  post_page: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/404.jpg
+  flink: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/friend_404.gif
+  post_page: /img/404.jpg
 
 # A simple 404 page
 error_404:
-  enable: true
+  enable: false
   subtitle: 'Page Not Found'
-  background: https://i.loli.net/2020/05/19/aKOcLiyPl2JQdFD.png
+  background: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/error404.png
 
 post_meta:
   page: # Home Page
@@ -194,10 +195,10 @@ post_copyright:
 reward:
   enable: true
   QR_code:
-    - img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/wxpay.png
+    - img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/wxpay.png
       link:
       text: wechat
-    - img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/alipay.png
+    - img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/alipay.png
       link:
       text: alipay
 
@@ -227,7 +228,7 @@ post_pagination: 1
 
 # anchor
 # when you scroll in post, the URL will update according to header id.
-anchor: true
+anchor: false
 
 # Displays outdated notice for a post (文章過期提醒)
 noticeOutdate:
@@ -251,7 +252,7 @@ addThis:
 # https://github.com/overtrue/share.js
 sharejs:
   enable: true
-  sites: wechat,qq,weibo
+  sites: wechat,weibo,qq
 
 # AddToAny
 # https://www.addtoany.com/
@@ -320,7 +321,7 @@ valine:
   appKey: # leancloud application app key
   pageSize: 10 # comment list page size
   avatar: monsterid # gravatar style https://valine.js.org/#/avatar
-  lang: zh-CN # i18n: zh-CN/zh-TW/en/ja
+  lang: en # i18n: zh-CN/zh-TW/en/ja
   placeholder: Please leave your footprints # valine comment input placeholder (like: Please leave your footprints)
   guest_info: nick,mail,link # valine comment header info (nick/mail/link)
   recordIP: false # Record reviewer IP
@@ -511,7 +512,7 @@ tag_ui: # 留空或 index
 background:
 
 # Footer Background
-footer_bg: false
+footer_bg: true
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
@@ -529,8 +530,8 @@ canvas_ribbon:
   size: 150
   alpha: 0.6
   zIndex: -1
-  click_to_change: true
-  mobile: true
+  click_to_change: false
+  mobile: false
 
 # Fluttering Ribbon (動態彩帶)
 canvas_fluttering_ribbon:
@@ -541,7 +542,7 @@ canvas_fluttering_ribbon:
 # https://github.com/hustcc/canvas-nest.js
 canvas_nest:
   enable: false
-  color: '147,250,248' #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
+  color: '0,0,255' #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
   opacity: 0.7 # the opacity of line (0~1), default: 0.5.
   zIndex: -1 # z-index property of the background, default: -1.
   count: 99 # the number of lines, default: 99.
@@ -583,8 +584,8 @@ display_mode: light
 
 # Beautify (美化頁面顯示)
 beautify:
-  enable: false
-  field: post # site/post
+  enable: true
+  field: site # site/post
   title-prefix-icon: '\f0c1'
   title-prefix-icon-color: '#F47466'
 
@@ -593,8 +594,8 @@ beautify:
 font:
   global-font-size:
   code-font-size:
-  font-family: '/source/font/萌神手写体.ttf'
-  code-font-family: ''
+  font-family:
+  code-font-family:
 
 # Font settings for the site title and site subtitle
 # 左上角網站名字 主頁居中網站名字
@@ -651,7 +652,7 @@ aside:
       link: https://github.com/YuJiZhao
   card_announcement:
     enable: true
-    content: 博客还有几处bug暂时无法修改，首先是左下角的aplayer不定时掉线无法加载，导致顶部图片布局出现问题，以及网站访问量等统计，是使用了不蒜子统计，也时常掉线，还有aplayer无法实现pjax加载导致页面跳转会中断音乐播放。。。。我会慢慢改进的。。。。。
+    content: This is my Blog
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
@@ -677,6 +678,7 @@ aside:
   card_webinfo:
     enable: true
     post_count: true
+    card_map: true
     last_push_date: true
     sort_order: # Don't modify the setting unless you know how it works
 
@@ -690,7 +692,7 @@ busuanzi:
 # Time difference between publish date and now (網頁運行時間)
 # Formal: Month/Day/Year Time or Year/Month/Day Time
 runtimeshow:
-  enable: true
+  enable: false
   publish_date: 2021/8/24 21:00
 
 # Aside widget - Newest Comments
@@ -778,47 +780,22 @@ note:
 # It may contain bugs and unstable, give feedback when you find the bugs.
 # https://github.com/MoOx/pjax
 pjax:
-  enable: false
+  enable: true
   exclude:
-    # - xxxx
+    - /music/
+    - /video/
 
 # Inject the css and script (aplayer/meting)
-# aplayerInject:
-#   enable: true
-#   per_page: true
-
-##侧边栏歌单
-# aplayer:
-  # meting: true
-  # asset_inject: false
-#<div class="aplayer no-destroy" data-id="6936632013" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div>
-aplayer:
-  enable: true
-  # meting: true
-  # asset_inject: false
-  js:
-    - https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js
-    - https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js
-  css:
-    - https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css
-  id: 6936632013 #歌单id
-  server: netease #服务商
-  type: playlist # 播放菜单
-  fixed: 'true' #是否开启吸底模式，详细：https://aplayer.js.org/#/home?id=fixed-mode
-  mini: 'true'
-  order: random # 音频循环顺序, 可选值: 'list', 'random'
-  preload: auto #预加载，可选值: 'none', 'metadata', 'auto'
-  listFolded: 'false' #列表默认折叠
-  autoplay: 'true' # 自动播放
-  volume: 0.1 # 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
-
+aplayerInject:
+  enable: false
+  per_page: true
 
 # Snackbar (Toast Notification 彈窗)
 # https://github.com/polonel/SnackBar
 # position 彈窗位置
 # 可選 top-left / top-center / top-right / bottom-left / bottom-center / bottom-right
 snackbar:
-  enable: false
+  enable: true
   position: bottom-left
   bg_light: '#49b1f5' # The background color of Toast Notification in light mode
   bg_dark: '#121212' # The background color of Toast Notification in dark mode
@@ -864,17 +841,27 @@ css_prefix: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-    - <link rel="stylesheet" href="/css/lete.css">
-    - <link rel="stylesheet" href="/live2d/css/live2d.css" />
-  bottom: 
-    - <div id="landlord"><div class="message" style="opacity:0"></div><canvas id="live2d" width="280" height="370" class="live2d"></canvas><div class="hide-button">隐藏</div></div>
-    - <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-    - <script type="text/javascript">var message_Path = '/live2d/' var home_Path = 'http://localhost:4000'</script>
-    - <script type="text/javascript" src="/live2d/js/live2d.js"></script>
-    - <script type="text/javascript" src="/live2d/js/message.js"></script>
-    - <script type="text/javascript">loadlive2d("live2d", "/live2d/model/xiaomai/13.json");</script>
-    - <script type="text/javascript" src="/js/title.js"></script>
-
+    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tzy13755126023/BLOG_SOURCE/css/function.min.css">
+    - <link rel="stylesheet" href="/css/global/index.css">
+    # - <link rel="stylesheet" href="/live2d/css/live2d.css" />
+  bottom:
+    # --- global begin ---
+    - <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    - <script src="/js/global/banf12.js"></script>
+    - <script src="/js/global/chocolate.js"></script>
+    - <script src="/js/global/title.js"></script>
+    # --- global end ---
+    # --- 看板娘 begin ---
+    # - <div id="landlord"><div class="message" style="opacity:0"></div><canvas id="live2d" width="280" height="370" class="live2d"></canvas><div class="hide-button">隐藏</div></div>
+    # - <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    # - <script type="text/javascript">var message_Path = '/live2d/' var home_Path = 'http://localhost:4000'</script>
+    # - <script type="text/javascript" src="/live2d/js/live2d.js"></script>
+    # - <script type="text/javascript" src="/live2d/js/message.js"></script>
+    # - <script type="text/javascript">loadlive2d("live2d", "/live2d/model/xiaomai/13.json");</script>
+    # --- 看板娘 end ---
+    # --- 单个页面 begin ---
+    - <script src="/js/artitalk/index.js"></script>
+    # --- 单个页面 end ---
 
 # Artitalk
 # see https://artitalk.js.org/
@@ -882,11 +869,129 @@ artitalk:
   enable: true
   appId: KmOfkuNuFQB6hYxL6yQnuYbf-MdYXbMMI
   appKey: bcs2wdzDN2OgtbmFFettQQux
-  path:
+  path: 
   js:
   option:
   front_matter:
 
+#aplayer
+post_asset_folder: true
+aplayer:
+  script_dir: js                      # Public 目录下脚本目录路径，默认: 'assets/js'
+  style_dir: css                         # Public 目录下样式目录路径，默认: 'assets/css'
+  #cdn: http://xxx/aplayer.min.js                # 引用 APlayer.js 外部 CDN 地址 (默认不开启)
+  #style_cdn: http://xxx/aplayer.min.css         # 引用 APlayer.css 外部 CDN 地址 (默认不开启)
+  meting: true                                  # MetingJS 支持
+  #meting_api: http://xxx/api.php                # 自定义 Meting API 地址
+  #meting_cdn: http://xxx/Meing.min.js           # 引用 Meting.js 外部 CDN 地址 (默认不开启)
+  asset_inject: true                            # 自动插入 Aplayer.js 与 Meting.js 资源脚本, 默认开启
+  #externalLink: http://xxx/aplayer.min.js       # 老版本参数，功能与参数 cdn 相同meting: true
+
+# hexo-filter-gitcalendar
+# see https://akilar.top/posts/1f9c68c9/
+gitcalendar:
+  enable: true # 开关
+  priority: 5 #过滤器优先权
+  enable_page: / # 应用页面
+  # butterfly挂载容器
+  layout: # 挂载容器类型
+    type: id
+    name: recent-posts
+    index: 0
+  # volantis挂载容器
+  # layout:
+  #   type: class
+  #   name: l_main
+  #   index: 0
+  # matery挂载容器
+  # layout:
+  #   type: id
+  #   name: indexCard
+  #   index: 0
+  # mengd挂载容器
+  # layout:
+  #   type: class
+  #   name: content
+  #   index: 0
+  user: YuJiZhao #git用户名
+  apiurl: 'https://gitcalendar.akilar.top'
+  minheight:
+    pc: 280px #桌面端最小高度
+    mibile: 0px #移动端最小高度
+  # color: "['#e4dfd7', '#f9f4dc', '#f7e8aa', '#f7e8aa', '#f8df72', '#fcd217', '#fcc515', '#f28e16', '#fb8b05', '#d85916', '#f43e06']" #橘黄色调
+  # color: "['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f']" #浅紫色调
+  color: "['#ebedf0', '#f0fff4', '#dcffe4', '#bef5cb', '#85e89d', '#34d058', '#28a745', '#22863a', '#176f2c', '#165c26', '#144620']" #翠绿色调
+  # color: "['#ebedf0', '#f1f8ff', '#dbedff', '#c8e1ff', '#79b8ff', '#2188ff', '#0366d6', '#005cc5', '#044289', '#032f62', '#05264c']" #天青色调
+  container: .recent-post-item(style='width:100%;height:auto;padding:10px;') #父元素容器，需要使用pug语法
+
+# footer_beautify
+# 页脚计时器：[Native JS Timer](https://akilar.top/posts/b941af/)
+# 页脚徽标：[Add Github Badge](https://akilar.top/posts/e87ad7f8/)
+footer_beautify:
+  enable:
+    timer: true # 计时器开关
+    bdage: true # 徽标开关
+  priority: 5 #过滤器优先权
+  enable_page: all # 应用页面
+  exclude: #屏蔽页面
+    # - /posts/
+    # - /about/
+  layout: # 挂载容器类型
+    type: id
+    name: footer-wrap
+    index: 0
+  # 计时器部分配置项
+  runtime_js: /js/global/footer-beautify-runtime.js
+  runtime_css: https://cdn.jsdelivr.net/npm/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css
+  # 徽标部分配置项
+  swiperpara: 3 #若非0，则开启轮播功能，每行徽标个数
+  bdageitem:
+    - link: https://hexo.io/ #徽标指向网站链接
+      shields: https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo #徽标API
+      message: 博客框架为Hexo_v5.4.0 #徽标提示语
+    - link: https://butterfly.js.org/
+      shields: https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender
+      message: 主题版本Butterfly_v3.8.2
+    - link: https://www.jsdelivr.com/
+      shields: https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr
+      message: 本站使用JsDelivr为静态资源提供CDN加速
+    - link: https://vercel.com/
+      shields: https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&logo=Vercel
+      message: 本站采用双线部署，默认线路托管于Vercel
+    - link: https://vercel.com/
+      shields: https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&logo=Codio
+      message: 本站采用双线部署，联通线路托管于Coding
+    - link: https://github.com/
+      shields: https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub
+      message: 本站项目由Gtihub托管
+    - link: http://creativecommons.org/licenses/by-nc-sa/4.0/
+      shields: https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris
+      message: 本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可
+  swiper_css: https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper/lib/swiper.min.css
+  swiper_js: https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper/lib/swiper.min.js
+  swiperbdage_init_js: https://cdn.jsdelivr.net/npm/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js
+
+# envelope_comment
+# see https://akilar.top/posts/58900a8/
+envelope_comment:
+  enable: true #开关
+  cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/92.jpg #信笺封面图
+  message: #信笺内容，支持多行
+    - 有什么想问的？
+    - 有什么想说的？
+    - 有什么想吐槽的？
+    - 哪怕是有什么想吃的，都可以告诉我哦~
+  bottom: 自动书记人偶竭诚为您服务！ #信笺结束语，只能单行
+  height: #调整信笺划出高度，默认1050px
+  path: #【可选】comments 的路径名称。默认为 comments，生成的页面为 comments/index.html
+  front_matter: #【可选】comments页面的 front_matter 配置
+    title: 留言板
+    comments: true
+
+# Live2D
+## https://github.com/EYHN/hexo-helper-live2d
+live2d:
+  enable: true
 
 # CDN
 # Don't modify the following settings unless you know how they work

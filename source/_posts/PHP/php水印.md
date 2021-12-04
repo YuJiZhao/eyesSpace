@@ -1,7 +1,7 @@
 ---
 title: GD图像处理——水印图实现
 date: 2021-07-29 13:15:41
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/69.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/69.jpg
 tags: 
   - 水印图
   - 图像

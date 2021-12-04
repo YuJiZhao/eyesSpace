@@ -1,5 +1,5 @@
 ---
 title: 标签
 type: "tags"
-top_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/71.jpg
+top_img: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/cover/71.jpg
 ---

@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'UnidreamLED'; /*a name to be used later*/
+    src: url('https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/fonts/UnidreamLED.ttf'); /*URL to font*/
+}
+#hexo_electric_clock{
+padding:20px
+}
+.card-clock{
+    padding: 0!important;
+}
+.card-background {
+    height: 153px;
+    margin: 15px;
+    border-radius: 8px;
+    background-color: #ececec;
+    box-shadow: inset 3px 3px 18px 0 rgb(50 50 50 / 40%);
+    z-index: 2;
+}
+.clock-row{
+    font-family: UnidreamLED;
+    font-weight: 400;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+.card-clock-clockdate,.card-clock-ip{
+    text-align: left;
+    flex-basis: calc(40% - 5px);
+}
+.card-clock-weather,.card-clock-location{
+    text-align: center;
+    flex-basis: calc(30% - 5px);
+}
+.card-clock-humidity,.card-clock-dackorlight{
+    text-align: right;
+    flex-basis: calc(30% - 5px);
+}
+.card-clock-time{
+    flex: 1;
+    font-family: UnidreamLED;
+    font-size: 38px;
+    text-align: center;
+    line-height: 1.5;
+}

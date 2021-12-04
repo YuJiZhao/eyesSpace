@@ -1,7 +1,7 @@
 ---
 title: PHP会话技术(cookie与session)详解
 date: 2021-07-26 01:47:31
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/66.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/66.jpg
 tags: 
   - cookie
   - session
@@ -273,7 +273,7 @@ session.php 文件代码：
 session_start();
 
 // 设置内容
-$_SESSION['name'] = 'eyes++';
+$_SESSION['name'] = 'eyes';
 
 // 获取sessionID和名字
 $id = session_id();  // 获取是在session_start执行之后

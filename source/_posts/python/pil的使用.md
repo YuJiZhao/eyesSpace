@@ -1,7 +1,7 @@
 ---
 title: python之pil的使用
 date:  2021-10-13 15:48:51
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/104.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/104.jpg
 tags:
   - pil
 categories: python
@@ -89,7 +89,7 @@ tfont = ImageFont.truetype("萌神手写体.ttf", 24)
     参数三：字体颜色，当然颜色也可以用RGB值指定
     参数四：字体类型
 """
-draw.text((50, 30), "eyes++", fill="green", font=tfont)
+draw.text((50, 30), "eyes", fill="green", font=tfont)
 # 5.保存图片
 img.save("image/addWord.png")
 # 6.显示图片

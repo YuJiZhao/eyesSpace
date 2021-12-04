@@ -1,7 +1,7 @@
 ---
 title: 使用Webpack5打包各类资源
 date:  2021-10-14 20:00:02
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/108.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/108.jpg
 tags:
   - webpack
 categories: javascript

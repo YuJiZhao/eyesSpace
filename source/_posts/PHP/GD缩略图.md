@@ -2,7 +2,7 @@
 title: GD图像处理——缩略图的实现
 date: 2021-07-29 00:28:00
 updated: 2021-07-29 00:28:00
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/68.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/68.jpg
 tags: 
   - GD库
   - 缩略图

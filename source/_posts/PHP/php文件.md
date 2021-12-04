@@ -1,7 +1,7 @@
 ---
 title: PHP文件上传
 date: 2021-07-24 15:55:12
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/70.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/70.jpg
 tags: 
   - 文件
 categories: PHP

@@ -1,7 +1,7 @@
 ---
 title: 利用php的mail函数发送邮件
 date: 2021-06-01 12:30:39
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/24.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/24.jpg
 tags: 
   - 邮件
   - PHP
@@ -42,7 +42,7 @@ httpd -k restart
 $to = 'eyes7927@163.com';
 $sub = 'say hello';
 $msg = 'hello, php!';
-$from = "From: <eyes++>";
+$from = "From: <eyes>";
 mail($to,$sub,$msg,$from);
 ```
 效果展示：

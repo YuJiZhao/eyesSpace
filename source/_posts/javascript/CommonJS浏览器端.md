@@ -1,7 +1,7 @@
 ---
 title: CommonJS基于浏览器端的运用
 date: 2021-05-29 12:00:59
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/20.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/20.jpg
 tags: 
   - CommonJS
   - 模块化

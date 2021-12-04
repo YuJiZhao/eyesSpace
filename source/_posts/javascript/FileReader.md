@@ -1,7 +1,7 @@
 ---
 title: File Reader文件操作
 date: 2021-06-11 18:23:56
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/4.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/4.jpg
 tags: 
   - 文件
 categories: javascript

@@ -1,7 +1,7 @@
 ---
 title: CSDN屏蔽会员资源脚本
 date: 2021-09-15 17:00:15
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/58.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/58.jpg
 tags:
   - 脚本
 categories: 脚本

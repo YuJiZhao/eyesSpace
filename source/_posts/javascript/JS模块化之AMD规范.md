@@ -1,7 +1,7 @@
 ---
 title: JS模块化之AMD规范
 date:  2021-05-29 17:26:11
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/65.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/65.jpg
 tags: 
   - 模块化
   - AMD规范

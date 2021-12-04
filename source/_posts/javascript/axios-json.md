@@ -1,7 +1,7 @@
 ---
 title: axios + json-server用法演示
 date: 2021-08-17 16:59:31
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/11.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/11.jpg
 tags: 
   - axios
   - json-server
@@ -71,7 +71,7 @@ npm i -g json-server
                 data: {
                     id: 2,
                     title: "这是一个POST请求",
-                    author: "eyes++"
+                    author: "eyes"
                 }
             }).then(response => {
                 console.log(response);

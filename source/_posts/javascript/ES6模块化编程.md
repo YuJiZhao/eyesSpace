@@ -1,7 +1,7 @@
 ---
 title: ES6模块化编程
 date:  2021-05-29 21:23:59
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/2.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/2.jpg
 tags: 
   - ES6
   - 模块化

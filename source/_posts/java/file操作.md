@@ -1,7 +1,7 @@
 ---
 title: 使用java.io.File操作文件及文件夹
 date: 2021-09-11 17:37:55
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/42.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/42.jpg
 tags: 
   - IO流
   - 文件

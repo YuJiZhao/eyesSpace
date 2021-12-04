@@ -1,7 +1,7 @@
 ---
 title: bilibili弹幕列表随视频播放滚动
 date: 2021-09-18 10:51:09
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/97.png
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/97.png
 tags:
   - 脚本
 categories: 脚本

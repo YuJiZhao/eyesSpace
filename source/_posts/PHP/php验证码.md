@@ -1,7 +1,7 @@
 ---
 title: GD图像处理——验证码处理
 date: 2021-07-28 19:23:05
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/R-C.ca023026d87378399e177ca661173a45.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/3.jpg
 tags: 
   - 验证码
   - 图像

@@ -1,7 +1,7 @@
 ---
 title: sql之约束、事务与视图
 date:  2021-09-28 19:43:03
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/46.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/46.jpg
 tags:
   - 约束
   - 事务

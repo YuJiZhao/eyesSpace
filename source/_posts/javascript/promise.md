@@ -1,7 +1,7 @@
 ---
 title: Promise的一些使用
 date:  2021-08-17 15:25:46
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/1.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/1.jpg
 tags: 
   - promise
   - ES6

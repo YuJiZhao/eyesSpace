@@ -1,7 +1,7 @@
 ---
 title: Tomcat的安装配置与使用，及常用端口大全
 date: 2021-09-07 23:19:01
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/5.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/5.jpg
 tags: 
   - tomcat
   - 端口

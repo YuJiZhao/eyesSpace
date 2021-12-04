@@ -1,7 +1,7 @@
 ---
 title: PHP表单汇总
 date: 2021-07-23 20:52:54
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/27.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/27.jpg
 tags: 
   - 表单
 categories: PHP

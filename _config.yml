@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: eyes++的个人空间
+title: eyes的个人空间
 subtitle: ''
 description: '宅也是一种人生态度╮(￣▽ ￣)╭'
-keywords: eyes++、博客、动态、生活、程序、未来
-author: eyes++
+keywords: eyes、博客、动态、生活、程序、未来
+author: eyes
 language: zh-CN
 timezone: ''
 
@@ -28,7 +28,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: 
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -105,3 +105,16 @@ deploy:
   type: 'git'
   repo: git@gitee.com:eyesblog/eyesblog.git
   branch: master
+
+aplayer:
+  meting: true
+
+electric_clock:
+  priority: 5
+  enable: true
+  enable_page: all
+  layout:
+    type: class
+    name: sticky_layout
+    index: 0
+  temple_html: '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img id="card-clock-loading" src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading" class="entered loading"></div></div></div></div></div>'

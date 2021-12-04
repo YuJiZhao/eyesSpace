@@ -1,7 +1,7 @@
 ---
 title: thinkphp的数据库操作(上)
 date:  2021-08-27 15:51:15
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/8.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/8.jpg
 tags: 
   - 数据库
   - thinkphp

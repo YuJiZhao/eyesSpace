@@ -1,7 +1,7 @@
 ---
 title: thinkphp控制器
 date: 2021-08-26 19:56:48
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/17.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/17.jpg
 tags: 
   - thinkphp
   - 控制器

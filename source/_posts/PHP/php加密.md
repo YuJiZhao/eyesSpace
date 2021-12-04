@@ -1,7 +1,7 @@
 ---
 title: PHP加密算法
 date: 2021-09-19 20:39:55
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/102.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/102.jpg
 tags: 
   - 加密解密
 categories: PHP
@@ -87,7 +87,7 @@ string crypt(string $str[, string $salt])
 
 ```php
 <?php
-$str = "eyes++";
+$str = "eyes";
 echo crypt($str);
 echo "<br>";
 echo crypt($str, "eyes");
@@ -105,7 +105,7 @@ echo crypt($str, "eyes");
 
 ```php
 <?php
-$str = "eyes++";
+$str = "eyes";
 echo crypt($str);
 echo "<br>";
 echo crypt($str, "eyes");

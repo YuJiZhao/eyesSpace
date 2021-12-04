@@ -1,7 +1,7 @@
 ---
 title: js防抖和节流
 date: 2021-05-20 20:24:53
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/007.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/007.jpg
 tags: 
   - 防抖节流
   - 效率

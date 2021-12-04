@@ -1,7 +1,7 @@
 ---
 title: uniCloud初体验
 date: 2021-10-01 11:54:32
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/7.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/7.jpg
 tags:
   - uniCloud
 categories: javascript

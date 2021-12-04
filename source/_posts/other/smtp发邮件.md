@@ -1,7 +1,7 @@
 ---
 title: 利用smtp协议实现命令行发送邮件
 date: 2021-05-31 15:44:07
-cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/25.jpg
+cover: https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/article/25.jpg
 tags: 
   - smtp协议
   - 命令行

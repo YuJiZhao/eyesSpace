@@ -782,8 +782,6 @@ note:
 pjax:
   enable: true
   exclude:
-    - /music/
-    - /video/
 
 # Inject the css and script (aplayer/meting)
 aplayerInject:
@@ -843,7 +841,7 @@ inject:
   head:
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tzy13755126023/BLOG_SOURCE/css/function.min.css">
     - <link rel="stylesheet" href="/css/global/index.css">
-    # - <link rel="stylesheet" href="/live2d/css/live2d.css" />
+    - <link rel="stylesheet" href="/live2d/css/live2d.css" />
   bottom:
     # --- global begin ---
     - <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -852,12 +850,12 @@ inject:
     - <script src="/js/global/title.js"></script>
     # --- global end ---
     # --- 看板娘 begin ---
-    # - <div id="landlord"><div class="message" style="opacity:0"></div><canvas id="live2d" width="280" height="370" class="live2d"></canvas><div class="hide-button">隐藏</div></div>
-    # - <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-    # - <script type="text/javascript">var message_Path = '/live2d/' var home_Path = 'http://localhost:4000'</script>
-    # - <script type="text/javascript" src="/live2d/js/live2d.js"></script>
-    # - <script type="text/javascript" src="/live2d/js/message.js"></script>
-    # - <script type="text/javascript">loadlive2d("live2d", "/live2d/model/xiaomai/13.json");</script>
+    - <div id="landlord"><div class="message" style="opacity:0"></div><canvas id="live2d" width="280" height="370" class="live2d"></canvas><div class="hide-button">隐藏</div></div>
+    - <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    - <script type="text/javascript">var message_Path = '/live2d/' var home_Path = 'http://localhost:4000'</script>
+    - <script type="text/javascript" src="/live2d/js/live2d.js"></script>
+    - <script type="text/javascript" src="/live2d/js/message.js"></script>
+    - <script type="text/javascript">loadlive2d("live2d", "/live2d/model/xiaomai/13.json");</script>
     # --- 看板娘 end ---
     # --- 单个页面 begin ---
     - <script src="/js/artitalk/index.js"></script>

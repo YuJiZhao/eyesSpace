@@ -7,15 +7,92 @@ aside: false
 
 <!DOCTYPE html>
 <html lang="th">
-<head>
-<style>
 
-</style>
+<head>
+    <style>
+    </style>
 </head>
+
 <body>
-    
+
 </body>
 <script>
+    console.log("hello music");
+    $(function () {
+        // 修改初始页面
+        $("#page-header").css({
+            "height": "70px",
+            "background": "none"
+        });
+        $("#page-site-info").css({
+            "display": "none",
+        });
+        $("#nav a").css({
+            "color": "#9CBCD1"
+        })
+        $("#page").css({
+            "position": "fixed",
+            "top": "0",
+            "left": "0",
+            "height": "100%",
+            "width": "100%",
+            "background-image": "url('https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/song/芒种.png')"
+        })
+        $("#footer-wrap").css("display", "none");
 
+        // 修改播放器
+        let clear1 = setInterval(() => {
+            if ($(".aplayer").length != 0) {
+                clearInterval(clear1);
+                // 删除组件
+                $(".aplayer-icon.aplayer-icon-menu").css("display", "none");
+                $(".aplayer-list").css("display", "none");
+                $(".aplayer-icon.aplayer-icon-loop").css("display", "none");
+                $(".aplayer-icon.aplayer-icon-order").css("display", "none");
+                $(".aplayer.aplayer-withlist .aplayer-info").css({
+                    "border-bottom": "none"
+                })
+                // 修改样式
+                $(".aplayer .aplayer-info .aplayer-music .aplayer-author").css({
+                    "color": "#fff"
+                })
+                $(".aplayer .aplayer-lrc p").css({
+                    "color": "#fff",
+                    "font-size": "17px"
+                });
+                $("#article-container").css({
+                    "overflow": "visible",
+                })
+                $("#aplayer-dHveJhAh").css({
+                    "overflow": "visible",
+                })
+                $(".aplayer").css({
+                    "background": "none",
+                    "color": "#fff"
+                })
+                $(".aplayer-body").css({
+                    "position": "fixed",
+                    "bottom": "5%",
+                    "left": "10%",
+                    "width": "80%"
+                });
+                $(".aplayer-lrc").css({
+                    "position": "fixed",
+                    "top": "45%",
+                    "left": "50%",
+                    "transform": "translate(-50%, -50%)",
+                    "width": "80%",
+                    "height": "70%",
+                });
+                $(".aplayer-lrc-contents").css({
+                    "margin-top": "20%"
+                })
+                $(".aplayer-played").css({
+                    "background": "rgb(20, 214, 214)"
+                })
+            }
+        }, 100)
+    })
 </script>
+
 </html>

@@ -782,6 +782,8 @@ note:
 pjax:
   enable: true
   exclude:
+    - /music/
+    - /video/
 
 # Inject the css and script (aplayer/meting)
 aplayerInject:
@@ -841,22 +843,13 @@ inject:
   head:
     - <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tzy13755126023/BLOG_SOURCE/css/function.min.css">
     - <link rel="stylesheet" href="/css/global/index.css">
-    - <link rel="stylesheet" href="/live2d/css/live2d.css" />
+    - <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   bottom:
     # --- global begin ---
-    - <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     - <script src="/js/global/banf12.js"></script>
     - <script src="/js/global/chocolate.js"></script>
     - <script src="/js/global/title.js"></script>
     # --- global end ---
-    # --- 看板娘 begin ---
-    - <div id="landlord"><div class="message" style="opacity:0"></div><canvas id="live2d" width="280" height="370" class="live2d"></canvas><div class="hide-button">隐藏</div></div>
-    - <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-    - <script type="text/javascript">var message_Path = '/live2d/' var home_Path = 'http://localhost:4000'</script>
-    - <script type="text/javascript" src="/live2d/js/live2d.js"></script>
-    - <script type="text/javascript" src="/live2d/js/message.js"></script>
-    - <script type="text/javascript">loadlive2d("live2d", "/live2d/model/xiaomai/13.json");</script>
-    # --- 看板娘 end ---
     # --- 单个页面 begin ---
     - <script src="/js/artitalk/index.js"></script>
     # --- 单个页面 end ---
@@ -927,12 +920,12 @@ gitcalendar:
 # 页脚徽标：[Add Github Badge](https://akilar.top/posts/e87ad7f8/)
 footer_beautify:
   enable:
-    timer: true # 计时器开关
-    bdage: true # 徽标开关
+    timer: false # 计时器开关
+    bdage: false # 徽标开关
   priority: 5 #过滤器优先权
   enable_page: all # 应用页面
   exclude: #屏蔽页面
-    # - /posts/
+    # - /music/
     # - /about/
   layout: # 挂载容器类型
     type: id

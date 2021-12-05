@@ -6,15 +6,44 @@ aside: false
 
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-<style>
-
-</style>
+    <style>
+    </style>
 </head>
-<body>
-    
-</body>
-<script>
 
+<body>
+    <div id="dplayer"></div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/hls.js/8.0.0-beta.3/hls.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/dplayer/1.25.1/DPlayer.min.js"></script>
+<script>
+    $(function () {
+        // 修改初始页面
+        $("#page-header").css({
+            "height": "70px",
+            "background": "none"
+        });
+        $("#page-site-info").css({
+            "display": "none",
+        });
+        $("#footer-wrap").css("display", "none");
+        $(".dplayer-menu").css("display", "none");
+        $("body").css({
+            "overflow": "hidden"
+        });
+        $("#nav a").css({
+            "color": "#9CBCD1"
+        })
+    })
+
+    // 播放器设置
+    const dp = new DPlayer({
+        container: document.getElementById('dplayer'),
+        video: {
+            url: 'https://qqgame.gzc.svp.tencent-cloud.com/gzc_5684_1047_0bc3neazaaabwqacie5jdvqrm2iesbuqdeca.f0.mp4',
+        },
+    });
 </script>
+
 </html>

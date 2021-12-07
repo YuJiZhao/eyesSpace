@@ -20,6 +20,7 @@
     "hexo-butterfly-footer-beautify": "^1.0.4",
     "hexo-electric-clock": "^1.1.0",
     "hexo-filter-gitcalendar": "^1.0.6",
+    "hexo-filter-nofollow": "^2.0.2",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
     "hexo-generator-index": "^2.0.0",

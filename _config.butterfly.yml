@@ -920,7 +920,7 @@ gitcalendar:
 # 页脚徽标：[Add Github Badge](https://akilar.top/posts/e87ad7f8/)
 footer_beautify:
   enable:
-    timer: false # 计时器开关
+    timer: true # 计时器开关
     bdage: false # 徽标开关
   priority: 5 #过滤器优先权
   enable_page: all # 应用页面
@@ -970,8 +970,8 @@ envelope_comment:
   message: #信笺内容，支持多行
     - 有什么想问的？
     - 有什么想说的？
-    - 有什么想吐槽的？
-    - 哪怕是有什么想吃的，都可以告诉我哦~
+    - 有什么改进建议吗？
+    - 不会是有bug吧!!?
   bottom: 自动书记人偶竭诚为您服务！ #信笺结束语，只能单行
   height: #调整信笺划出高度，默认1050px
   path: #【可选】comments 的路径名称。默认为 comments，生成的页面为 comments/index.html
@@ -983,6 +983,11 @@ envelope_comment:
 ## https://github.com/EYHN/hexo-helper-live2d
 live2d:
   enable: true
+
+nofollow:
+  enable: true
+  field: site
+  exclude:
 
 # CDN
 # Don't modify the following settings unless you know how they work

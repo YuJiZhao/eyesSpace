@@ -37,6 +37,19 @@ aside: false
         })
     })
 
+    // 调整播放器定位
+    $(".layout").css({
+        "width": "70%",
+        "transform": "translateY(-70px)"
+    })
+
+    // 清除背景
+    $(".layout > div:first-child:not(.recent-posts)").css({
+        "background": "none",
+        "-webkit-box-shadow": "none",
+        "shadow": "none"
+    })
+
     // 播放器设置
     const dp = new DPlayer({
         container: document.getElementById('dplayer'),

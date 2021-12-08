@@ -920,7 +920,7 @@ gitcalendar:
 # 页脚徽标：[Add Github Badge](https://akilar.top/posts/e87ad7f8/)
 footer_beautify:
   enable:
-    timer: true # 计时器开关
+    timer: false # 计时器开关
     bdage: false # 徽标开关
   priority: 5 #过滤器优先权
   enable_page: all # 应用页面

@@ -2,7 +2,8 @@
 title: 视频
 type: "video"
 aside: false
-comment: false
+comments: false
+top_img: false
 ---
 
 <!DOCTYPE html>
@@ -21,13 +22,7 @@ comment: false
 <script>
     $(function () {
         // 修改初始页面
-        $("#page-header").css({
-            "height": "70px",
-            "background": "none"
-        });
-        $("#page-site-info").css({
-            "display": "none",
-        });
+        $(".page-title").css("display", "none");
         $("#footer-wrap").css("display", "none");
         $(".dplayer-menu").css("display", "none");
         $("body").css({

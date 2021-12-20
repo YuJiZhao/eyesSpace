@@ -10,16 +10,22 @@ top_img: false
 <html lang="th">
 
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/YuJiZhao/picbed@css/aplayer.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/YuJiZhao/picbed@css/aplayer1.css">
     <script src="https://cdn.jsdelivr.net/gh/YuJiZhao/picbed@js/aplayer3.js"></script>
+    <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
     <div id="aplayer"></div>
+    <div class="sideBar">
+        <div class="announce"></div>
+        <div class="random"></div>
+        <div class="choose"></div>
+    </div>
 </body>
 <script>
+    // 获取歌单列表
     var count = 0;
-
     $.get("https://api.i-meto.com/meting/api", {
         server: "netease",
         type: "playlist",
@@ -34,7 +40,6 @@ top_img: false
         })
         fun(res);
     });
-
     let fun = data => {
         const ap = new APlayer({
             container: document.getElementById('aplayer'),
@@ -61,8 +66,8 @@ top_img: false
         });
     }
 
+    // 修改初始页面
     let clear1 = setInterval(() => {
-        // 修改初始页面
         $(".page-title").css("display", "none");
         $("#nav").css("background", "none")
         $("#nav a").css("color", "#9CBCD1")
@@ -75,7 +80,6 @@ top_img: false
             "border-radius": "0px"
         })
         $("#footer").css("display", "none");
-
         // 删除组件
         $(".aplayer-icon.aplayer-icon-menu").css("display", "none");
         $(".aplayer-list").css("display", "none");
@@ -85,9 +89,6 @@ top_img: false
             "border-bottom": "none"
         })
         // 修改样式
-        $(".aplayer .aplayer-info .aplayer-music .aplayer-author").css({
-            "color": "#fff"
-        })
         $("#article-container").css({
             "overflow": "visible",
         })
@@ -96,6 +97,9 @@ top_img: false
         })
         $(".aplayer").css({
             "background": "none",
+            "color": "#fff"
+        })
+        $(".aplayer .aplayer-info .aplayer-music .aplayer-author").css({
             "color": "#fff"
         })
         $(".aplayer-body").css({
@@ -123,24 +127,7 @@ top_img: false
         clearInterval(clear1);
     }, 2000)
 
-    // 监听歌词高度变化
-    // let tNum = undefined;
-    // let clear2 = setInterval(() => {
-    //     if ($(".aplayer-lrc-contents").length != 0) {
-    //         if ($(".aplayer-lrc-contents").css("transform").slice(22, 23) != 0) {
-    //             tNum = $(".aplayer-lrc-contents").css("transform").slice(23, -1)
-    //             clearInterval(clear2);
-    //         }
-    //     }
-    // });
-    // setInterval(() => {
-    //     if (patNum != $(".aplayer-lrc-contents").css("transform").slice(23, -1) && tNum != undefined) {
-    //         tNum = 2 * $(".aplayer-lrc-contents").css("transform").slice(23, -1)
-    //         console.log("tNum:", tNum);
-    //         console.log("transform", $(".aplayer-lrc-contents").css("transform").slice(23, -1))
-    //         $(".aplayer-lrc-contents").style.transform = "translateY(-" + tNum + "px)"
-    //     }
-    // }, 100)
+    // 
 </script>
 
 </html>

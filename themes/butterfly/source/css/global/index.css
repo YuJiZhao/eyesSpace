@@ -12,9 +12,9 @@ body,
 
 /* 全站鼠标样式 */
 body, span, time, i {
-    cursor: url(https://pic.imgdb.cn/item/61261cd844eaada7392eca10.png), auto;
+    cursor: url('https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/normal.png'), auto;
 }
 
 a:hover, button:hover, #footer-wrap a:hover, #pagination .page-number:hover, #nav .site-page:hover, a > i, a > span{
-    cursor: url(https://pic.imgdb.cn/item/61261d1944eaada7392f6470.png), auto;
+    cursor: url('https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/click.png'), auto;
 }

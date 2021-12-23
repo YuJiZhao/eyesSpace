@@ -27,10 +27,10 @@ setInterval(() => {
     time[4] = nol(second);
   }
   if ((Number(time[2])<22) && (Number(time[2])>7)){
-    currentTimeHtml ="<img class='boardsign' src='https://img.shields.io/badge/eyes的个人空间-营业中-6adea8?style=social&logo=cakephp' title='距离百年老店也就差不到一百年~'><div id='runtime'>" + time[0] + ' YEAR ' + time[1] + ' DAYS ' + time[2] + ' : ' + time[3] + ' : ' + time[4] + '</div>';
+    currentTimeHtml ="<img class='boardsign' src='https://img.shields.io/badge/瞳孔的个人空间-营业中-6adea8?style=social&logo=cakephp' title='距离百年老店也就差不到一百年~'><div id='runtime'>" + time[0] + ' YEAR ' + time[1] + ' DAYS ' + time[2] + ' : ' + time[3] + ' : ' + time[4] + '</div>';
   }
   else{
-    currentTimeHtml ="<img class='boardsign' src='https://img.shields.io/badge/eyes的个人空间-打烊了-6adea8?style=social&logo=coffeescript' title='距离睡觉还有24个小时'><div id='runtime'>" + time[0] + ' YEAR ' + time[1] + ' DAYS ' + time[2] + ' : ' + time[3] + ' : ' + time[4] + '</div>';
+    currentTimeHtml ="<img class='boardsign' src='https://img.shields.io/badge/瞳孔的个人空间-打烊了-6adea8?style=social&logo=coffeescript' title='距离睡觉还有24个小时'><div id='runtime'>" + time[0] + ' YEAR ' + time[1] + ' DAYS ' + time[2] + ' : ' + time[3] + ' : ' + time[4] + '</div>';
   }
   document.getElementById("workboard").innerHTML = currentTimeHtml;
 }, 1000);

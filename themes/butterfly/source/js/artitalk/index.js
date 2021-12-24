@@ -17,7 +17,14 @@ if (reg_shuoshuo.test(loc)) {
         if ($(".power").length) {
             $(".power").css("display", "none");
             clearInterval(clear2);
-            // console.log("2")
+        }
+    }, 500)
+    // 隐藏评论界面
+    let clear3 = setInterval(() => {
+        if ($("#post-comment").length) {
+            $("#page > hr").css("display", "none");
+            $("#post-comment").css("display", "none");
+            clearInterval(clear3);
         }
     }, 500)
 }

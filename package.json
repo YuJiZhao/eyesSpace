@@ -17,7 +17,7 @@
     "hexo": "^5.0.0",
     "hexo-butterfly-artitalk": "^1.0.4",
     "hexo-butterfly-envelope": "^1.0.7",
-    "hexo-butterfly-footer-beautify": "^1.0.4",
+    "hexo-butterfly-footer-beautify": "^1.0.5",
     "hexo-electric-clock": "^1.1.0",
     "hexo-filter-gitcalendar": "^1.0.6",
     "hexo-filter-nofollow": "^2.0.2",

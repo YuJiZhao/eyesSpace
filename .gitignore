@@ -1,7 +1,5 @@
-.DS_Store
-Thumbs.db
-db.json
+/.idea
+/.vscode
+/vendor
 *.log
-node_modules/
-public/
-.deploy*/
+.env

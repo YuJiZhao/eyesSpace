@@ -1,5 +1,5 @@
 <?php
-namespace app\api\controller;
+namespace app;
 use think\facade\Config;
 use think\facade\Request;
 use think\Response;
@@ -8,7 +8,7 @@ use think\Response;
  * Class Base
  * @package app\controller
  */
-abstract class Base
+abstract class BaseResponse
 {
     /**
      * @var int

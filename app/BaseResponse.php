@@ -63,6 +63,6 @@ abstract class BaseResponse
     public function __call($name, $arguments)
     {
         //404，方法不存在的错误
-        return redirect('https://www.bilibili.com/video/BV1GJ411x7h7');
+        return redirect(Config::get('route.redirectPath'));
     }
 }

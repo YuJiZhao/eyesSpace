@@ -42,4 +42,10 @@ return [
     'default_jsonp_handler' => 'jsonpReturn',
     // 默认JSONP处理方法
     'var_jsonp_handler'     => 'callback',
+    // 重定向路径
+    'redirectPath'          => 'https://www.bilibili.com/video/BV1GJ411x7h7',
+    // 页面基础地址
+    'baseUrl'               => 'https://blog.eyescode.top',
+    // api基础地址
+    'baseApi'               => 'https://blogapi.eyescode.top'
 ];

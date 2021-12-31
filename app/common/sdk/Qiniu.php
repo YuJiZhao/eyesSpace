@@ -47,14 +47,14 @@ class Qiniu
 
     /**
      * 获取七牛云某空间下资源列表
-     * @param $request
+     * @param $mark
      */
-    public function list()
+    public function list($mark)
     {
         // 要列取文件的公共前缀
         $prefix = '';
         // 上次列举返回的位置标记，作为本次列举的起点信息。
-        $marker = '';
+        $marker = $mark;
         // 本次列举的条目数
         $limit = 3;
         // 列举文件
@@ -72,8 +72,9 @@ class Qiniu
      */
     public function signedUrl($arr)
     {
-        // 对链接进行签名
-        $signedUrl = $this->auth->privateDownloadUrl($this->baseUrl);
-        echo $signedUrl;
+        foreach ($arr as &$val) {
+            $val['key'] = $this->auth->privateDownloadUrl(Config::get("route.baseSpace") . $val['key'], 3600);
+        }
+        return $arr;
     }
 }

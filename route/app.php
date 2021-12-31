@@ -9,3 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 use think\facade\Route;
+
+// 路由中间件
+//Route::rule('ar/:id', 'Address/read')
+//    ->middleware(\app\middleware\Auth::class);

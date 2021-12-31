@@ -14,7 +14,10 @@ class Check
      */
     public function handle($request, \Closure $next)
     {
-        //
-//        return $next();
+//        if ($request->get("c") == 'hello') {
+//            echo "hello";
+//        }
+//        echo "Nihao";
+        return $next($request);
     }
 }

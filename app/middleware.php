@@ -7,4 +7,6 @@ return [
     // \think\middleware\LoadLangPack::class,
     // Session初始化
     // \think\middleware\SessionInit::class
+    // 请求拦截
+    \app\middleware\Check::class
 ];

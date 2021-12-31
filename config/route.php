@@ -45,7 +45,9 @@ return [
     // 重定向路径
     'redirectPath'          => 'https://www.bilibili.com/video/BV1GJ411x7h7',
     // 页面基础地址
-    'baseUrl'               => 'https://blog.eyescode.top',
+    'baseUrl'               => 'https://blog.eyescode.top/',
     // api基础地址
-    'baseApi'               => 'https://blogapi.eyescode.top'
+    'baseApi'               => 'https://blogapi.eyescode.top/',
+    // cdn空间基础地址
+    'baseSpace'             => 'http://r3hcuj6xu.hn-bkt.clouddn.com/'
 ];

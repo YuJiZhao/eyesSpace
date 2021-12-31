@@ -11,8 +11,7 @@ class Video extends BaseResponse
      * 测试接口
      */
     public function index() {
-        $qiniu = new Qiniu();
-        $qiniu->signedUrl('');
+        return "hello";
     }
 
     /**

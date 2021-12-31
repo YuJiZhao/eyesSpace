@@ -9,7 +9,6 @@ class index
 {
     public function index()
     {
-        return Db::table('jobs')->where('job_id', 'AD_ASST')->find();
-//        return "index";
+        return "index";
     }
 }

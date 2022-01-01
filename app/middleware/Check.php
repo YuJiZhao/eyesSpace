@@ -1,9 +1,8 @@
 <?php
-declare (strict_types = 1);
-
 namespace app\middleware;
-
 use app\common\store\Log;
+use app\common\tools\Ip;
+
 
 class Check
 {
@@ -16,14 +15,14 @@ class Check
      */
     public function handle($request, \Closure $next)
     {
-        $info = $request::header();
+        $info = $request->header();
         // 请求验证
         if ($request->param('name')) {
 
         }
         $response = $next($request);
         // 写入日志
-        Log::success('瞳孔', '60.166.58.226', $request->url(), $request->method(), $request->param());
+        Log::success('瞳孔', Ip::ip(), $request->url(), $request->method(), $request->param());
         return $response;
     }
 }

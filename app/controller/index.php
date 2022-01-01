@@ -8,6 +8,6 @@ class index
     public function index()
     {
 //        return Cache::store('redis')->get('name');
-//        return "index";
+        return "index";
     }
 }

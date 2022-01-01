@@ -9,5 +9,6 @@ class encryption
      */
     public static function sign()
     {
+
     }
 }

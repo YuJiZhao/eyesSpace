@@ -1,6 +1,7 @@
 <?php
 namespace app\controller\handle;
 use app\BaseResponse;
+use app\common\store\Log;
 use think\facade\Config;
 use think\Request;
 use app\common\sdk\Qiniu;
@@ -8,15 +9,9 @@ use app\common\sdk\Qiniu;
 class Video extends BaseResponse
 {
     /**
-     * 测试接口
-     */
-    public function index() {
-        return "hello";
-    }
-
-    /**
      * 返回视频列表
-     * @return string|resource
+     *
+     * @return string
      */
     public function List(Request $request) {
         // 检验请求类型
@@ -26,8 +21,9 @@ class Video extends BaseResponse
         $qiniu = new Qiniu();
         $list = $qiniu->list($request->post('marker'));
         // 返回结果
-        if ($list == "error")
+        if ($list == "error") {
             return $this->create('', 'error', 404);
+        }
         $list["items"] = $qiniu->signedUrl($list["items"]);
         return $this->create($list, 'success');
     }

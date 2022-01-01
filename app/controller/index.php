@@ -1,14 +1,13 @@
 <?php
 namespace app\controller;
-//use think\facade;
-//use think\Db;
-
-use think\facade\Db;
+use think\facade\Cache;
+use Predis\Client;
 
 class index
 {
     public function index()
     {
-        return "index";
+//        return Cache::store('redis')->get('name');
+//        return "index";
     }
 }

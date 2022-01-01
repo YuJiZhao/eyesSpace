@@ -1,7 +1,7 @@
 <?php
 namespace app\common\sdk;
-
 use think\facade\Config;
+use app\common\store\Log;
 use Qiniu\Auth;
 use Qiniu\Storage\BucketManager;
 

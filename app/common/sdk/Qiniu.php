@@ -1,9 +1,11 @@
 <?php
 namespace app\common\sdk;
+use app\common\utils\Tools;
 use think\facade\Config;
 use app\common\store\Log;
 use Qiniu\Auth;
 use Qiniu\Storage\BucketManager;
+use think\facade\Request;
 
 class Qiniu
 {
@@ -60,6 +62,7 @@ class Qiniu
         // 列举文件
         list($ret, $err) = $this->bucketManager->listFiles($this->videoBucket, $prefix, $marker, $limit);
         if ($err !== null) {
+            Log::error('瞳孔', Tools::ip(), '请求七牛云视频列表失败', Request::url(), Request::method(), Request::param(), [serialize($err)]);
             return "error";
         } else {
             return $ret;

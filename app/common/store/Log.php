@@ -1,5 +1,6 @@
 <?php
 namespace app\common\store;
+use app\common\utils\Tools;
 use think\facade\Log as facadeLog;
 
 class Log
@@ -27,7 +28,7 @@ class Log
             'ip: ' . $ip,
             'path: ' . $path,
             'method: ' . $method,
-            'para: ' . implode($para),
+            'para: ' . Tools::arrToStr($para),
         ]);
     }
 
@@ -36,6 +37,7 @@ class Log
      *
      * @param string $operator
      * @param string $ip
+     * @param string $message
      * @param string $path
      * @param string $method
      * @param array $paras
@@ -44,6 +46,7 @@ class Log
     public static function fail(
         string $operator,
         string $ip,
+        string $message,
         string $path,
         string $method,
         array $paras
@@ -52,9 +55,10 @@ class Log
         facadeLog::warning([
             'operator: ' . $operator,
             'ip: ' . $ip,
+            'message: ' . $message,
             'path: ' . $path,
             'method: ' . $method,
-            'paras: ' . implode($paras)
+            'paras: ' . Tools::arrToStr('&', $paras)
         ]);
     }
 
@@ -86,8 +90,8 @@ class Log
             'message: ' . $message,
             'path: ' . $path,
             'method: ' . $method,
-            'paras: ' . implode($paras),
-            'other: ' . implode($other)
+            'paras: ' . Tools::arrToStr($paras),
+            'other: ' . implode(' & ', $other)
         ]);
     }
 }

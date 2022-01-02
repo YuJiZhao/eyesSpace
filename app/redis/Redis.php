@@ -9,6 +9,11 @@ use think\facade\Config;
 class Redis
 {
     /**
+     * @var Redis
+     */
+    public $redis;
+
+    /**
      * Base constructor.
      */
     public function __construct()
@@ -16,9 +21,9 @@ class Redis
         $this->redis = new Client([
             'host' => Config::get('cache.stores.redis.host'),
             'port' => Config::get('cache.stores.redis.port'),
-            'scheme' => Config::get('cache.stores.redis.scheme'),
-            'cache' => Config::get('cache.stores.redis.cache'),
-            'password' => Config::get('cache.stores.redis.password'),
+//            'scheme' => Config::get('cache.stores.redis.scheme'),
+//            'cache' => Config::get('cache.stores.redis.cache'),
+//            'password' => Config::get('cache.stores.redis.password'),
         ]);
     }
 

@@ -40,7 +40,24 @@ return [
             'cache'      => '',
             // 密码
             'password'   => '792734338'
-        ]
+        ],
+        // mongodb缓存
+        'mongodb' => [
+            // 驱动方式
+            'type'       => 'mongodb',
+            // 服务器地址
+            'host'       => '127.0.0.1',
+            // 端口
+            'port'       => '27017',
+            // scheme
+            'scheme'     => '',
+            // token
+            'token'      => '',
+            // cache
+            'cache'      => '',
+            // 密码
+            'password'   => '792734338'
+        ],
         // 更多的缓存连接
     ],
 ];

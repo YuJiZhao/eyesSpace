@@ -1,7 +1,7 @@
 <?php
 namespace app\middleware;
 use app\common\store\Log;
-use app\common\tools\Ip;
+use app\common\utils\Tools;
 
 
 class Check
@@ -22,7 +22,7 @@ class Check
         }
         $response = $next($request);
         // 写入日志
-        Log::success('瞳孔', Ip::ip(), $request->url(), $request->method(), $request->param());
+        Log::success('瞳孔', Tools::ip(), $request->url(), $request->method(), $request->param());
         return $response;
     }
 }

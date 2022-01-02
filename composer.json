@@ -24,7 +24,8 @@
         "topthink/framework": "^6.0.0",
         "topthink/think-orm": "^2.0",
         "qiniu/php-sdk": "^7.4",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+      "ext-json": "*"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",

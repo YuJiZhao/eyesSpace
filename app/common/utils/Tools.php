@@ -1,8 +1,7 @@
 <?php
-namespace app\common\tools;
+namespace app\common\utils;
 
-
-class Ip
+class Tools
 {
     /**
      * 获取用户ip
@@ -32,5 +31,19 @@ class Ip
         }
         //客户端IP 或 (最后一个)代理服务器 IP
         return ($ip ? $ip : $_SERVER["REMOTE_ADDR"]);
+    }
+
+    /**
+     * k-v形数组转字符串
+     *
+     * @param array $arr
+     * return string
+     */
+    public static function arrToStr(array $arr) {
+        $res = '';
+        foreach ($arr as $key => $value) {
+            $res .= $key . "=" . $value . " & ";
+        }
+        return $res;
     }
 }

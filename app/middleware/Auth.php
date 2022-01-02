@@ -9,6 +9,8 @@ namespace app\middleware;
  * @param \think\Request $request
  * @param \Closure       $next
  * @return Response
+ *
+ * todo: 完善路由中间件
  */
 class Auth
 {

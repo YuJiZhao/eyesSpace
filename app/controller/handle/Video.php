@@ -1,7 +1,6 @@
 <?php
 namespace app\controller\handle;
 use app\BaseResponse;
-use app\common\store\Log;
 use think\facade\Config;
 use think\Request;
 use app\common\sdk\Qiniu;
@@ -13,7 +12,7 @@ class Video extends BaseResponse
      *
      * @return string
      */
-    public function List(Request $request) {
+    public function list(Request $request) {
         // 检验请求类型
         if(!$request->isPost())
             return redirect(Config::get('route.redirectPath'));

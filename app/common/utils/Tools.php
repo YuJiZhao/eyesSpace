@@ -7,6 +7,8 @@ class Tools
      * 获取用户ip
      *
      * @return string
+     *
+     * todo： ip不准
      */
     public static function ip()
     {

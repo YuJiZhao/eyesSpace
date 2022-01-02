@@ -12,6 +12,8 @@ class Check
      * @param \think\Request $request
      * @param \Closure       $next
      * @return Response
+     *
+     * todo: 完成请求鉴权
      */
     public function handle($request, \Closure $next)
     {

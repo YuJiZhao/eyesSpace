@@ -17,14 +17,19 @@ class Check
      */
     public function handle($request, \Closure $next)
     {
+        // 请求鉴权
         $info = $request->header();
-        // 请求验证
-        if ($request->param('name')) {
 
-        }
+        // 携带参数
+        $request->isFail = false;
+        $request->bus = [];
+
         $response = $next($request);
+
         // 写入日志
-        Log::success('瞳孔', Tools::ip(), $request->url(), $request->method(), $request->param());
+        if (!$request->isFail) {
+            Log::success('瞳孔', Tools::ip(), $request->url(), $request->method(), $request->param());
+        }
         return $response;
     }
 }

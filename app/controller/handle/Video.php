@@ -1,7 +1,6 @@
 <?php
 namespace app\controller\handle;
 use app\BaseResponse;
-use think\facade\Config;
 use think\Request;
 use app\common\sdk\Qiniu;
 
@@ -13,9 +12,6 @@ class Video extends BaseResponse
      * @return string
      */
     public function list(Request $request) {
-        // 检验请求类型
-        if(!$request->isPost())
-            return redirect(Config::get('route.redirectPath'));
         // 初始化七牛云SDK对象
         $qiniu = new Qiniu();
         $list = $qiniu->list($request->post('marker'));

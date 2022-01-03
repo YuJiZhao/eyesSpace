@@ -2,9 +2,14 @@
 namespace app\common\store;
 use app\common\utils\Tools;
 use think\facade\Log as facadeLog;
+use think\Request;
 
 class Log
 {
+    /**
+     * todo: Log获取不到isFail
+     */
+
     /**
      * 合法请求
      *
@@ -41,6 +46,7 @@ class Log
      * @param string $path
      * @param string $method
      * @param array $paras
+     * @param Request $request
      * return null
      */
     public static function fail(
@@ -49,7 +55,8 @@ class Log
         string $message,
         string $path,
         string $method,
-        array $paras
+        array $paras,
+        Request $request
     )
     {
         facadeLog::warning([
@@ -58,8 +65,9 @@ class Log
             'message: ' . $message,
             'path: ' . $path,
             'method: ' . $method,
-            'paras: ' . Tools::arrToStr('&', $paras)
+            'paras: ' . Tools::arrToStr($paras)
         ]);
+        $request->isFail = true;
     }
 
     /**
@@ -71,6 +79,7 @@ class Log
      * @param string $path
      * @param string $method
      * @param array $paras
+     * @param Request $request
      * @param array $other
      * return null
      */
@@ -81,6 +90,7 @@ class Log
         string $path,
         string $method,
         array $paras,
+        Request $request,
         array $other = []
     )
     {
@@ -93,5 +103,6 @@ class Log
             'paras: ' . Tools::arrToStr($paras),
             'other: ' . implode(' & ', $other)
         ]);
+        $request->isFail = true;
     }
 }

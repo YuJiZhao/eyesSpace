@@ -13,11 +13,11 @@ return [
     // 是否开启路由延迟解析
     'url_lazy_route'        => false,
     // 是否强制使用路由
-    'url_route_must'        => false,
+    'url_route_must'        => true,
     // 合并路由规则
     'route_rule_merge'      => false,
     // 路由是否完全匹配
-    'route_complete_match'  => false,
+    'route_complete_match'  => true,
     // 访问控制器层名称
     'controller_layer'      => 'controller',
     // 空控制器名

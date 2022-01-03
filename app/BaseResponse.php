@@ -3,7 +3,7 @@ namespace app;
 use app\common\store\Log;
 use app\common\utils\Tools;
 use think\facade\Config;
-use think\facade\Request;
+use think\Request;
 use think\Response;
 
 /**
@@ -23,15 +23,22 @@ abstract class BaseResponse
     protected $pageSize;
 
     /**
+     * @var Request $request
+     */
+
+    /**
      * Base constructor.
      */
     public function __construct()
     {
+        // 初始化请求类
+        $request = new Request();
+
         //获取分页
-        $this->page = (int)Request::param('page');
+        $this->page = (int)$request->param('page');
 
         //获取条数
-        $this->pageSize = (int)Request::param('page_size', Config::get('app.page_size'));
+        $this->pageSize = (int)$request->param('page_size', Config::get('app.page_size'));
     }
 
     /**
@@ -65,7 +72,7 @@ abstract class BaseResponse
     public function __call($name, $arguments)
     {
         //404，方法不存在的错误
-        Log::fail('瞳孔', Tools::ip(), '请求方法不存在', Request::url(), Request::method(), Request::param());
+        Log::fail('瞳孔', Tools::ip(), '请求方法不存在', $this->request->url(), $this->request->method(), $this->request->param(), $this->request);
         return redirect(Config::get('route.redirectPath'));
     }
 }

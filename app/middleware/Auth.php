@@ -16,9 +16,6 @@ class Auth
 {
     public function handle($request, \Closure $next)
     {
-//        if ($request->param('id') == 10) {
-//            echo '是管理员！';
-//        }
         return $next($request);
     }
 }

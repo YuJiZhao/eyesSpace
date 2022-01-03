@@ -2,7 +2,7 @@
 namespace app;
 use app\common\store\Log;
 use app\common\utils\Tools;
-use think\facade\Request;
+use think\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -25,7 +25,8 @@ class BaseRequest
             $client = new Client([ 'timeout'  => 2.0 ]);
             $response = $client->request($method, $url, [ 'query' => $data ]);
         } catch (GuzzleException $e){
-            Log::error('瞳孔', Tools::ip(), '同步请求错误', Request::url(), Request::method(), Request::param(), [
+            $request = new Request();
+            Log::error('瞳孔', Tools::ip(), '同步请求错误', $request->url(), $request->method(), $request->param(), $request, [
                 'url: '     => $url,
                 'method: '  => $method,
                 'data: '    => Tools::arrToStr($data),

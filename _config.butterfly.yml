@@ -10,7 +10,7 @@ menu:
   主页: / || fas fa-home
   说说: /artitalk/ || fas fa-comment
   音乐: /music/ || fa fa-music
-  视频: /video/ || fa fa-play-circle
+  # 视频: /video/ || fa fa-play-circle
   时间轴: /archives/ || fas fa-archive
   留言: /comments/ || fa fa-edit
 

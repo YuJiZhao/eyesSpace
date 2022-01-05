@@ -10,6 +10,7 @@ use app\common\utils\Tools;
 Route::rule('/','/');
 Route::get('music/list','handle.music/list');
 Route::post('video/list','handle.video/list');
+Route::get('video/freedom','handle.video/freedom');
 
 /**
  * resources路由

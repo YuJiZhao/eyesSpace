@@ -25,8 +25,8 @@
         "topthink/think-orm": "^2.0",
         "qiniu/php-sdk": "^7.4",
         "predis/predis": "^1.1",
-      "ext-json": "*",
-        "guzzlehttp/guzzle": "^7.4"
+        "guzzlehttp/guzzle": "~6.0",
+        "php-ffmpeg/php-ffmpeg": "^0.19.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",

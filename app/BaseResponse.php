@@ -3,14 +3,16 @@ namespace app;
 use app\common\store\Log;
 use app\common\utils\Tools;
 use think\facade\Config;
-use think\Request;
+use think\facade\Request;
 use think\Response;
 
 /**
  * Class Base
  * @package app\controller
+ *
+ * todo: 将其改造成静态
  */
-abstract class BaseResponse
+class BaseResponse
 {
     /**
      * @var int
@@ -31,14 +33,11 @@ abstract class BaseResponse
      */
     public function __construct()
     {
-        // 初始化请求类
-        $request = new Request();
-
         //获取分页
-        $this->page = (int)$request->param('page');
+        $this->page = (int)Request::param('page');
 
         //获取条数
-        $this->pageSize = (int)$request->param('page_size', Config::get('app.page_size'));
+        $this->pageSize = (int)Request::param('page_size', Config::get('app.page_size'));
     }
 
     /**
@@ -48,7 +47,7 @@ abstract class BaseResponse
      * @param string $type
      * @return Response
      */
-    protected function create($data, string $msg = '', int $code = 200, string $type = 'json') : Response
+    public static function create($data, string $msg = '', int $code = 200, string $type = 'json') : Response
     {
         //标准api结构生成
         $result = [
@@ -72,7 +71,7 @@ abstract class BaseResponse
     public function __call($name, $arguments)
     {
         //404，方法不存在的错误
-        Log::fail('瞳孔', Tools::ip(), '请求方法不存在', $this->request->url(), $this->request->method(), $this->request->param(), $this->request);
+        Log::fail('瞳孔', Tools::ip(), '请求方法不存在', Request::url(), Request::method(), Request::param());
         return redirect(Config::get('route.redirectPath'));
     }
 }

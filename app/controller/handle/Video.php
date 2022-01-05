@@ -3,6 +3,7 @@ namespace app\controller\handle;
 use app\BaseResponse;
 use think\Request;
 use app\common\sdk\Qiniu;
+use FFMpeg\FFMpeg;
 
 class Video extends BaseResponse
 {
@@ -21,5 +22,15 @@ class Video extends BaseResponse
         }
         $list["items"] = $qiniu->signedUrl($list["items"]);
         return $this->create($list, 'success');
+    }
+
+    /**
+     * 返回自由动图
+     *
+     * @return resource
+     */
+    public static function freedom() {
+        $ffmpeg = new FFMpeg();
+        $video = $ffmpeg->open('C:\Users\79273\Desktop\freedom.gif');
     }
 }

@@ -1,14 +1,13 @@
 <?php
 namespace app\controller;
 use app\BaseRequest;
-
-class index extends BaseRequest
+use app\BaseResponse;
+class index
 {
     public function index()
     {
-        return BaseRequest::syncRequest('www.baidu.com', 'GET', [], function ($a, $b, $c, $d){
-            return "hello";
+        return BaseRequest::syncRequest('https://api.btstu.cn/yan/api.php', 'GET', [], function ($res){
+            return BaseResponse::create($res['data'], $res['msg'], $res['code']);
         });
-//        return 'index';
     }
 }

@@ -14,8 +14,8 @@ class Netease
             'server'    => 'netease',
             'type'      => 'playlist',
             'id'        => '6936632013',
-        ], function ($res, $msg, $code, $header = []){
-            return [$res, $msg, $code];
+        ], function ($bus){
+            return $bus;
         });
     }
 }

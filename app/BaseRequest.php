@@ -2,7 +2,7 @@
 namespace app;
 use app\common\store\Log;
 use app\common\utils\Tools;
-use think\Request;
+use think\facade\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -17,30 +17,53 @@ class BaseRequest
      * @param $callback
      * @param array $head
      *
-     * todo: 无法成功发送请求
+     * todo: 返回数据只能处理成字符串
      */
     public static function syncRequest(string $url, string $method, Array $data, $callback, Array $head = []) {
-        if ($url == '' || $method == '') return $callback('', 'param error', 400);
+        /**
+         * @var $bus
+         * @key string | array data
+         * @key string msg
+         * @key int code
+         * @key array header
+         * @key int size
+         */
+        $bus = [
+            'data'      => '',
+            'msg'       => '',
+            'code'      => 0,
+            'header'    => [],
+            'size'      => 0
+        ];
+        if ($url == '' || $method == '') {
+            $bus['msg'] = 'param error';
+            $bus['code'] = 400;
+            return $callback($bus);
+        }
         try {
             $client = new Client([ 'timeout'  => 2.0 ]);
-            $response = $client->request($method, $url, [ 'query' => $data ]);
+            $response = $client->request($method, $url, $data);
         } catch (GuzzleException $e){
-            $request = new Request();
-            Log::error('瞳孔', Tools::ip(), '同步请求错误', $request->url(), $request->method(), $request->param(), $request, [
+            Log::error('瞳孔', Tools::ip(), '同步请求错误', Request::url(), Request::method(), Request::param(), [
                 'url: '     => $url,
                 'method: '  => $method,
                 'data: '    => Tools::arrToStr($data),
 //                'msg: '     => serialize($e)
             ]);
-            return $callback('', 'request error', 400);
+            $bus['msg'] = 'request error';
+            $bus['code'] = 400;
+            return $callback($bus);
         }
-        $headInfo = [];
+        $bus['data'] = $response->getBody()->getContents();
+        $bus['msg'] = $response->getReasonPhrase();
+        $bus['code'] = $response->getStatusCode();
+        $bus['size'] = $response->getBody()->getSize();
         if ($head != []) {
             foreach ($head as $key) {
-                array_merge($headInfo, [ $key    => $response->getHeader($key) ]);
+                array_merge($bus['header'], [ $key => $response->getHeader($key) ]);
             }
         }
-        return $callback($response->getBody(), $response->getReasonPhrase(), $response->getStatusCode(), $headInfo);
+        return $callback($bus);
     }
 
     /**

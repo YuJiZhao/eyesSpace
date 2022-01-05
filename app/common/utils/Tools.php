@@ -1,4 +1,5 @@
 <?php
+
 namespace app\common\utils;
 
 class Tools
@@ -8,31 +9,51 @@ class Tools
      *
      * @return string
      *
-     * todo： ip不准
+     * todo： ip准确性有待测试
      */
     public static function ip()
     {
-        $ip = FALSE;
-        //客户端IP 或 NONE
+        static $realip;
+        if (isset($_SERVER)) {
+            if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+                $realip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+            } else if (isset($_SERVER["HTTP_CLIENT_IP"])) {
+                $realip = $_SERVER["HTTP_CLIENT_IP"];
+            } else {
+                $realip = $_SERVER["REMOTE_ADDR"];
+            }
+        } else {
+            if (getenv("HTTP_X_FORWARDED_FOR")) {
+                $realip = getenv("HTTP_X_FORWARDED_FOR");
+            } else if (getenv("HTTP_CLIENT_IP")) {
+                $realip = getenv("HTTP_CLIENT_IP");
+            } else {
+                $realip = getenv("REMOTE_ADDR");
+            }
+        }
+        return $realip;
+    }
+
+    public static function getip()
+    {
+        $ip = false;
         if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
             $ip = $_SERVER["HTTP_CLIENT_IP"];
         }
-        //多重代理服务器下的客户端真实IP地址（可能伪造）,如果没有使用代理，此字段为空
-        if (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
-            $ips = explode(",", $_SERVER["HTTP_X_FORWARDED_FOR"]);
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ips = explode(", ", $_SERVER['HTTP_X_FORWARDED_FOR']);
             if ($ip) {
                 array_unshift($ips, $ip);
                 $ip = FALSE;
             }
             for ($i = 0; $i < count($ips); $i++) {
-//                if (!eregi("^(10│172.16│192.168).", $ips[$i])) {
-//                    $ip = $ips[$i];
-//                    break;
-//                }
+                if (!preg_match("/^(10│172.16│192.168)./i", $ips[$i])) {
+                    $ip = $ips[$i];
+                    break;
+                }
             }
         }
-        //客户端IP 或 (最后一个)代理服务器 IP
-        return ($ip ? $ip : $_SERVER["REMOTE_ADDR"]);
+        return ($ip ? $ip : $_SERVER['REMOTE_ADDR']);
     }
 
     /**
@@ -41,7 +62,8 @@ class Tools
      * @param array $arr
      * return string
      */
-    public static function arrToStr(array $arr) {
+    public static function arrToStr(array $arr)
+    {
         $res = '';
         foreach ($arr as $key => $value) {
             $res .= $key . "=" . $value . " & ";

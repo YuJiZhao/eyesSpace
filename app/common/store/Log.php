@@ -7,10 +7,6 @@ use think\Request;
 class Log
 {
     /**
-     * todo: Log获取不到isFail
-     */
-
-    /**
      * 合法请求
      *
      * @param string $operator
@@ -46,7 +42,6 @@ class Log
      * @param string $path
      * @param string $method
      * @param array $paras
-     * @param Request $request
      * return null
      */
     public static function fail(
@@ -55,8 +50,7 @@ class Log
         string $message,
         string $path,
         string $method,
-        array $paras,
-        Request $request
+        array $paras
     )
     {
         facadeLog::warning([
@@ -67,11 +61,14 @@ class Log
             'method: ' . $method,
             'paras: ' . Tools::arrToStr($paras)
         ]);
+        $request = new Request();
         $request->isFail = true;
     }
 
     /**
      * 请求出错
+     *
+     * todo: isFail为null
      *
      * @param string $operator
      * @param string $ip
@@ -79,7 +76,6 @@ class Log
      * @param string $path
      * @param string $method
      * @param array $paras
-     * @param Request $request
      * @param array $other
      * return null
      */
@@ -90,7 +86,6 @@ class Log
         string $path,
         string $method,
         array $paras,
-        Request $request,
         array $other = []
     )
     {
@@ -103,6 +98,7 @@ class Log
             'paras: ' . Tools::arrToStr($paras),
             'other: ' . implode(' & ', $other)
         ]);
+        $request = new Request();
         $request->isFail = true;
     }
 }

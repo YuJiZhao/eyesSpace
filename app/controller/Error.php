@@ -2,7 +2,7 @@
 namespace app\controller;
 use app\common\utils\Tools;
 //use think\facade\Request;
-use think\Request;
+use think\facade\Request;
 use app\common\store\Log;
 use think\facade\Config;
 
@@ -18,7 +18,7 @@ class Error
      */
     public function __call($method, $args, Request $request)
     {
-        Log::fail('瞳孔', Tools::ip(), '非法路径', $request->url(), $request->method(), $request->param(), $request);
+        Log::fail('瞳孔', Tools::ip(), '非法路径', Request::url(), Request::method(), Request::param());
         return \redirect(Config::get('route.redirectPath'));
     }
 }

@@ -1,0 +1,27 @@
+{
+  "name": "eyesblog",
+  "version": "3.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.5.9",
+    "@types/node": "^16.11.10",
+    "animate.css": "^4.1.1",
+    "axios": "^0.24.0",
+    "jquery": "^3.6.0",
+    "lodash": "^4.17.21",
+    "sass": "^1.43.4",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.12"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "typescript": "^4.4.3",
+    "vite": "^2.6.4",
+    "vite-plugin-style-import": "^1.3.0",
+    "vue-tsc": "^0.3.0"
+  }
+}

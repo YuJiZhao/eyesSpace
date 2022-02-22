@@ -1,25 +1,19 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import styleImport from 'vite-plugin-style-import';
+import prismjs from 'vite-plugin-prismjs';
 
 const path = require('path')
 
 export default defineConfig({
   plugins: [
     vue(),
-    styleImport({  // vant
-      libs: [
-        {
-          libraryName: 'vant',
-          esModule: true,
-          resolveStyle: (name) => `vant/es/${name}/style`,
-        },
-      ],
+    prismjs({
+      languages: ['markup', 'css', 'javascript', 'cpp', 'docker', 'git', 'go', 'java', 'javadoc', 'json', 'kotlin', 'less', 'lua', 'markdown', 'mongodb', 'perl', 'php', 'sass', 'scss', 'sql', 'swift', 'typescript'],
     }),
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src')  // 根目录设置为src
+      '@': path.resolve(__dirname, 'src')
     }
   },
 })

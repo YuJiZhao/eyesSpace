@@ -24,3 +24,7 @@ yarn add @types/jquery --save-dev
 yarn add --save lodash
 
 # nprogress
+
+# v-md-editor
+yarn add @kangc/v-md-editor@next
+yarn add vite-plugin-prismjs --dev // 代码高亮语言包

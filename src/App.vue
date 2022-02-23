@@ -42,13 +42,13 @@ export default defineComponent({
 
     //路由加载完成初始化博客基本内容
     $router.isReady().then(async () => {
-      await getSafe();
-      Promise.all([context(), sso()]).then(async values => {
-        const [contextData, ssoData] = values;
-        initConfig(contextData);
+      // await getSafe();
+      // Promise.all([context(), sso()]).then(async values => {
+      //   const [contextData, ssoData] = values;
+      //   initConfig(contextData);
         // initUserInfo(ssoData);
-        waiting.value = false;
-      });
+        // waiting.value = false;
+      // });
     });
 
     // 初始化文案信息

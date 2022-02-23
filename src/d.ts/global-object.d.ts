@@ -60,8 +60,8 @@ declare namespace bean {
     }
     //查询文案配置
     interface copywriting extends base {
-        pa_t?: string;
-        on_s?: string;
+        // pa_t?: string;
+        // on_s?: string;
     }
     //刷新登录接口
     // interface rein extends base {

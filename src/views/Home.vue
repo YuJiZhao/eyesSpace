@@ -1,7 +1,5 @@
 <template>
     <div class="home">
-        <!-- <v-md-editor :text="markdown"></v-md-editor> -->
-        <v-md-editor :model-value="markdown" mode="preview"></v-md-editor>
     </div>
 </template>
 
@@ -10,9 +8,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
     components: {},
     setup() {
-        const markdown = "# hello world";
         return {
-            markdown
         };
     },
 });

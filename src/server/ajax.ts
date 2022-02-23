@@ -24,10 +24,10 @@ export async function post<T>(url: string, req: T) {
         .post(config.apiUrl + url, req, getConfig())
         .then(res => {
             if (res.status == 200) return res.data;
-            else return { code: '999000', msg: '系统异常' };
+            else return { code: '400', msg: 'request error' };
         })
         .catch(() => {
-            return { code: '999000', msg: '系统异常' };
+            return { code: '502', msg: 'request error' };
         });
     return data;
 }

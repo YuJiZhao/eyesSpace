@@ -1,7 +1,6 @@
 interface ConfigType {
-    apiUrl: string;
-    appid: string;
-    [propName: string]: any; //支持拓展属性
+    picUrl: string,
+    video: string
 }
 
 declare const config: ConfigType;

@@ -6,6 +6,6 @@ export default {
       secondKey: '67890',
       thirdKey: 'abcde'
     },
-    successReturnCode: '000000'
+    successReturnCode: '200'
   }
 };

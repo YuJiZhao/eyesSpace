@@ -1,3 +1,8 @@
+<template>
+    <div class="error">
+    </div>
+</template>
+
 <script lang="ts">
 import { defineComponent } from "vue";
 export default defineComponent({
@@ -8,12 +13,8 @@ export default defineComponent({
 });
 </script>
 
-<template>
-    <div class="blink">
-    </div>
-</template>
 
 <style lang="scss" scoped>
-.blink {
+.error {
 }
 </style>

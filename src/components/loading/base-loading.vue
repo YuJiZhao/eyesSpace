@@ -56,7 +56,7 @@ export default defineComponent({
 .container3 > div {
     width: 10px;
     height: 10px;
-    background-color: #ef0a35;
+    background-color: #aef3fc;
     border-radius: 100%;
     position: absolute;
     -webkit-animation: bouncedelay 1.2s infinite ease-in-out;

@@ -1,0 +1,4 @@
+window.config = {
+    picUrl: '',
+    videoUrl: ''
+};

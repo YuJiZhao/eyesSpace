@@ -1,10 +1,11 @@
 <template>
-    <div class="blink">
+    <div class="markdown">
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+// import './vue-markdown-editor';
 export default defineComponent({
     components: {},
     setup() {
@@ -14,6 +15,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.blink {
+.markdown {
 }
 </style>

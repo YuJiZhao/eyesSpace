@@ -9,7 +9,27 @@ interface Wait {
     hide: () => void;
 }
 
+interface iconLink {
+    icon: string;
+    title: string;
+    link: string;
+}
+
 interface context {
+    blog_name: string;
+    cover: string;
+    navBar: Partial<iconLink>;
+    avatar: string;
+    nick: string;
+    motto: string;
+    footprint: Partial<iconLink>;
+    announcement: string;
+    date: string;
+    wechat_reward: string;
+    alipay_reward: string;
+    copyright: string;
+    theme_name: string;
+    project_info: Partial<iconLink>;
 }
 
 interface CV {
@@ -24,17 +44,12 @@ interface ext {
 interface userInfoType {
 //   vr_s: string; //视频彩铃状态 vrbtRingStatus
 //   vr_vs: string;
-//   p_no: string; //手机号
-//   op_n: string; //运营商
-//   rg_s: string; //彩铃状态
-//   vp_s: string; //个彩状态
-//   cg_id: string; //计费ID
 }
 
 interface resp_type {
-    // code?: string;
-    // msg?: string;
-    // [propName: string]: any;
+    code?: string;
+    msg?: string;
+    [propName: string]: any;
 }
 
 declare namespace bean {
@@ -44,19 +59,19 @@ declare namespace bean {
         // pn: string;
     }
     //查询文案配置
-    interface qcog extends base {
+    interface copywriting extends base {
         pa_t?: string;
         on_s?: string;
     }
     //刷新登录接口
-    interface rein extends base {
-        b_type: string;
-        r_time?: string;
-    }
-    interface login extends base {
-        s_cd: string;
-        b_type: string;
-        r_time: string;
-        p_no: string;
-    }
+    // interface rein extends base {
+    //     b_type: string;
+    //     r_time?: string;
+    // }
+    // interface login extends base {
+    //     s_cd: string;
+    //     b_type: string;
+    //     r_time: string;
+    //     p_no: string;
+    // }
 }

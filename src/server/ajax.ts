@@ -21,7 +21,7 @@ function getConfig() {
 
 export async function post<T>(url: string, req: T) {
     const data: resp_type = await axios
-        .post(config.apiUrl + url, req, getConfig())
+    .post(config.blogUrl + url, req, getConfig())
         .then(res => {
             if (res.status == 200) return res.data;
             else return { code: '400', msg: 'request error' };
@@ -33,8 +33,14 @@ export async function post<T>(url: string, req: T) {
 }
 
 export async function get(url: string) {
-    await axios
-        .get(config.apiUrl + url)
-        .then(() => { })
-        .catch(() => { });
+    const data: resp_type = await axios
+    .get(config.blogUrl + url, getConfig())
+        .then(res => {
+            if (res.status == 200) return res.data;
+            else return { code: '400', msg: 'request error' };
+        })
+        .catch(() => {
+            return { code: '502', msg: 'request error' };
+        });
+    return data;
 }

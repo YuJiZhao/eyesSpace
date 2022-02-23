@@ -19,44 +19,52 @@ export default defineComponent({
   setup() {
     const $route = useRoute();
     const $router = useRouter();
-    //接口
     const $service = inject<ApiObject>('$service')!;
-    //接口等待层
+    const $context = inject<CV>('$context')!;
+    const $user = inject<U>('$user')!;
     const $wait = inject<Wait>('$wait')!;
-    //控制页面展示
     const waiting = ref(false);
 
-    //csrf
-    // async function getSafe() {
-    //   await $service.safe();
-    // }
+    // csrf
+    async function getSafe() {
+      await $service.safe();
+    }
 
-    //路由加载完成，确保能够获取url参数
-    // $router.isReady().then(async () => {
-      // await getSafe();
-      // Promise.all([context(), sso()]).then(async values => {
-      //   const [contextData, ssoData] = values;
-      //   initUserInfo(ssoData);
-      //   initConfig(contextData);
-      //   waiting.value = false;
-      // });
-    // });
+    // 获取文案信息
+    async function context() {
+      return await $service.copywriting({});
+    }
 
-    //初始化用户信息
-    // async function initUserInfo({ code, u, c }: resp_type) {
-    //   if (code == '200') {
-    //     $wait.hide();
-    //     $user.init();
-    //   }
-    // }
+    // 获取用户信息
+    async function sso() {
+      // return await $service.au_in({ cn, pn, p, t, b_type: 'diy' });
+    }
 
-    //初始化文案配置
-    // async function initConfig({ code, pa_a }: resp_type) {
-    //   if (code == '200') {
-    //     const p = JSON.parse(pa_a) || {};
-    //     $context.init(p);
-    //   }
-    // }
+    //路由加载完成初始化博客基本内容
+    $router.isReady().then(async () => {
+      await getSafe();
+      Promise.all([context(), sso()]).then(async values => {
+        const [contextData, ssoData] = values;
+        initConfig(contextData);
+        // initUserInfo(ssoData);
+        waiting.value = false;
+      });
+    });
+
+    // 初始化文案信息
+    async function initConfig({ code, pa_a }: resp_type) {
+      if (code == '200') {
+        const p = JSON.parse(pa_a) || {};
+        $context.init(p);
+      }
+    }
+
+    // 初始化用户信息
+    async function initUserInfo({ code, u, c }: resp_type) {
+      if (code == '200') {
+        $user.init(Object.assign(c, u));
+      }
+    }
 
     return {
       waiting
@@ -64,3 +72,7 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss">
+
+</style>

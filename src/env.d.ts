@@ -12,7 +12,6 @@ declare module '*.vue' {
 // 自定义插件
 declare module '@/server/api';
 declare module '@/modules/store';
-declare module '@/utils/helper';
 
 // markdown编辑器
 declare module '@kangc/v-md-editor';

@@ -1,46 +1,60 @@
-import axios from 'axios';
-axios.defaults.withCredentials = true;
+import axios from "axios";
+import { inject } from "vue";
+import { start, close } from "@/utils/nprogress";
+// TODO：确认$utils引入方式
+const $utils = inject<utils>("$utils")!;
 
-function getCookie(name: string) {
-    let arr,
-        reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)');
-    if ((arr = document.cookie.match(reg))) return unescape(arr[2]);
-    else return 'null';
-}
+const service = axios.create({
+    baseURL: "https://blog.api.eyescode.top/",
+    timeout: 6 * 1000,
+    withCredentials: true,
+    headers: {
+        "safe-token": $utils.getCookie("security"),
+    },
+});
 
-// 获取配置信息
-function getConfig() {
-    return {
-        timeout: 60000,
-        headers: {
-            'safe-token': getCookie('security')
-        },
-        withCredentials: true
-    };
-}
+service.interceptors.request.use(
+    config => {
+        start();
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
+
+service.interceptors.response.use(
+    response => {
+        close();
+        return response;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
 
 export async function post<T>(url: string, req: T) {
-    const data: resp_type = await axios
-    .post(config.blogUrl + url, req, getConfig())
-        .then(res => {
+    const data: resp_type = await service
+        .post(config.blogUrl + url, req)
+        .then((res) => {
             if (res.status == 200) return res.data;
-            else return { code: '400', msg: 'request error' };
+            else return { code: "400", msg: "request error" };
         })
         .catch(() => {
-            return { code: '502', msg: 'request error' };
+            return { code: "502", msg: "request error" };
         });
     return data;
 }
 
 export async function get(url: string) {
-    const data: resp_type = await axios
-    .get(config.blogUrl + url, getConfig())
-        .then(res => {
+    const data: resp_type = await service
+        .get(config.blogUrl + url)
+        .then((res) => {
             if (res.status == 200) return res.data;
-            else return { code: '400', msg: 'request error' };
+            else return { code: "400", msg: "request error" };
         })
         .catch(() => {
-            return { code: '502', msg: 'request error' };
+            return { code: "502", msg: "request error" };
         });
     return data;
 }

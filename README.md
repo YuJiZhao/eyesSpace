@@ -24,6 +24,7 @@ yarn add @types/jquery --save-dev
 yarn add --save lodash
 
 # nprogress
+yarn add nprogress
 
 # v-md-editor
 yarn add @kangc/v-md-editor@next

@@ -13,6 +13,7 @@
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",
     "jquery": "^3.6.0",
+    "lib-flexible": "^0.3.2",
     "lodash": "^4.17.21",
     "nprogress": "^0.2.0",
     "sass": "^1.43.4",

@@ -29,3 +29,6 @@ yarn add nprogress
 # v-md-editor
 yarn add @kangc/v-md-editor@next
 yarn add vite-plugin-prismjs --dev // 代码高亮语言包
+
+# lib-flexible
+yarn add lib-flexible

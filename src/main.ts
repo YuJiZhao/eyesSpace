@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import 'lib-flexible/flexible.js'
 // import 'animate.css/animate.min.css'
 
 import { $router, $service, $context, $user, $wait, $ext, $utils } from './plugins';

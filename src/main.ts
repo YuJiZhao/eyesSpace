@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import 'lib-flexible/flexible.js'
 
 /**
  * 全局样式

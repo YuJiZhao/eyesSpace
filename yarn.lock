@@ -2287,10 +2287,32 @@
   dependencies:
     "is-buffer" "^1.1.5"
 
+<<<<<<< HEAD
 "kind-of@^3.2.0":
   "integrity" "sha512-NOW9QQXMoZGg/oqnVNoNTTIFEIid1627WCffUBJEdMxYApq7mNE7CpzucIPc+ZQg25Phej7IJSmX3hO+oblOtQ=="
   "resolved" "https://registry.npmmirror.com/kind-of/-/kind-of-3.2.2.tgz"
   "version" "3.2.2"
+=======
+kind-of@^5.0.0:
+  version "5.1.0"
+  resolved "https://registry.npmmirror.com/kind-of/-/kind-of-5.1.0.tgz#729c91e2d857b7a419a1f9aa65685c4c33f5845d"
+  integrity sha512-NGEErnH6F2vUuXDh+OlbcKW7/wOcfdRHaZ7VWtqCztfHri/++YKmP51OdWeGPuqCOba6kk2OTe5d02VmTB80Pw==
+
+kind-of@^6.0.0, kind-of@^6.0.2:
+  version "6.0.3"
+  resolved "https://registry.npmmirror.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
+  integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
+
+lib-flexible@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.npmmirror.com/lib-flexible/-/lib-flexible-0.3.2.tgz#06f5a74832314a2d35c12039bc9c3ca2daeaa426"
+  integrity sha512-9yowMWA70tKhKdCJDaltY0mNQG4OWo7pWKScnTp9aiSxS7s20ZYlwBRE3335nweOf5qKXVC7sDxJwMPM8/MFZg==
+
+linkify-it@^2.0.0:
+  version "2.2.0"
+  resolved "https://registry.npmmirror.com/linkify-it/-/linkify-it-2.2.0.tgz#e3b54697e78bf915c70a38acd78fd09e0058b1cf"
+  integrity sha512-GnAl/knGn+i1U/wjBz3akz2stz+HrHLsxMwHQGofCDfPvlf+gDKN58UtfmUquTY4/MXeE2x7k19KQmeoZi94Iw==
+>>>>>>> 516c83e842341e42a438556cc7e6785f03d3a599
   dependencies:
     "is-buffer" "^1.1.5"
 

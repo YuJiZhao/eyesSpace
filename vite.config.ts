@@ -5,7 +5,7 @@ import prismjs from 'vite-plugin-prismjs';
 const path = require('path')
 
 export default defineConfig({
-  publicDir: path.join(__dirname, `src/config/`),
+  publicDir: path.join(__dirname, `src/public/`),
   plugins: [
     vue(),
     prismjs({

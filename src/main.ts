@@ -1,7 +1,14 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-// import 'animate.css/animate.min.css'
 
+/**
+ * 全局样式
+ */
+import "@/assets/scss/theme/default/global.scss";
+
+/**
+ * 插件注册
+ */
 import { $router, $service, $context, $user, $wait, $ext, $utils } from './plugins';
 const plugins = [$router, $service, $context, $user, $wait, $ext, $utils];
 

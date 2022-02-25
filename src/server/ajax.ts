@@ -1,15 +1,13 @@
 import axios from "axios";
-import { inject } from "vue";
 import { start, close } from "@/utils/nprogress";
-// TODO：确认$utils引入方式
-const $utils = inject<utils>("$utils")!;
+import utils from "@/utils/helper";
 
 const service = axios.create({
     baseURL: "https://blog.api.eyescode.top/",
     timeout: 6 * 1000,
     withCredentials: true,
     headers: {
-        "safe-token": $utils.getCookie("security"),
+        "safe-token": utils.getCookie("security"),
     },
 });
 

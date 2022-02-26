@@ -1,10 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import 'lib-flexible/flexible.js'
 
 /**
  * 全局样式
  */
+import 'normalize.css/normalize.css'
+import 'lib-flexible/flexible.js'
 import "@/assets/scss/theme/default/global.scss";
 
 /**

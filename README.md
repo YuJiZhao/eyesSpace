@@ -32,3 +32,9 @@ yarn add vite-plugin-prismjs --dev // 代码高亮语言包
 
 # lib-flexible
 yarn add lib-flexible
+
+# lazysizes
+yarn add lazysizes
+
+# normalize.css
+yarn add normalize.css

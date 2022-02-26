@@ -1,3 +1,10 @@
+// 响应式布局
+@media screen and (min-width: 750px) {
+    html {
+        font-size: 37.5px !important;
+    }
+}
+
 // 字体
 @font-face {
     font-family: 'eyes';

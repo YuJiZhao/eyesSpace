@@ -4,18 +4,21 @@
       <component :is="Component" />
     </keep-alive>
   </router-view>
-  <base-wait></base-wait>
-  <base-loading :wait="waiting"></base-loading>
+  <Wait></Wait>
+  <Loading :wait="waiting"></Loading>
+  <Mask :mask="isMask"></Mask>
 </template>
 
 <script lang="ts">
 import { defineComponent, inject, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import BaseLoading from './components/loading/base-loading.vue';
-import BaseWait from './components/loading/base-wait.vue';
+import Loading from './components/loading/base-loading.vue';
+import Wait from './components/loading/base-wait.vue';
+import Mask from './components/currency/mask.vue';
+
 export default defineComponent({
   name: 'App',
-  components: { BaseLoading, BaseWait },
+  components: { Loading, Wait, Mask },
   setup() {
     const $route = useRoute();
     const $router = useRouter();
@@ -24,6 +27,7 @@ export default defineComponent({
     const $user = inject<U>('$user')!;
     const $wait = inject<Wait>('$wait')!;
     const waiting = ref(false);
+    const isMask = ref(false);
 
     // csrf
     async function getSafe() {
@@ -67,7 +71,8 @@ export default defineComponent({
     }
 
     return {
-      waiting
+      waiting,
+      isMask
     }
   }
 });

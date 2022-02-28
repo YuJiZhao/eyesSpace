@@ -10,6 +10,10 @@
 </template>
 
 <script lang="ts">
+/**
+ * 公告组件
+ * 每个用户初次使用时打开一次，公告更新则刷新
+ */
 import { defineComponent, reactive } from "vue";
 import $ from 'jquery';
 export default defineComponent({
@@ -30,12 +34,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import url();
+// @import url();
 
 .announcement {
     position: fixed;
     position: 999;
-    top: 2.6667rem;
+    top: -3.4667rem;
     left: 50%;
     transform: translateX(-50%);
     width: 6.6667rem;
@@ -77,12 +81,19 @@ export default defineComponent({
     }
 }
 
+.annAni {
+    animation: annAni 5s;
+}
+
 @keyframes annAni {
     10% {
+        top: 2.6667rem;
     }
-
     90% {
-
+        top: 2.6667rem;
+    }
+    100% {
+        top: -3.4667rem;
     }
 }
 </style>

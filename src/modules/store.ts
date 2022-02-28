@@ -1,6 +1,7 @@
 import { reactive, ref } from "vue";
 
 // 等待层
+// TODO: 删除等待层，并入弹出层，记得修改App.vue
 const Wait: Wait = {
     status: ref(false),
     show() {
@@ -8,6 +9,17 @@ const Wait: Wait = {
     },
     hide() {
         Wait.status.value = false;
+    },
+};
+
+// 弹出层
+const Popup: Popup = {
+    waitStatus: ref(false),
+    waitShow() {
+        Popup.waitStatus.value = true;
+    },
+    waitHide() {
+        Popup.waitStatus.value = false;
     },
 };
 

@@ -9,6 +9,13 @@ interface Wait {
     hide: () => void;
 }
 
+interface Popup {
+    waitStatus: any;
+    waitShow: () => void;
+    waitHide: () => void;
+}
+
+
 interface iconLink {
     icon: string;
     title: string;

@@ -3,18 +3,15 @@ interface U {
     init: <T>(info: T) => void;
 }
 
-interface Wait {
-    status: any;
-    show: () => void;
-    hide: () => void;
-}
-
 interface Popup {
+    loadStatus: any;
+    loadShow: () => void;
+    loadHide: () => void;
+
     waitStatus: any;
     waitShow: () => void;
     waitHide: () => void;
 }
-
 
 interface iconLink {
     icon: string;
@@ -49,8 +46,6 @@ interface ext {
 
 //用户的类型
 interface userInfoType {
-//   vr_s: string; //视频彩铃状态 vrbtRingStatus
-//   vr_vs: string;
 }
 
 interface resp_type {
@@ -62,23 +57,13 @@ interface resp_type {
 declare namespace bean {
     //基类型
     interface base {
-        // cn: string;
-        // pn: string;
     }
     //查询文案配置
     interface copywriting extends base {
-        // pa_t?: string;
-        // on_s?: string;
     }
     //刷新登录接口
     // interface rein extends base {
-    //     b_type: string;
-    //     r_time?: string;
     // }
     // interface login extends base {
-    //     s_cd: string;
-    //     b_type: string;
-    //     r_time: string;
-    //     p_no: string;
     // }
 }

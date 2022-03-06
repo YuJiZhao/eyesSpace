@@ -12,10 +12,9 @@
 <script lang="ts">
 /**
  * 公告组件
- * 每个用户初次使用时打开一次，公告更新则刷新
+ * @desc 每个用户初次使用时打开一次，公告更新则刷新
  */
 import { defineComponent, reactive } from "vue";
-import $ from 'jquery';
 export default defineComponent({
     components: {},
     props: {
@@ -35,11 +34,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 // @import url();
+// TODO：实现响应式，实现色彩抽离
 
 .announcement {
     position: fixed;
     position: 999;
-    top: -3.4667rem;
+    // top: -3.4667rem;
+    top: 3.4667rem;
     left: 50%;
     transform: translateX(-50%);
     width: 6.6667rem;
@@ -54,7 +55,7 @@ export default defineComponent({
         width: .2667rem;
         height: .2667rem;
         border-radius: 50%;
-        background: rgba(2, 218, 247);
+        background: #000;
     }
     .line {
         position: absolute;

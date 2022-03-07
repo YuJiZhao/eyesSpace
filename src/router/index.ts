@@ -2,9 +2,29 @@ import { createRouter, createWebHashHistory, RouteRecordRaw, onBeforeRouteLeave,
 
 const routes: Array<RouteRecordRaw> = [
     {
-        path: '/',
-        component: () => import("../views/Home.vue"),
-        children: []
+        path: "/",
+        name: "app",
+        component: () => import("@/App.vue"),
+        children: [
+            {
+                path: "/Home",
+                name: "Home",
+                component: () => import("@/view/Home.vue"),
+                children: []
+            },
+            {
+                path: "/Blog",
+                name: "Blog",
+                component: () => import("@/view/Blog.vue"),
+                children: []
+            },
+            // TODO: 完善非法路由跳转
+            // {
+            //     path: '/*',
+            //     component: () => import("@/view/Error.vue"),
+            //     redirect: '/Error',
+            // },
+        ]
     }
 ]
 

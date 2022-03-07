@@ -30,7 +30,7 @@ export default defineComponent({
 
     // 获取文案信息
     async function context() {
-      return await $service.copywriting({});
+      // return await $service.copywriting({});
     }
 
     // 获取用户信息
@@ -41,11 +41,12 @@ export default defineComponent({
     //路由加载完成初始化博客基本内容
     $router.isReady().then(async () => {
       // await getSafe();
-      Promise.all([context(), sso()]).then(async values => {
+      // Promise.all([context(), sso()]).then(async values => {
         // const [contextData, ssoData] = values;
         // initConfig(contextData);
         // initUserInfo(ssoData);
-      });
+        // TODO: 路由跳转
+      // });
     });
 
     // 初始化文案信息

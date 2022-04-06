@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -39,16 +39,16 @@ class EyesblogApplicationTests {
 
     @Test
     void testBlog() {
-        List<Blog> list = blogmapper.findBlog();
-        System.out.println(list);
+//        List<Blog> list = blogmapper.findBlog();
+//        System.out.println(list);
     }
 
     @Test
     void testEncoder() {
-        PasswordEncoder pw = new BCryptPasswordEncoder();
-        String encode = pw.encode("123456789");
-        System.out.println(encode);
-        boolean matches = pw.matches("123456789", encode);
-        System.out.println(matches);
+//        PasswordEncoder pw = new BCryptPasswordEncoder();
+//        String encode = pw.encode("123456789");
+//        System.out.println(encode);
+//        boolean matches = pw.matches("123456789", encode);
+//        System.out.println(matches);
     }
 }

@@ -10,5 +10,4 @@ import java.util.List;
 @Mapper
 @Repository
 public interface BlogMapper extends BaseMapper<Blog> {
-    List<Blog> findBlog();
 }

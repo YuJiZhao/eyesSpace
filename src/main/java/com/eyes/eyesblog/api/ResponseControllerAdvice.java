@@ -25,7 +25,6 @@ public class ResponseControllerAdvice implements ResponseBodyAdvice<Object> {
      */
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-        log.info("判断是否需要进行返回值包装");
         //如果接口方法返回 Result 不需要再次包装
         //如果接口方法使用了 @NotResultWrap 注解，表示不需要包装了
         //只对成功的请求进行返回包装，异常情况统一放在全局异常中进行处理
@@ -40,7 +39,6 @@ public class ResponseControllerAdvice implements ResponseBodyAdvice<Object> {
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
                                   Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   ServerHttpRequest request, ServerHttpResponse response) {
-        log.info("进行返回值包装");
         Result<Object> result = new Result<>();
         //String 类型不能直接包装，需要进行特殊处理
         if (returnType.getParameterType().equals(String.class)){

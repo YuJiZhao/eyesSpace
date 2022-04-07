@@ -11,7 +11,10 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CopywritingMapper extends BaseMapper<Copywriting> {
-
+    /**
+     * 获取博客文案配置信息
+     * @return List<Copywriting>
+     */
     @Select("select * from base_info union select * from copywriting")
     List<Copywriting> findAll();
 }

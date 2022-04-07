@@ -7,10 +7,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ResultCode {
     //成功提示码
-    SUCCESS(20000, "成功"),
+    SUCCESS(200, "success"),
 
     //自定义失败信息
-    FAILURE(40000, "失败"),
+    FAILURE(400, "fail"),
 
     //通用错误码 50001~50099
     PROGRAM_INSIDE_EXCEPTION(50001, "program exception"),

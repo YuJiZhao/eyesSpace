@@ -1,3 +1,4 @@
+import { ApiObject } from "@/d.ts/api";
 import { get, post } from "./ajax"
 
 const api: ApiObject = {

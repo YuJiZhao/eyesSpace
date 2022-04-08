@@ -1,6 +1,7 @@
 import axios from "axios";
 import { start, close } from "@/utils/nprogress";
 import utils from "@/utils/helper";
+import { config } from "@/config/index";
 
 const service = axios.create({
     baseURL: "https://blog.api.eyescode.top/",
@@ -32,7 +33,7 @@ service.interceptors.response.use(
 );
 
 export async function post<T>(url: string, req: T) {
-    const data: resp_type = await service
+    const data: RespType = await service
         .post(config.blogUrl + url, req)
         .then((res) => {
             if (res.status == 200) return res.data;
@@ -45,7 +46,7 @@ export async function post<T>(url: string, req: T) {
 }
 
 export async function get(url: string) {
-    const data: resp_type = await service
+    const data: RespType = await service
         .get(config.blogUrl + url)
         .then((res) => {
             if (res.status == 200) return res.data;

@@ -9,20 +9,13 @@ import 'lib-flexible/flexible.js'
 import "@/assets/scss/theme/default/global.scss";
 
 /**
- * 全局组件
- */
-import components from '@/global/components';
-
-/**
  * 插件
  */
-import { $router, $service, $context, $user, $popup, $ext, $utils } from "./global/plugins";
+import { $router, $service, $context, $user, $popup, $ext, $utils } from "./plugins";
 
 const plugins = [$router, $service, $context, $user, $popup, $ext, $utils];
 
 const app = createApp(App);
-
-app.use(components);
 
 plugins.forEach(plugin => {
     app.use(plugin);

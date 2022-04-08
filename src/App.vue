@@ -1,27 +1,37 @@
 <template>
-<!-- 
-  // TODO：设定为嵌套路由
--->
-  <router-view v-slot="{ Component }" v-if="!status">
-    <keep-alive>
-      <component :is="Component" />
-    </keep-alive>
-  </router-view>
-  <Load :loadStatus="status"></Load>
+  <!-- 主页面 -->
+  <Home class="home" v-if="!loadStatus"/>
+  
+  <!-- 弹出层 -->
+  <Load class="load" v-if="loadStatus"></Load>
+  <Announcement />
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { defineComponent, inject, ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import Home from "@/views/Home.vue";
+import { Load, Alert, Announcement } from "@/components/popup";
+import { CVType, PopupType, UserType } from "@/d.ts/modules";
 
 export default defineComponent({
+  components: {
+    Home,
+    Load, Alert, Announcement
+  },
   setup() {
     const $route = useRoute();
     const $router = useRouter();
     const $service = inject<ApiObject>('$service')!;
-    const $context = inject<CV>('$context')!;
-    const $user = inject<U>('$user')!;
-    const $popup = inject<Popup>('$popup')!;
+    const $context = inject<CVType>('$context')!;
+    const $user = inject<UserType>('$user')!;
+    const $popup = inject<PopupType>('$popup')!;
+
+    let loadStatus = ref($popup.loadStatus.value);
+
+    watch(() => $popup.loadStatus.value, (value) => {
+      loadStatus.value = value;
+    });
 
     // csrf
     async function getSafe() {
@@ -45,12 +55,12 @@ export default defineComponent({
         // const [contextData, ssoData] = values;
         // initConfig(contextData);
         // initUserInfo(ssoData);
-        // TODO: 路由跳转
+        // $popup.loadStatus.val = true
       // });
     });
 
     // 初始化文案信息
-    async function initConfig({ code, pa_a }: resp_type) {
+    async function initConfig({ code, pa_a }: RespType) {
       // if (code == '200') {
       //   const p = JSON.parse(pa_a) || {};
       //   $context.init(p);
@@ -65,12 +75,15 @@ export default defineComponent({
     // }
 
     return {
-      status: $popup.loadStatus
+      loadStatus
     }
   }
 });
 </script>
 
 <style lang="scss">
-
+.load {
+  width: 100vw;
+  height: 100vh;
+}
 </style>

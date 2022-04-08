@@ -1,20 +1,41 @@
-import { reactive, ref } from "vue";
+import { PopupType, CVType, UserType, ExtType } from "@/d.ts/modules";
+import { reactive, ref, UnwrapNestedRefs } from "vue";
+import { announcementMsg } from "@/config/index"
 
 // 弹出层
-const Popup: Popup = {
-    // 页面跳转加载控制
+const Popup: PopupType = {
+    // 页面跳转加载页面
     loadStatus: ref(false),
     loadShow() { Popup.loadStatus.value = true; },
     loadHide() { Popup.loadStatus.value = false; },
 
-    // 等待控制
-    waitStatus: ref(false),
-    waitShow() { Popup.waitStatus.value = true; },
-    waitHide() { Popup.waitStatus.value = false; },
+    // 页面提示
+    alertStatus: ref(false),
+    alertShow(content: String) {
+
+        Popup.alertStatus.value = true; 
+    },
+    alertHide() { Popup.alertStatus.value = false; },
+
+    // 公告
+    announcementStatus: ref(false),
+    announcementMsg: reactive({
+        ...announcementMsg.defaultAnnouncement
+    }),
+    announcementShow(msg: UnwrapNestedRefs<{title: String, content: String}>) {
+        Popup.announcementMsg.title = msg.title;
+        Popup.announcementMsg.content = msg.content;
+        Popup.announcementStatus.value = true;
+    },
+    announcementHide() {
+        Popup.announcementStatus.value = false; 
+        Popup.announcementMsg.title = announcementMsg.defaultAnnouncement.title;
+        Popup.announcementMsg.content = announcementMsg.defaultAnnouncement.content;
+    },
 };
 
 // 文案配置
-const CV: CV = {
+const CV: CVType = {
     context: {},
     init: <T>(context: T) => {
         CV.context = context;
@@ -22,7 +43,7 @@ const CV: CV = {
 };
 
 // 用户信息
-const User: U = {
+const User: UserType = {
     info: reactive({ detail: {} }),
     init: <T>(userInfo: T) => {
         User.info.detail = userInfo;
@@ -30,7 +51,7 @@ const User: U = {
 };
 
 // 流程逻辑控制
-const Ext: ext = {
+const Ext: ExtType = {
 };
 
 export { User, CV, Popup, Ext };

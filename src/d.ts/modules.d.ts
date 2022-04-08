@@ -1,24 +1,34 @@
-interface U {
+import { Ref, UnwrapNestedRefs } from "vue";
+
+// 用户类型
+interface UserType {
     readonly info: { detail: Partial<userInfoType> };
     init: <T>(info: T) => void;
 }
+interface userInfoType {
+}
 
-interface Popup {
-    loadStatus: any;
+// 弹出层
+interface PopupType {
+    loadStatus: Ref<Boolean>;
     loadShow: () => void;
     loadHide: () => void;
 
-    waitStatus: any;
-    waitShow: () => void;
-    waitHide: () => void;
+    alertStatus: Ref<Boolean>;
+    alertShow: (content: String) => void;
+    alertHide: () => void;
+
+    announcementStatus: Ref<Boolean>;
+    announcementMsg: UnwrapNestedRefs<{title: String, content: String}>
+    announcementShow: (msg: UnwrapNestedRefs<{title: String, content: String}>) => void;
+    announcementHide: () => void;
 }
 
-interface iconLink {
-    icon: string;
-    title: string;
-    link: string;
+// 文案配置
+interface CVType {
+    context: Partial<context>;
+    init: <T>(context: T) => void;
 }
-
 interface context {
     blog_name: string;
     cover: string;
@@ -35,35 +45,12 @@ interface context {
     theme_name: string;
     project_info: Partial<iconLink>;
 }
-
-interface CV {
-    context: Partial<context>;
-    init: <T>(context: T) => void;
+interface iconLink {
+    icon: string;
+    title: string;
+    link: string;
 }
 
-interface ext {
-}
-
-//用户的类型
-interface userInfoType {
-}
-
-interface resp_type {
-    code?: string;
-    msg?: string;
-    [propName: string]: any;
-}
-
-declare namespace bean {
-    //基类型
-    interface base {
-    }
-    //查询文案配置
-    interface copywriting extends base {
-    }
-    //刷新登录接口
-    // interface rein extends base {
-    // }
-    // interface login extends base {
-    // }
+// 流程逻辑控制
+interface ExtType {
 }

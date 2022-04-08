@@ -69,8 +69,9 @@ public class BlogController {
      * 新增博客
      */
     @PostMapping("/addblog")
-    public String addBlog(@RequestParam Map<String, String> map) {
-        return null;
+    public Result<Void> addBlog(@RequestParam Map<String, Object> map) {
+        blogService.addBlog(map);
+        return Result.success();
     }
 
     /**

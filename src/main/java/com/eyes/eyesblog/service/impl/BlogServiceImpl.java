@@ -6,6 +6,8 @@ import com.eyes.eyesblog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -35,11 +37,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public String addBlog() {
-        // TODO： spring事务操作
-//        blogMapper.addBlog();
-//        blogMapper.addLabel();
-        return null;
+    public void addBlog(Map<String, Object> map) {
+        // TODO： spring事务操作, 以及标签数组功能的验证
+        System.out.println(map);
+        blogMapper.addBlog(map);
+        blogMapper.addLabel((BigInteger)map.get("id"), (List<String>)map.get("label"));
     }
 
     @Override

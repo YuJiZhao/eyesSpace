@@ -52,7 +52,7 @@ public interface BlogService {
      *
      * @return String
      */
-    String addBlog();
+    void addBlog(Map<String, Object> map);
 
     /**
      * 修改博客

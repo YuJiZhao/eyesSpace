@@ -3,8 +3,11 @@ package com.eyes.eyesblog.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.eyes.eyesblog.entity.Blog;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -39,13 +42,17 @@ public interface BlogMapper extends BaseMapper<Blog> {
     /**
      * 添加标签
      */
-    Integer addLabel(Integer id, String label);
-
+    Integer addLabel(BigInteger id, List<String> labels);
 
     /**
      * 修改博客
      */
-    String modifyBlog();
+    Integer modifyBlog();
+
+    /**
+     * 修改博客标签
+     */
+    Integer modifyBlogLabels();
 
     /**
      * 删除博客

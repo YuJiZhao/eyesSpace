@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.eyes.eyesblog.mapper.BlogMapper">
-    <!--  按id查询博客  -->
+    <!--
+        按id查询博客
+        TODO: 还要查询博客标签
+    -->
     <select id="getBlogById" resultType="map">
         SELECT
             id,
@@ -59,25 +62,37 @@
     <!--  新增博客  -->
     <insert id="addBlog" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO blog
-            (title, cover, archive, word_num, priorty, summary, content)
+            (title, cover, archive, word_num, summary, content)
         VALUES (
                 #{title},
                 #{cover},
                 #{archive},
                 #{word_num},
-                #{priority},
                 #{summary},
-                #{content},
+                #{content}
                )
     </insert>
 
     <!--  添加博客标签  -->
     <insert id="addLabel">
-        INSERT INTO blog_label
-        VALUES ( #{id}, #{label} )
+        INSERT INTO blog_label VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{id}, #{item})
+        </foreach>
     </insert>
 
-<!--  修改博客  -->
-<!--  删除博客  -->
-<!--  设置/取消置顶  -->
+    <!--  修改博客  -->
+    <update id="modifyBlog">
+
+    </update>
+
+    <!--  修改博客标签  -->
+    <update id="modifyBlog">
+
+    </update>
+
+    <!--  删除博客  -->
+    <delete id="deleteBlog">
+
+    </delete>
 </mapper>

@@ -1,23 +1,25 @@
 <template>
   <!-- 主页面 -->
   <Home class="home" v-if="!loadStatus"/>
-  
+
   <!-- 弹出层 -->
   <Load class="load" v-if="loadStatus"></Load>
   <Announcement />
+  <Alert />
+  <!-- <Reward /> -->
 </template>
 
 <script lang="ts">
 import { defineComponent, inject, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Home from "@/views/Home.vue";
-import { Load, Alert, Announcement } from "@/components/popup";
+import { Load, Announcement, Alert, Reward } from "@/components/popup";
 import { CVType, PopupType, UserType } from "@/d.ts/modules";
 
 export default defineComponent({
   components: {
     Home,
-    Load, Alert, Announcement
+    Load, Announcement, Alert, Reward
   },
   setup() {
     const $route = useRoute();

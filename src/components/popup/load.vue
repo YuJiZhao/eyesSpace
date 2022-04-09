@@ -25,7 +25,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .load {
-  background-color: rgb(21, 106, 128);
+  background-color: rgb(55,71,79);
   .eye {
     width: 20px;
     height: 8px;
@@ -43,7 +43,7 @@ export default defineComponent({
     margin: -250px auto;
     width: 80px;
     height: 80px;
-    background-color: rgb(21, 106, 128);
+    background-color: rgb(55,71,79);
     border-radius: 50px;
     box-shadow: inset -4px 2px 0px 0px rgba(240, 220, 220, 1);
     -webkit-animation: headAnim 1.5s infinite alternate;
@@ -55,7 +55,7 @@ export default defineComponent({
     margin: 90px auto;
     width: 140px;
     height: 120px;
-    background-color: rgb(21, 106, 128);
+    background-color: rgb(55,71,79);
     border-radius: 50px/25px;
     box-shadow: inset -5px 2px 0px 0px rgba(240, 220, 220, 1);
     -webkit-animation: bodyAnim 1.5s infinite alternate;
@@ -94,7 +94,7 @@ export default defineComponent({
     -webkit-backface-visibility: hidden;
     width: 180px;
     height: 180px;
-    background-color: rgb(21, 106, 128);
+    background-color: rgb(55,71,79);
     border-radius: 0px 0px 50px 50px;
     position: absolute;
     left: 50%;
@@ -109,7 +109,7 @@ export default defineComponent({
     width: 120px;
     height: 120px;
     position: absolute;
-    background-color: rgb(21, 106, 128);
+    background-color: rgb(55,71,79);
     border-radius: 20px;
     box-shadow: -1px -4px 0px 0px rgba(240, 220, 220, 1);
     -webkit-transform: rotate(45deg);

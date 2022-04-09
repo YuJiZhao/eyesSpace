@@ -11,11 +11,20 @@ const Popup: PopupType = {
 
     // 页面提示
     alertStatus: ref(false),
-    alertShow(content: String) {
-
-        Popup.alertStatus.value = true; 
+    alertMsg: reactive({
+        title: "",
+        content: ""
+    }),
+    alertShow(msg: UnwrapNestedRefs<{title: String, content: String}>) {
+        Popup.alertMsg.title = msg.title;
+        Popup.alertMsg.content = msg.content;
+        Popup.alertStatus.value = true;
     },
-    alertHide() { Popup.alertStatus.value = false; },
+    alertHide() { 
+        Popup.alertStatus.value = false;
+        Popup.alertMsg.title = "";
+        Popup.alertMsg.content = "";
+    },
 
     // 公告
     announcementStatus: ref(false),

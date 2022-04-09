@@ -15,7 +15,8 @@ interface PopupType {
     loadHide: () => void;
 
     alertStatus: Ref<Boolean>;
-    alertShow: (content: String) => void;
+    alertMsg: UnwrapNestedRefs<{title: String, content: String}>
+    alertShow: (msg: UnwrapNestedRefs<{title: String, content: String}>) => void;
     alertHide: () => void;
 
     announcementStatus: Ref<Boolean>;

@@ -1,11 +1,8 @@
 <template>
     <div class="announcement" v-if="status">
-        <div class="line"></div>
-        <div class="point"></div>
-        <div class="content">
+            <div class="close">x</div>
             <div class="title">{{msg.title}}</div>
             <div class="value">{{msg.content}}</div>
-        </div>
     </div>
 </template>
 
@@ -42,4 +39,17 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.announcement {
+    .close {
+
+    }
+
+    .title {
+
+    }
+
+    .value {
+
+    }
+}
 </style>

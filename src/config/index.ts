@@ -10,9 +10,11 @@ const config: ConfigType = {
 /**
  * 内置提示内容
  */
-
 const alertMsg: AlertMsgType = {
-    
+    copyAlert: {
+        title: "不能打开控制台喔",
+        content: "采用本站js及css请注明来源，请勿商业使用哦"
+    }
 }
 
 /**

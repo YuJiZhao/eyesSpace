@@ -5,7 +5,7 @@ interface ConfigType {
 }
 
 interface AlertMsgType {
-
+    copyAlert: {title: String, content: String}
 }
 
 interface AnnouncementMsgType {

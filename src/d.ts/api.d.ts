@@ -23,7 +23,8 @@ interface RespType {
 // 统一api管理
 interface ApiObject {
     safe: () => Promise<void>;
-    copywriting: (req: bean.copywriting) => Promise<RespType>;
+    // copywriting: (req: bean.copywriting) => Promise<RespType>;
+    copywriting: () => Promise<void>;
 }
 
 declare const api: ApiObject;

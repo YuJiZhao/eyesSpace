@@ -3,6 +3,7 @@
  */
 const config: ConfigType = {
     blogUrl: 'https://blog.eyescode.top/',
+    apiUrl: "/api",
     picUrl: 'https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/',
     videoUrl: ''
 };

@@ -5,8 +5,8 @@ const api: ApiObject = {
     safe: async () => {
         await get('/safe');
     },
-    copywriting: async req => {
-        return await post('/copywriting', req);
+    copywriting: async () => {
+        return await get('/copywriting');
     }
 }
 

@@ -6,7 +6,6 @@ import App from './App.vue'
  */
 import 'normalize.css/normalize.css'
 import 'lib-flexible/flexible.js'
-import "@/assets/scss/theme/default/global.scss";
 
 /**
  * 插件

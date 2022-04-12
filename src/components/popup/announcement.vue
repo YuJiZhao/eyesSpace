@@ -1,8 +1,8 @@
 <template>
     <div class="announcement" v-if="status">
-            <div class="close">x</div>
-            <div class="title">{{msg.title}}</div>
-            <div class="value">{{msg.content}}</div>
+        <div class="close">x</div>
+        <div class="title">{{msg.title}}</div>
+        <div class="value">{{msg.content}}</div>
     </div>
 </template>
 

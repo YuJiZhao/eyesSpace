@@ -4,7 +4,7 @@ import utils from "@/utils/helper";
 import { config } from "@/config/index";
 
 const service = axios.create({
-    baseURL: "https://blog.api.eyescode.top/",
+    baseURL: config.apiUrl,
     timeout: 6 * 1000,
     withCredentials: true,
     headers: {
@@ -28,13 +28,14 @@ service.interceptors.response.use(
         return response;
     },
     error => {
+        close();
         return Promise.reject(error);
     }
 );
 
 export async function post<T>(url: string, req: T) {
     const data: RespType = await service
-        .post(config.blogUrl + url, req)
+        .post(url, req)
         .then((res) => {
             if (res.status == 200) return res.data;
             else return { code: "400", msg: "request error" };
@@ -47,7 +48,7 @@ export async function post<T>(url: string, req: T) {
 
 export async function get(url: string) {
     const data: RespType = await service
-        .get(config.blogUrl + url)
+        .get(url)
         .then((res) => {
             if (res.status == 200) return res.data;
             else return { code: "400", msg: "request error" };

@@ -1,7 +1,8 @@
 interface ConfigType {
-    blogUrl: String,
-    picUrl: String,
-    videoUrl: String
+    blogUrl: string,
+    apiUrl: string,
+    picUrl: string,
+    videoUrl: string
 }
 
 interface AlertMsgType {

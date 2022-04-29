@@ -30,6 +30,10 @@ export default defineComponent({
             $popup.loadHide();
         }
 
+            setInterval(() => {
+      console.log($popup.loadStatus.value);
+    }, 1000);
+
         // 公告
         function openAnn() {
             $popup.announcementShow(announcementMsg["defaultAnnouncement"]);

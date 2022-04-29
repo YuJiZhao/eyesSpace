@@ -9,7 +9,7 @@ const Popup: PopupType = {
     loadShow() { Popup.loadStatus.value = true; },
     loadHide() { Popup.loadStatus.value = false; },
 
-    // 页面提示
+    // 提示
     alertStatus: ref(false),
     alertMsg: reactive({
         title: "",

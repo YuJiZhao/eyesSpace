@@ -1,39 +1,35 @@
 <template>
   <!-- 主页面 -->
-  <Home class="home" v-if="!loadStatus"/>
+  <Home class="home" v-if="!loadStatus" />
 
   <!-- 弹出层 -->
-  <Load class="load" v-if="loadStatus"></Load>
+  <Load v-if="loadStatus"></Load>
   <Announcement />
   <Alert />
   <Reward />
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref, watch } from "vue";
+import { defineComponent, inject } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Home from "@/views/Home.vue";
 import { Load, Announcement, Alert, Reward } from "@/components/popup";
-import { CVType, PopupType, UserType } from "@/d.ts/modules";
+import { CVType, UserType } from "@/d.ts/modules";
 
 export default defineComponent({
   components: {
     Home,
-    Load, Announcement, Alert, Reward
+    Load,
+    Announcement,
+    Alert,
+    Reward,
   },
   setup() {
     const $route = useRoute();
     const $router = useRouter();
-    const $service = inject<ApiObject>('$service')!;
-    const $context = inject<CVType>('$context')!;
-    const $user = inject<UserType>('$user')!;
-    const $popup = inject<PopupType>('$popup')!;
-
-    let loadStatus = ref($popup.loadStatus.value);
-
-    watch(() => $popup.loadStatus.value, (value) => {
-      loadStatus.value = value;
-    });
+    const $service = inject<ApiObject>("$service")!;
+    const $context = inject<CVType>("$context")!;
+    const $user = inject<UserType>("$user")!;
 
     // csrf
     async function getSafe() {
@@ -52,13 +48,13 @@ export default defineComponent({
 
     //路由加载完成初始化博客基本内容
     // $router.isReady().then(async () => {
-      // await getSafe();
-      // Promise.all([context(), sso()]).then(async values => {
-        // const [contextData, ssoData] = values;
-        // initConfig(contextData);
-        // initUserInfo(ssoData);
-        // $popup.loadStatus.val = true
-      // });
+    // await getSafe();
+    // Promise.all([context(), sso()]).then(async values => {
+    // const [contextData, ssoData] = values;
+    // initConfig(contextData);
+    // initUserInfo(ssoData);
+    // $popup.loadStatus.val = true
+    // });
     // });
 
     // 初始化文案信息
@@ -74,51 +70,65 @@ export default defineComponent({
 
     // 初始化用户信息
     async function initUserInfo({ code, u, c }: RespType) {
-    //   if (code == '200') {
-    //     $user.init(Object.assign(c, u));
-    //   }
+      //   if (code == '200') {
+      //     $user.init(Object.assign(c, u));
+      //   }
     }
 
     return {
-      loadStatus
-    }
-  }
+      
+    };
+  },
 });
 </script>
 
 <style lang="scss">
-// 全局样式
+/**
+ * 全局样式
+ */
 
 // 响应式布局
-@media screen and (min-width: 750px) {
-    html {
-        font-size: 37.5px !important;
-    }
+@media screen and (max-width: 1100px) {
+  html {
+    font-size: 37.5px !important;
+  }
 }
 
 // 字体
 @font-face {
-    font-family: 'eyes';
-    src: url('https://cdn.jsdelivr.net/gh/YuJiZhao/picbed@material/font/eyesblog.woff2');
-    font-display: swap;
+  font-family: "eyes";
+  src: url("https://cdn.jsdelivr.net/gh/YuJiZhao/picbed@material/font/eyesblog.woff2");
+  font-display: swap;
 }
+
 body {
-    font-family: eyes !important;
+  font-family: eyes !important;
 }
 
 // 鼠标
-body, span, time, i {
-    cursor: url('https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/normal.png'), auto;
+body,
+span,
+time,
+i {
+  cursor: url("https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/normal.png"),
+    auto;
 }
-a:hover, button:hover, #footer-wrap a:hover, #pagination .page-number:hover, #nav .site-page:hover, a > i, a > span{
-    cursor: url('https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/click.png'), auto;
+a:hover,
+button:hover,
+#footer-wrap a:hover,
+#pagination .page-number:hover,
+#nav .site-page:hover,
+a > i,
+a > span {
+  cursor: url("https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/click.png"),
+    auto;
 }
 
 // 谷歌导航条样式设置
 ::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-    background: rgb(76, 180, 240);
+  background: rgb(76, 180, 240);
 }
 </style>

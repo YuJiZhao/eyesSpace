@@ -1,7 +1,10 @@
 <template>
   <transition name="alertAnimate">
     <div class="alert" v-if="status">
-      <div class="title">{{ msg.title }}</div>
+      <div class="title">
+        <div class="close" @click="close">×</div>
+        <div class="content">{{ msg.title }}</div>
+      </div>
       <div class="value">{{ msg.content }}</div>
     </div>
   </transition>
@@ -17,7 +20,7 @@ import "animate.css";
 
 export default defineComponent({
   components: {},
-  setup(props, { emit }) {
+  setup() {
     const $popup = inject<PopupType>("$popup")!;
 
     let status = ref($popup.alertStatus.value);
@@ -35,9 +38,14 @@ export default defineComponent({
       }
     );
 
+    function close() {
+      $popup.alertHide();
+    }
+
     return {
       status,
       msg,
+      close
     };
   },
 });
@@ -51,12 +59,41 @@ export default defineComponent({
   animation: bounceOutRight 1s;
 }
 .alert {
-  width: 5rem;
-  height: 5rem;
+  width: 250px;
+  height: 90px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: rgb(213, 213, 250) 0 0 5px;
   background: #fff;
   position: fixed;
   z-index: 99;
   top: 50px;
   right: 50px;
+  .title {
+    display: flex;
+    height: 20px;
+    margin-top: 5px;
+    .close {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgb(246, 108, 107);
+      color: #fff;
+      text-align: center;
+      line-height: 20px;
+      cursor: pointer;
+    }
+    .content {
+      line-height: 20px;
+      margin-left: 10px;
+      font-size: 15px;
+    }
+  }
+  .value {
+    margin-left: 30px;
+    margin-top: 10px;
+    font-size: 13px;
+  }
 }
 </style>

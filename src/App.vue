@@ -1,20 +1,21 @@
 <template>
   <!-- 主页面 -->
-  <Home class="home" v-if="!loadStatus" />
+  <Home class="home" />
 
   <!-- 弹出层 -->
-  <Load v-if="loadStatus"></Load>
+  <Load />
   <Announcement />
   <Alert />
   <Reward />
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from "vue";
+import { defineComponent, inject, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Home from "@/views/Home.vue";
 import { Load, Announcement, Alert, Reward } from "@/components/popup";
 import { CVType, UserType } from "@/d.ts/modules";
+import { PopupType } from "@/d.ts/modules";
 
 export default defineComponent({
   components: {
@@ -30,6 +31,7 @@ export default defineComponent({
     const $service = inject<ApiObject>("$service")!;
     const $context = inject<CVType>("$context")!;
     const $user = inject<UserType>("$user")!;
+    const $popup = inject<PopupType>("$popup")!;
 
     // csrf
     async function getSafe() {
@@ -37,34 +39,36 @@ export default defineComponent({
     }
 
     // 获取文案信息
-    async function context() {
+    async function context(): Promise<RespType> {
       return await $service.copywriting();
     }
 
     // 获取用户信息
+    // async function sso(): Promise<RespType> {
     async function sso() {
-      // return await $service.au_in({ cn, pn, p, t, b_type: 'diy' });
+      // return await $service.;
     }
 
     //路由加载完成初始化博客基本内容
-    // $router.isReady().then(async () => {
-    // await getSafe();
-    // Promise.all([context(), sso()]).then(async values => {
-    // const [contextData, ssoData] = values;
-    // initConfig(contextData);
-    // initUserInfo(ssoData);
-    // $popup.loadStatus.val = true
-    // });
-    // });
+    $router.isReady().then(async () => {
+      // await getSafe();
+      Promise.all([context(), sso()]).then(async values => {
+        const [contextData, ssoData] = values;
+        initConfig(contextData);
+        // initUserInfo(ssoData);
+      });
+    });
 
     // 初始化文案信息
     async function initConfig({ code, message, data }: RespType) {
-      if (code == "200") {
-        // const copywriting = JSON.parse(data) || {};
-        // console.log(copywriting);
-        // $context.init(p);
+      if (code == 200) {
+        $context.init(data);
+        console.log($context);
       } else {
-        // TODO: 否则弹出警示框
+        $popup.alertShow(reactive({
+          title: "接口请求出错",
+          content: message
+        }));
       }
     }
 
@@ -75,9 +79,7 @@ export default defineComponent({
       //   }
     }
 
-    return {
-      
-    };
+    return {};
   },
 });
 </script>
@@ -86,13 +88,6 @@ export default defineComponent({
 /**
  * 全局样式
  */
-
-// 响应式布局
-@media screen and (max-width: 1100px) {
-  html {
-    font-size: 37.5px !important;
-  }
-}
 
 // 字体
 @font-face {

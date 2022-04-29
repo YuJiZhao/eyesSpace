@@ -15,7 +15,7 @@ declare namespace bean {
 
 // 接口返回格式
 interface RespType {
-    code?: string;
+    code?: number;
     msg?: string;
     [propName: string]: any;
 }
@@ -23,8 +23,7 @@ interface RespType {
 // 统一api管理
 interface ApiObject {
     safe: () => Promise<void>;
-    // copywriting: (req: bean.copywriting) => Promise<RespType>;
-    copywriting: () => Promise<void>;
+    copywriting: () => Promise<RespType>;
 }
 
 declare const api: ApiObject;

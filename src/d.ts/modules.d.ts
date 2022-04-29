@@ -23,11 +23,15 @@ interface PopupType {
     announcementMsg: UnwrapNestedRefs<{title: String, content: String}>
     announcementShow: (msg: UnwrapNestedRefs<{title: String, content: String}>) => void;
     announcementHide: () => void;
+
+    rewardStatus: Ref<Boolean>;
+    rewardShow: () => void;
+    rewardHide: () => void;
 }
 
 // 文案配置
 interface CVType {
-    context: Partial<context>;
+    data: Partial<context>;
     init: <T>(context: T) => void;
 }
 interface context {
@@ -39,6 +43,7 @@ interface context {
     motto: string;
     footprint: Partial<iconLink>;
     announcement: string;
+    ann_time: string;
     date: string;
     wechat_reward: string;
     alipay_reward: string;

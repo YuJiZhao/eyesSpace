@@ -41,13 +41,23 @@ const Popup: PopupType = {
         Popup.announcementMsg.title = announcementMsg.defaultAnnouncement.title;
         Popup.announcementMsg.content = announcementMsg.defaultAnnouncement.content;
     },
+
+    // 打赏
+    rewardStatus: ref(false),
+    rewardShow() { Popup.rewardStatus.value = true; },
+    rewardHide() { Popup.rewardStatus.value = false; },
 };
 
 // 文案配置
-const CV: CVType = {
-    context: {},
+let CV: CVType = {
+    data: {},
     init: <T>(context: T) => {
-        CV.context = context;
+        CV.data = context;
+        // TODO：我想直接在CV上加上参数，这样减少调用时的层级
+        // CV = {
+        //     CV,
+        //     ...context
+        // }
     },
 };
 

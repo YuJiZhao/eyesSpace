@@ -1,11 +1,12 @@
 /**
  * url管理
  */
+
 const config: ConfigType = {
-    blogUrl: 'https://blog.eyescode.top/',
+    blogUrl: "https://blog.eyescode.top/",
     apiUrl: "/api",
-    picUrl: 'https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/',
-    videoUrl: ''
+    picUrl: "https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/",
+    videoUrl: "",
 };
 
 /**

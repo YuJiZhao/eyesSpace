@@ -9,6 +9,9 @@
         <div>提示：</div>
         <button @click="openAlert">click</button>
         <button @click="closeAlert">close</button>
+        <div>打赏：</div>
+        <button @click="openReward">click</button>
+        <button @click="closeReward">close</button>
     </div>
 </template>
 
@@ -30,10 +33,6 @@ export default defineComponent({
             $popup.loadHide();
         }
 
-            setInterval(() => {
-      console.log($popup.loadStatus.value);
-    }, 1000);
-
         // 公告
         function openAnn() {
             $popup.announcementShow(announcementMsg["defaultAnnouncement"]);
@@ -50,13 +49,23 @@ export default defineComponent({
             $popup.alertHide();
         }
 
+        // 打赏
+        function openReward() {
+            $popup.rewardShow();
+        }
+        function closeReward() {
+            $popup.rewardHide();
+        }
+
         return {
             openLoad,
             closeLoad,
             openAnn,
             closeAnn,
             openAlert,
-            closeAlert
+            closeAlert,
+            openReward,
+            closeReward
         };
     },
 });

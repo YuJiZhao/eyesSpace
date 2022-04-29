@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: "/Blog",
                 name: "Blog",
-                component: () => import("@/view/Blog.vue"),
+                component: () => import("@/views/Blog.vue"),
                 children: []
             },
             // TODO: 完善非法路由跳转

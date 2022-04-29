@@ -4,8 +4,10 @@ import App from './App.vue'
 /**
  * 全局样式
  */
-import 'normalize.css/normalize.css'
-import 'lib-flexible/flexible.js'
+import 'reset-css/reset.css';
+import '@/lib/back_ribbon.js'
+import '@/lib/title_joke.js'
+import '@/lib/click_firework.js'
 
 /**
  * 插件

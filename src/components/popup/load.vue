@@ -17,7 +17,7 @@
  */
 import { defineComponent, inject, ref, watch } from "vue";
 import { PopupType } from "@/d.ts/modules";
-// BUG：不知道为什么，load无法控制
+
 export default defineComponent({
   setup() {
     const $popup = inject<PopupType>("$popup")!;

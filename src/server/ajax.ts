@@ -38,10 +38,10 @@ export async function post<T>(url: string, req: T) {
         .post(url, req)
         .then((res) => {
             if (res.status == 200) return res.data;
-            else return { code: "400", msg: "request error" };
+            else return { code: 400, msg: "request error" };
         })
         .catch(() => {
-            return { code: "502", msg: "request error" };
+            return { code: 502, msg: "request error" };
         });
     return data;
 }
@@ -51,10 +51,10 @@ export async function get(url: string) {
         .get(url)
         .then((res) => {
             if (res.status == 200) return res.data;
-            else return { code: "400", msg: "request error" };
+            else return { code: 400, msg: "request error" };
         })
         .catch(() => {
-            return { code: "502", msg: "request error" };
+            return { code: 502, msg: "request error" };
         });
     return data;
 }

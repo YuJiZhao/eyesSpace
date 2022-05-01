@@ -1,6 +1,6 @@
 import { PopupType, CVType, UserType, ExtType } from "@/d.ts/modules";
 import { reactive, ref, UnwrapNestedRefs } from "vue";
-import { announcementMsg } from "@/config/index"
+import { errorMsg } from "@/config/websiteConfig";
 
 // 弹出层
 const Popup: PopupType = {
@@ -29,17 +29,16 @@ const Popup: PopupType = {
     // 公告
     announcementStatus: ref(false),
     announcementMsg: reactive({
-        ...announcementMsg.defaultAnnouncement
+        title: "",
+        content: ""
     }),
     announcementShow(msg: UnwrapNestedRefs<{title: String, content: String}>) {
-        Popup.announcementMsg.title = msg.title;
-        Popup.announcementMsg.content = msg.content;
+        Popup.announcementMsg.title = msg.title || errorMsg.contextError;
+        Popup.announcementMsg.content = msg.content || errorMsg.contextError;
         Popup.announcementStatus.value = true;
     },
     announcementHide() {
         Popup.announcementStatus.value = false; 
-        Popup.announcementMsg.title = announcementMsg.defaultAnnouncement.title;
-        Popup.announcementMsg.content = announcementMsg.defaultAnnouncement.content;
     },
 
     // 打赏

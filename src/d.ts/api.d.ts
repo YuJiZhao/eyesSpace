@@ -23,7 +23,8 @@ interface RespType {
 // 统一api管理
 interface ApiObject {
     safe: () => Promise<void>;
-    copywriting: () => Promise<RespType>;
+    getCopywriting: () => Promise<RespType>;
+    getMusicList: () => Promise<RespType>;
 }
 
 declare const api: ApiObject;

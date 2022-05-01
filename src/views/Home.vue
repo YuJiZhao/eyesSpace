@@ -1,73 +1,42 @@
 <template>
-    <div class="home">
-        <div>load：</div>
-        <button @click="openLoad">click</button>
-        <button @click="closeLoad">close</button>
-        <div>公告：</div>
-        <button @click="openAnn">click</button>
-        <button @click="closeAnn">close</button>
-        <div>提示：</div>
-        <button @click="openAlert">click</button>
-        <button @click="closeAlert">close</button>
-        <div>打赏：</div>
-        <button @click="openReward">click</button>
-        <button @click="closeReward">close</button>
-    </div>
+  <div class="home">
+    <button @click="jump">jump</button>
+    <button @click="open1">click</button>
+    <button @click="open2">click</button>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, inject } from "vue";
-import { PopupType } from "@/d.ts/modules";
-import { alertMsg, announcementMsg } from "@/config/index";
+import { useRouter } from "vue-router";
+import { PopupType, CVType } from "@/d.ts/modules";
+import { alertMsg, announcementMsg } from "@/config/websiteConfig";
 
 export default defineComponent({
-    components: {},
-    setup() {
-        const $popup = inject<PopupType>('$popup')!;
+  components: {},
+  setup() {
+    const $router = useRouter();
+    const $popup = inject<PopupType>("$popup")!;
+    const $context = inject<CVType>("$context")!;
 
-        // load
-        function openLoad() {
-            $popup.loadShow();
-        }
-        function closeLoad() {
-            $popup.loadHide();
-        }
+    function jump() {
+      $router.push("/music");
+    }
 
-        // 公告
-        function openAnn() {
-            $popup.announcementShow(announcementMsg["defaultAnnouncement"]);
-        }
-        function closeAnn() {
-            $popup.announcementHide();
-        }
+    function open1() {
+      $popup.announcementShow(announcementMsg.defaultAnnouncement);
+    }
 
-        // 提示
-        function openAlert() {
-            $popup.alertShow(alertMsg["copyAlert"]);
-        }
-        function closeAlert() {
-            $popup.alertHide();
-        }
+    function open2() {
+      $popup.alertShow(alertMsg.copyAlert);
+    }
 
-        // 打赏
-        function openReward() {
-            $popup.rewardShow();
-        }
-        function closeReward() {
-            $popup.rewardHide();
-        }
-
-        return {
-            openLoad,
-            closeLoad,
-            openAnn,
-            closeAnn,
-            openAlert,
-            closeAlert,
-            openReward,
-            closeReward
-        };
-    },
+    return {
+      jump,
+      open1,
+      open2,
+    };
+  },
 });
 </script>
 

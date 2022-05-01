@@ -1,10 +1,10 @@
 import axios from "axios";
 import { start, close } from "@/utils/nprogress";
 import utils from "@/utils/helper";
-import { config } from "@/config/index";
+import { urlConfig } from "@/config/websiteConfig";
 
 const service = axios.create({
-    baseURL: config.apiUrl,
+    baseURL: urlConfig.apiUrl,
     timeout: 6 * 1000,
     withCredentials: true,
     headers: {

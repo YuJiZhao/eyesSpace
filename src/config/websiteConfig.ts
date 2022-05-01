@@ -1,8 +1,12 @@
 /**
- * url管理
+ * 网站相关配置
  */
 
-const config: ConfigType = {
+
+/**
+ * url管理
+ */
+const urlConfig: urlType = {
     blogUrl: "https://blog.eyescode.top/",
     apiUrl: "/api",
     picUrl: "https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/",
@@ -29,4 +33,13 @@ const announcementMsg: AnnouncementMsgType = {
     },
 }
 
-export { config, alertMsg, announcementMsg };
+/**
+ * 内置报错信息
+ */
+const errorMsg: ErrorMsgType = {
+    apiError: "接口请求出错...",
+    apiErrorDetail: "请检查您网络是否正常，正常的话那应该是我网站服务器崩了...",
+    contextError: "网络出错...",
+}
+
+export { urlConfig, alertMsg, announcementMsg, errorMsg };

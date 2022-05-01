@@ -1,6 +1,9 @@
 <template>
-  <!-- 主页面 -->
-  <Home class="home" />
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
 
   <!-- 弹出层 -->
   <Load />
@@ -16,6 +19,7 @@ import Home from "@/views/Home.vue";
 import { Load, Announcement, Alert, Reward } from "@/components/popup";
 import { CVType, UserType } from "@/d.ts/modules";
 import { PopupType } from "@/d.ts/modules";
+import { errorMsg } from "@/config/websiteConfig"
 
 export default defineComponent({
   components: {
@@ -40,7 +44,7 @@ export default defineComponent({
 
     // 获取文案信息
     async function context(): Promise<RespType> {
-      return await $service.copywriting();
+      return await $service.getCopywriting();
     }
 
     // 获取用户信息
@@ -63,11 +67,10 @@ export default defineComponent({
     async function initConfig({ code, message, data }: RespType) {
       if (code == 200) {
         $context.init(data);
-        console.log($context);
       } else {
         $popup.alertShow(reactive({
-          title: "接口请求出错",
-          content: message
+          title: errorMsg.apiError,
+          content: message || errorMsg.apiErrorDetail
         }));
       }
     }

@@ -21,6 +21,7 @@
  */
 import { defineComponent, ref, reactive, watch, inject } from "vue";
 import { PopupType, CVType } from "@/d.ts/modules";
+import { errorMsg } from "@/config/websiteConfig";
 import "animate.css";
 
 export default defineComponent({
@@ -30,10 +31,9 @@ export default defineComponent({
     const $context = inject<CVType>("$context")!;
 
     let status = ref($popup.announcementStatus.value);
-    // TODO：需要解决异步问题
     let info = reactive({
-      author: $context.data.nick,
-      time: $context.data.ann_time,
+      author: "",
+      time: "",
     });
     let msg = reactive({
       title: $popup.announcementMsg.title,
@@ -42,10 +42,15 @@ export default defineComponent({
 
     watch(
       () => $popup.announcementStatus.value,
-      value => {
+      (value) => {
         status.value = value;
-        msg.title = $popup.announcementMsg.title;
-        msg.content = $popup.announcementMsg.content;
+        if (value == true) {
+          // TODO：这种解决异步的方法不完美
+          info.author = $context.data.nick || errorMsg.contextError;
+          info.time = $context.data.ann_time || errorMsg.contextError;
+          msg.title = $popup.announcementMsg.title;
+          msg.content = $popup.announcementMsg.content;
+        }
       }
     );
 

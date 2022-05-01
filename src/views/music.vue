@@ -1,15 +1,23 @@
 <template>
-    <div class="music">
-    </div>
+  <div class="music">
+    <Aplayer />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, inject } from "vue";
+import { PopupType, CVType } from "@/d.ts/modules";
+import Aplayer from "@/components/music/aplayer.vue";
+import $ from "jquery";
+
 export default defineComponent({
-    components: {},
-    setup() {
-        return {};
-    },
+  components: { Aplayer },
+  setup() {
+    const $popup = inject<PopupType>("$popup")!;
+    const $context = inject<CVType>("$context")!;
+
+    return {};
+  },
 });
 </script>
 

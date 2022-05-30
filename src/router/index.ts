@@ -6,12 +6,6 @@ const routes: Array<RouteRecordRaw> = [
         name: "home",
         component: () => import("@/views/Home.vue"),
         children: [
-            {
-                path: "/blog",
-                name: "blog",
-                component: () => import("@/views/Blog.vue"),
-                children: []
-            }
             // TODO: 完善非法路由跳转
             // {
             //     path: '/*',
@@ -23,6 +17,12 @@ const routes: Array<RouteRecordRaw> = [
         path: "/music",
         name: "music",
         component: () => import("@/views/Music.vue"),
+    },
+    {
+        path: "/blog",
+        name: "blog",
+        component: () => import("@/views/Blog.vue"),
+        children: []
     }
 ]
 

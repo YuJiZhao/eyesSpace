@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <button @click="jump">jump</button>
+    <button @click="jump1">jumpMusic</button>
+    <button @click="jump2">jumpBlog</button>
     <button @click="open1">click</button>
     <button @click="open2">click</button>
   </div>
@@ -19,8 +20,12 @@ export default defineComponent({
     const $popup = inject<PopupType>("$popup")!;
     const $context = inject<CVType>("$context")!;
 
-    function jump() {
+    function jump1() {
       $router.push("/music");
+    }
+
+    function jump2() {
+      $router.push("/blog");
     }
 
     function open1() {
@@ -32,7 +37,8 @@ export default defineComponent({
     }
 
     return {
-      jump,
+      jump1,
+      jump2,
       open1,
       open2,
     };

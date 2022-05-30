@@ -9,6 +9,7 @@ const service = axios.create({
     withCredentials: true,
     headers: {
         "safe-token": utils.getCookie("security"),
+        "token": "helloToken!"
     },
 });
 

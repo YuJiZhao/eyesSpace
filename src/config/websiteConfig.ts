@@ -1,6 +1,8 @@
-/**
- * 网站相关配置
- */
+import { urlType, AlertMsgType, AnnouncementMsgType, ErrorMsgType } from "@/d.ts/config";
+
+/****************
+ * 网站相关配置 *
+ ****************/
 
 
 /**
@@ -18,8 +20,8 @@ const urlConfig: urlType = {
  */
 const alertMsg: AlertMsgType = {
     copyAlert: {
-        title: "不能打开控制台喔",
-        content: "采用本站js及css请注明来源，请勿商业使用哦"
+        title: "你要打开控制台吗?",
+        content: "源码可以作为学习使用，但不要动歪心思啊(๑乛◡乛๑)"
     }
 }
 

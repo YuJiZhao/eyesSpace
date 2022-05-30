@@ -1,3 +1,5 @@
+import { AplayerSongServer, AplayerSongType, AplayerLoop, AplayerOrder, AplayerPreload, AplayerLrcType } from "@/constant/aplayerConstant";
+
 /**
  * 网站配置类型
  */
@@ -27,28 +29,17 @@ interface ErrorMsgType {
  * 外部应用配置类型
  */
 
-declare enum AplayerSongServerType { "netease", "tencent", "kugou", "xiami", "baidu" }
-declare enum AplayerSongTypeType { "song", "playlist", "album", "search", "artist" }
-declare enum AplayerLoopType { "all", "one", "none" }
-declare enum AplayerOrderType { "list", "random" }
-declare enum AplayerPreloadType { "auto", "metadata", "none" }
-declare enum AplayerLrcTypeType { 
-    "zero" = 0,
-    "one" = 1,
-    "two" = 2,
-    "three" = 3
-}
 interface AplayerConfigType {
-    songServer: AplayerSongServerType,
-    songType: AplayerSongTypeType,
+    songServer: AplayerSongServer,
+    songType: AplayerSongType,
     songId: number,
     fixed: boolean,
     mini: boolean,
     autoplay: boolean,
-    loop: AplayerLoopType,
-    order: AplayerOrderType,
-    preload: AplayerPreloadType,
+    loop: AplayerLoop,
+    order: AplayerOrder,
+    preload: AplayerPreload,
     volume: number,
     mutex: boolean,
-    lrcType: AplayerLrcTypeType
+    lrcType: AplayerLrcType
 }

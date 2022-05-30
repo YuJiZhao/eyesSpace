@@ -1,24 +1,27 @@
-/**
- * 外部应用相关配置
- */
+import { AplayerConfigType } from "@/d.ts/config";
+import { AplayerSongServer, AplayerSongType, AplayerLoop, AplayerOrder, AplayerPreload, AplayerLrcType } from "@/constant/aplayerConstant";
+
+/*******************
+ * 外部应用相关配置 *
+ *******************/
 
 /**
  * aplayer配置
  */
-// BUG: 需要解决类型问题
+
 const aplayerConfig: AplayerConfigType = {
-    songServer: AplayerSongServerType.netease,
-    songType: AplayerSongTypeType.playlist,
+    songServer: AplayerSongServer.Netease,
+    songType: AplayerSongType.Playlist,
     songId: 6936632013,
     fixed: false,
     mini: false,
     autoplay: false,
-    loop: AplayerLoopType.all,
-    order: AplayerOrderType.random,
-    preload: AplayerPreloadType.auto,
+    loop: AplayerLoop.All,
+    order: AplayerOrder.Random,
+    preload: AplayerPreload.Auto,
     volume: 0.7,
     mutex: true,
-    lrcType: AplayerLrcTypeType.three
+    lrcType: AplayerLrcType.Three
 }
 
 export { aplayerConfig };

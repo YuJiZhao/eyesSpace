@@ -4,8 +4,8 @@ const api: ApiObject = {
     safe: async () => {
         await get('/safe');
     },
-    getCopywriting: async () => {
-        return await get('/getCopywriting');
+    getContext: async () => {
+        return await get('/getContext');
     },
     getMusicList: async () => {
         return await get('/getMusicList');

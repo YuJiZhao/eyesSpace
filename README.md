@@ -26,9 +26,8 @@ yarn add --save lodash
 # nprogress
 yarn add nprogress
 
-# v-md-editor
-yarn add @kangc/v-md-editor@next
-yarn add vite-plugin-prismjs --dev // 代码高亮语言包
+# md-editor-v3
+yarn add md-editor-v3
 
 # lib-flexible
 yarn add lib-flexible

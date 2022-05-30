@@ -44,7 +44,7 @@ export default defineComponent({
 
     // 获取文案信息
     async function context(): Promise<RespType> {
-      return await $service.getCopywriting();
+      return await $service.getContext();
     }
 
     // 获取用户信息
@@ -56,11 +56,11 @@ export default defineComponent({
     //路由加载完成初始化博客基本内容
     $router.isReady().then(async () => {
       // await getSafe();
-      Promise.all([context(), sso()]).then(async values => {
-        const [contextData, ssoData] = values;
-        initConfig(contextData);
+      // Promise.all([context(), sso()]).then(async values => {
+      //   const [contextData, ssoData] = values;
+      //   initConfig(contextData);
         // initUserInfo(ssoData);
-      });
+      // });
     });
 
     // 初始化文案信息

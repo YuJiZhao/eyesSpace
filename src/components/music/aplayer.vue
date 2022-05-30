@@ -1,16 +1,11 @@
 <template>
-  <div ref="playerRef" id="playerRef"></div>
+  <div ref="playerRef"></div>
 </template>
 
 <script lang="ts">
 import APlayer from "APlayer";
 import "APlayer/dist/APlayer.min.css";
-import {
-  defineComponent,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-} from "vue";
+import { defineComponent, onBeforeUnmount, onMounted, ref } from "vue";
 import { aplayerConfig } from "@/config/appConfig"
 import $ from "jquery";
 
@@ -46,8 +41,7 @@ export default defineComponent({
     onMounted(() => {
       $.get(
         "https://api.i-meto.com/meting/api?server=netease&type=playlist&id=6936632013",
-        function (data, status) {
-          console.log("data: ", data);
+        function (data) {
           let audioList = data.map(
             (value: any) =>
               new Audio(
@@ -60,8 +54,8 @@ export default defineComponent({
           );
 
           instance = new APlayer({
-            container: $("#playerRef"),
-            audio: data,
+            container: playerRef.value,
+            audio: audioList,
             fixed: aplayerConfig.fixed,
             mini: aplayerConfig.mini,
             autoplay: aplayerConfig.autoplay,
@@ -81,7 +75,9 @@ export default defineComponent({
       instance.destroy();
     });
 
-    return {};
+    return {
+      playerRef
+    };
   },
 });
 </script>

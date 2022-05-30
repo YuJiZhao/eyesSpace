@@ -1,20 +1,30 @@
 <template>
     <div class="markdown">
+        <md-editor 
+            v-model="state.text" 
+            :previewOnly="state.previewOnly"
+        />
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-// import './vue-markdown-editor';
+import { defineComponent, ref, reactive } from "vue";
+import MdEditor from 'md-editor-v3';
+import 'md-editor-v3/lib/style.css';
 export default defineComponent({
-    components: {},
+    components: { MdEditor },
     setup() {
-        return {};
+        const state = reactive({
+            text: '# hello world',
+            previewOnly: "true"
+        });
+        
+        return {
+            state
+        };
     },
 });
 </script>
 
 <style lang="scss" scoped>
-.markdown {
-}
 </style>

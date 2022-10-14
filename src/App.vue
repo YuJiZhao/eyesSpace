@@ -1,132 +1,144 @@
 <template>
   <router-view v-slot="{ Component }">
-    <keep-alive>
-      <component :is="Component" />
-    </keep-alive>
+    <template v-if="Component">
+      <Suspense>
+        <component :is="Component" v-if="isShow" />
+      </Suspense>
+    </template>
   </router-view>
 
   <!-- 弹出层 -->
+  <Tip />
+  <Mask />
   <Load />
-  <Announcement />
   <Alert />
-  <Reward />
+  <Dialog />
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, reactive } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import Home from "@/views/Home.vue";
-import { Load, Announcement, Alert, Reward } from "@/components/popup";
-import { CVType, UserType } from "@/d.ts/modules";
-import { PopupType } from "@/d.ts/modules";
-import { errorMsg } from "@/config/websiteConfig"
+import { defineComponent, inject, onMounted, ref } from "vue";
+
+import {
+  ApiObject,
+  RespInterface,
+  HelpInterface,
+  ContextInterface,
+  UserInterface,
+  ProcessInterface,
+  WindowInterface,
+} from "@/d.ts/plugin";
+import { useRouter } from "vue-router";
+import { siteConfig, codeConfig } from "@/config/program";
+import { errorPath } from "@/config/site";
+import { Mask, Load, Tip, Alert, Dialog } from "@/components/general/popup";
+import resource from "@/config/resource";
+import preload from "@/utils/preload";
+import { preloadList } from "@/config/site";
+import { siteContext } from "@/config/site";
 
 export default defineComponent({
-  components: {
-    Home,
-    Load,
-    Announcement,
-    Alert,
-    Reward,
-  },
+  components: { Mask, Load, Tip, Alert, Dialog },
   setup() {
-    const $route = useRoute();
-    const $router = useRouter();
-    const $service = inject<ApiObject>("$service")!;
-    const $context = inject<CVType>("$context")!;
-    const $user = inject<UserType>("$user")!;
-    const $popup = inject<PopupType>("$popup")!;
+    const router = useRouter();
+    const $api = inject<ApiObject>("$api")!;
+    const $utils = inject<HelpInterface>("$utils")!;
+    const $context = inject<ContextInterface>("$context")!;
+    const $user = inject<UserInterface>("$user")!;
+    const $process = inject<ProcessInterface>("$process")!;
+    const $window = inject<WindowInterface>("$window")!;
 
-    // csrf
-    async function getSafe() {
-      await $service.safe();
-    }
+    let isShow = ref(false);
 
-    // 获取文案信息
-    async function context(): Promise<RespType> {
-      return await $service.getContext();
-    }
-
-    // 获取用户信息
-    // async function sso(): Promise<RespType> {
-    async function sso() {
-      // return await $service.;
-    }
-
-    //路由加载完成初始化博客基本内容
-    $router.isReady().then(async () => {
-      // await getSafe();
-      // Promise.all([context(), sso()]).then(async values => {
-      //   const [contextData, ssoData] = values;
-      //   initConfig(contextData);
-        // initUserInfo(ssoData);
-      // });
+    // 空间初始化
+    router.isReady().then(async () => {
+      if(router.currentRoute.value.fullPath != errorPath.context) {
+        localStorage.setItem(siteConfig.enterURL, router.currentRoute.value.fullPath);
+      }
+      Promise.all([context(), user(), spaceVisit()]).then(async (values) => {
+        const [contextData, userData] = values;
+        initContext(contextData);
+        initUser(userData);
+        listenWindow.initAll();
+        doPreload();
+      }).catch((e) => {
+        jumpPath(errorPath.context)
+      });
     });
 
-    // 初始化文案信息
-    async function initConfig({ code, message, data }: RespType) {
-      if (code == 200) {
-        $context.init(data);
-      } else {
-        $popup.alertShow(reactive({
-          title: errorMsg.apiError,
-          content: message || errorMsg.apiErrorDetail
-        }));
+    async function spaceVisit() {
+      return await $api.addSpaceVisit({path: router.currentRoute.value.fullPath});
+    }
+
+    async function context() {
+      return await $api.getContext();
+    }
+
+    async function user() {
+      if ($utils.getCookie(siteConfig.tokenHeader) == "") return "";
+      return await $api.getUserInfo();
+    }
+
+    function initContext(contextData: RespInterface) { 
+      if (contextData.code == codeConfig.success) {
+        $context.init(contextData.data);
+      } 
+      else if(![codeConfig.authentication_error, codeConfig.authentication_error_illegal_jwt].includes(contextData.code)) {
+        jumpPath(errorPath.context);
       }
     }
 
-    // 初始化用户信息
-    async function initUserInfo({ code, u, c }: RespType) {
-      //   if (code == '200') {
-      //     $user.init(Object.assign(c, u));
-      //   }
+    function initUser(userData: "" | RespInterface) {
+      if(userData == "" || userData.code != codeConfig.success) {
+        $user.init({
+          avatar: resource.defaultAvatar
+        });
+      } else {
+        $user.init(userData.data);
+        $user.status = 1;
+      }
     }
 
-    return {};
+    // 为组件提供浏览器数据
+    let listenWindow = {
+      initSize: () => $window.initSize(),
+      initDistance: () => $window.initDistance(),
+      initAll() {
+        this.initSize();
+        this.initDistance();
+      }
+    }
+    window.addEventListener("resize", listenWindow.initSize);
+    window.addEventListener("scroll", listenWindow.initDistance);
+
+    // 资源预加载
+    function doPreload() {
+      preload({
+        data: preloadList,
+        success: () => {
+          isShow.value = true;
+          $process.loadHide();
+          isShow.value = true;
+        }
+      });
+    }
+
+    // 路由跳转
+    function jumpPath(path: string) {
+      router.push(path);
+      isShow.value = true;
+      $process.loadHide();
+    }
+
+    onMounted(() => {
+      console.log(
+        '\n' + ` %c ${siteContext.siteNameEn} v${siteContext.spaceVersion}` + ` %c ${process.env.VITE_SITE_URL} ` + '\n', 
+        'color: #fadfa3; background: #030307; padding:5px 0;', 'background: rgb(127,200,248); padding:5px 0;'
+      );
+    })
+
+    return {
+      isShow,
+    };
   },
 });
 </script>
-
-<style lang="scss">
-/**
- * 全局样式
- */
-
-// 字体
-@font-face {
-  font-family: "eyes";
-  src: url("https://cdn.jsdelivr.net/gh/YuJiZhao/picbed@material/font/eyesblog.woff2");
-  font-display: swap;
-}
-
-body {
-  font-family: eyes !important;
-}
-
-// 鼠标
-body,
-span,
-time,
-i {
-  cursor: url("https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/normal.png"),
-    auto;
-}
-a:hover,
-button:hover,
-#footer-wrap a:hover,
-#pagination .page-number:hover,
-#nav .site-page:hover,
-a > i,
-a > span {
-  cursor: url("https://cdn.jsdelivr.net/gh/YuJiZhao/picbed/blog/other/click.png"),
-    auto;
-}
-
-// 谷歌导航条样式设置
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: rgb(76, 180, 240);
-}
-</style>

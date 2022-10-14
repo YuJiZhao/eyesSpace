@@ -1,42 +1,42 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
+import { createRouter, RouteRecordRaw, createWebHistory } from 'vue-router';
+import { context } from '@/modules/context';
+import process from "@/modules/process";
+import Window from '@/modules/window';
+import { errorPath } from '@/config/site';
+import { content } from './path';
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: "/",
-        name: "home",
-        component: () => import("@/views/Home.vue"),
-        children: [
-            // TODO: 完善非法路由跳转
-            // {
-            //     path: '/*',
-            //     component: () => import("@/view/Error.vue"),
-            //     redirect: '/Error',
-            // },
-        ]
-    }, {
-        path: "/music",
-        name: "music",
-        component: () => import("@/views/Music.vue"),
+        name: "index",
+        component: () => import("@/views/Index.vue"),
+        children: content
     },
-    {
-        path: "/blog",
-        name: "blog",
-        component: () => import("@/views/Blog.vue"),
-        children: []
-    }
 ]
 
-// TODO：配置路由跳转动画加载
-// onBeforeRouteUpdate((to,from)=>{
-//     console.log(to);
-// })
-// onBeforeRouteLeave((to,from)=>{
-//     alert('我离开啦')
-// })
-
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes,
 })
 
-export default router
+router.beforeEach((to, from, next) => {
+    // 禁止在没获取配置信息时浏览网站
+    if(from.fullPath == errorPath.context && !Object.getOwnPropertyNames(context.data).length) {
+        process.tipShow.warn("暂时无法跳转");
+        return;
+    };
+    next();
+});
+
+router.afterEach((to, from) => {
+    // 调整首部导航栏伸缩
+    if(process.headerStatus.value) {
+        process.headerCheckSwitch(Window.height.value);
+    }
+    // 调整底栏模式
+    if(process.footerStatus.value) {
+        process.footerPositionSwitch(Window.height.value);
+    }
+});
+
+export default router;

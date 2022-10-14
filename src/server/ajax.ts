@@ -1,21 +1,20 @@
 import axios from "axios";
-import { start, close } from "@/utils/nprogress";
-import utils from "@/utils/helper";
-import { urlConfig } from "@/config/websiteConfig";
+import { GetType, PostType, PutType, DelType} from "@/d.ts/server/ajax";
+import { UrlReqType } from "@/constant";
+import requestFilter from "./filter/requestFilter";
+import responseFilter from "./filter/responseFilter";
+import urlRequest from "@/server/help/urlHelp";
+import { addHeader } from "@/server/help/authHelp";
 
 const service = axios.create({
-    baseURL: urlConfig.apiUrl,
-    timeout: 6 * 1000,
+    baseURL: process.env.VITE_API_DOMAIN,
+    timeout: 60 * 1000,
     withCredentials: true,
-    headers: {
-        "safe-token": utils.getCookie("security"),
-        "token": "helloToken!"
-    },
 });
 
 service.interceptors.request.use(
     config => {
-        start();
+        requestFilter(config);
         return config;
     },
     error => {
@@ -25,37 +24,28 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
     response => {
-        close();
-        return response;
+        responseFilter(response);
+        return response.data;
     },
     error => {
-        close();
         return Promise.reject(error);
     }
 );
 
-export async function post<T>(url: string, req: T) {
-    const data: RespType = await service
-        .post(url, req)
-        .then((res) => {
-            if (res.status == 200) return res.data;
-            else return { code: 400, msg: "request error" };
-        })
-        .catch(() => {
-            return { code: 502, msg: "request error" };
-        });
-    return data;
+const get: GetType = (url, req, type = UrlReqType.param) => {
+    return service.get(urlRequest[type](url, req), addHeader());
 }
 
-export async function get(url: string) {
-    const data: RespType = await service
-        .get(url)
-        .then((res) => {
-            if (res.status == 200) return res.data;
-            else return { code: 400, msg: "request error" };
-        })
-        .catch(() => {
-            return { code: 502, msg: "request error" };
-        });
-    return data;
+const post: PostType = (url, req) => {
+    return service.post(url, req, addHeader());
 }
+
+const put: PutType = (url, req) => {
+    return service.put(url, req, addHeader());
+}
+
+const del: DelType = (url, req, type = UrlReqType.param) => {
+    return service.delete(urlRequest[type](url, req), addHeader());
+}
+
+export { get, post, put, del };

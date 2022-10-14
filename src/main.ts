@@ -1,25 +1,24 @@
-import { createApp } from 'vue';
-import App from './App.vue';
+import { createApp } from "vue";
+import App from "./App.vue";
+import lazyPlugin from "vue3-lazy";
+import { $router, $utils, $api, $process, $context, $user, $window } from "@/plugins/index";
+import resource from "@/config/resource";
 
-/**
- * 全局样式
- */
+import './assets/css/index.css';
 import 'reset-css/reset.css';
-import '@/lib/back_ribbon.js';
-import '@/lib/title_joke.js';
-import '@/lib/click_firework.js';
-
-/**
- * 插件
- */
-import { $router, $service, $context, $user, $popup, $ext, $utils } from "./plugins";
-
-const plugins = [$router, $service, $context, $user, $popup, $ext, $utils];
+import "animate.css";
+import "./libs/ribbon.js";
+import '@/libs/statistics.js';
 
 const app = createApp(App);
 
+const plugins = [$router, $utils, $api, $process, $context, $user, $window];
 plugins.forEach(plugin => {
     app.use(plugin);
+});
+app.use(lazyPlugin, {
+    loading: resource.loading,
+    error: resource.errorPage
 });
 
 app.mount('#app');

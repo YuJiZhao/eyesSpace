@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "eyes";
+    src: url("https://cdn.jsdelivr.net/gh/YuJiZhao/picbed@material/font/eyesblog.woff2");
+    font-display: swap;
+}
+
+body {
+    font-family: eyes !important;
+}
+
+div {
+    box-sizing: border-box;
+}

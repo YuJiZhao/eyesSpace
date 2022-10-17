@@ -1,0 +1,47 @@
+server:
+  port: @resource.server.port.site@
+  compression:
+    enabled: @resource.server.compression.enabled@
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+spring:
+  application:
+    name: service-site
+  datasource:
+    username: @resource.datasource.username@
+    password: @resource.datasource.password@
+    url: @resource.datasource.url@
+    driver-class-name: @resource.datasource.driver@
+  redis:
+    database: @resource.redis.database@
+    host: @resource.redis.host@
+    port: @resource.redis.port@
+    password: @resource.redis.password@
+    timeout: @resource.redis.timeout@
+    jedis:
+      pool:
+        max-active: @resource.redis.jedis.pool.max-active@
+        max-wait: @resource.redis.jedis.pool.max-wait@
+        max-idle: @resource.redis.jedis.pool.max-idle@
+        min-idle: @resource.redis.jedis.pool.min-idle@
+  rabbitmq:
+    host: @resource.rabbitmq.host@
+    port: @resource.rabbitmq.port@
+    virtual-host: @resource.rabbitmq.virtual-host@
+    username: @resource.rabbitmq.username@
+    password: @resource.rabbitmq.password@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: @resource.nacos.discovery.server-addr@
+        cluster-name: @resource.nacos.discovery.cluster-name@
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: @resource.feign.client.config.default.loggerLevel@
+  httpclient:
+    enabled: @resource.feign.httpclient.enable@
+    max-connections: @resource.feign.httpclient.max-connections@
+    max-connections-per-route: @resource.feign.httpclient.max-connections-per-route@

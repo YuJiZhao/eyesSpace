@@ -1,0 +1,103 @@
+server:
+  port: @resource.gateway.server.port@
+  compression:
+    enabled: @resource.server.compression.enabled@
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+spring:
+  application:
+    name: gateway
+  redis:
+    database: @resource.redis.database@
+    host: @resource.redis.host@
+    port: @resource.redis.port@
+    password: @resource.redis.password@
+    timeout: @resource.redis.timeout@
+    jedis:
+      pool:
+        max-active: @resource.redis.jedis.pool.max-active@
+        max-wait: @resource.redis.jedis.pool.max-wait@
+        max-idle: @resource.redis.jedis.pool.max-idle@
+        min-idle: @resource.redis.jedis.pool.min-idle@
+  rabbitmq:
+    host: @resource.rabbitmq.host@
+    port: @resource.rabbitmq.port@
+    virtual-host: @resource.rabbitmq.virtual-host@
+    username: @resource.rabbitmq.username@
+    password: @resource.rabbitmq.password@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: @resource.nacos.discovery.server-addr@
+        cluster-name: @resource.nacos.discovery.cluster-name@
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - @resource.gateway.allowedOrigins.front@
+              - @resource.gateway.allowedOrigins.backend@
+            allowedMethods:
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTION"
+            allowedHeaders: "*"
+            allowCredentials: true
+            maxAge: 360000
+      routes:
+        - id: service-site
+          uri: lb://service-site
+          predicates:
+            - Path=/site/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: @resource.gateway.filters.args.redis-rate-limiter.replenishRate@
+                redis-rate-limiter.burstCapacity: @resource.gateway.filters.args.redis-rate-limiter.burstCapacity@
+                key-resolver: "#{@ipKeyResolver}"
+        - id: service-entertain
+          uri: lb://service-entertain
+          predicates:
+            - Path=/entertain/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: @resource.gateway.filters.args.redis-rate-limiter.replenishRate@
+                redis-rate-limiter.burstCapacity: @resource.gateway.filters.args.redis-rate-limiter.burstCapacity@
+                key-resolver: "#{@ipKeyResolver}"
+        - id: service-article
+          uri: lb://service-article
+          predicates:
+            - Path=/article/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: @resource.gateway.filters.args.redis-rate-limiter.replenishRate@
+                redis-rate-limiter.burstCapacity: @resource.gateway.filters.args.redis-rate-limiter.burstCapacity@
+                key-resolver: "#{@ipKeyResolver}"
+        - id: service-backstage
+          uri: lb://service-backstage
+          predicates:
+            - Path=/backstage/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: @resource.gateway.filters.args.redis-rate-limiter.replenishRate@
+                redis-rate-limiter.burstCapacity: @resource.gateway.filters.args.redis-rate-limiter.burstCapacity@
+                key-resolver: "#{@ipKeyResolver}"
+        - id: auth-server
+          uri: lb://auth-server
+          predicates:
+            - Path=/auth/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: @resource.gateway.filters.args.redis-rate-limiter.replenishRate@
+                redis-rate-limiter.burstCapacity: @resource.gateway.filters.args.redis-rate-limiter.burstCapacity@
+                key-resolver: "#{@ipKeyResolver}"

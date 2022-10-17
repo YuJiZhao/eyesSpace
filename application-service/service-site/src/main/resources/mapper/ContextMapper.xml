@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eyes.eyesspace.service.site.mapper.ContextMapper">
+    <select id="getBlogNum" resultType="java.lang.Integer">
+        select count(*) from blog
+        <where>
+            <choose>
+                <when test="status == 2">
+                    status!=2
+                </when>
+                <otherwise>
+                    status=0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <select id="getShuoNum" resultType="java.lang.Integer">
+        select count(*) from shuoshuo
+        <where>
+            <choose>
+                <when test="status == 2">
+                    status!=2
+                </when>
+                <otherwise>
+                    status=0
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+</mapper>

@@ -4,7 +4,7 @@
 
 网站地址：[耶瞳空间](http://space.eyescode.top)
 
-![网站截图](https://img1.imgtp.com/2023/04/27/M2mHIrG4.png)
+![网站截图](images/snapshot.png)
 
 # 二：关于开发
 

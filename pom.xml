@@ -3,278 +3,171 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <name>eyesSpace</name>
-    <packaging>pom</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.12.RELEASE</version>
         <relativePath/>
     </parent>
+
     <groupId>com.eyes</groupId>
     <artifactId>eyesSpace</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-
-    <modules>
-        <module>application-common</module>
-        <module>application-service</module>
-        <module>infrastructure</module>
-    </modules>
-
-    <profiles>
-        <profile>
-            <id>dev_env</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <!-- 服务配置 -->
-                <resource.server.port.article></resource.server.port.article>
-                <resource.server.port.backstage></resource.server.port.backstage>
-                <resource.server.port.entertain></resource.server.port.entertain>
-                <resource.server.port.site></resource.server.port.site>
-                <resource.server.compression.enabled>true</resource.server.compression.enabled>
-
-                <!-- 邮箱配置 -->
-                <resource.mail.host></resource.mail.host>
-                <resource.mail.username></resource.mail.username>
-                <resource.mail.password></resource.mail.password>
-                <resource.mail.smtp.port></resource.mail.smtp.port>
-
-                <!-- mysql配置 -->
-                <resource.datasource.username></resource.datasource.username>
-                <resource.datasource.password></resource.datasource.password>
-                <resource.datasource.url></resource.datasource.url>
-                <resource.datasource.driver></resource.datasource.driver>
-
-                <!-- redis配置 -->
-                <resource.redis.database></resource.redis.database>
-                <resource.redis.host></resource.redis.host>
-                <resource.redis.port></resource.redis.port>
-                <resource.redis.password></resource.redis.password>
-                <resource.redis.timeout></resource.redis.timeout>
-                <resource.redis.jedis.pool.max-active></resource.redis.jedis.pool.max-active>
-                <resource.redis.jedis.pool.max-wait></resource.redis.jedis.pool.max-wait>
-                <resource.redis.jedis.pool.max-idle></resource.redis.jedis.pool.max-idle>
-                <resource.redis.jedis.pool.min-idle></resource.redis.jedis.pool.min-idle>
-
-                <!-- nacos配置 -->
-                <resource.nacos.discovery.server-addr></resource.nacos.discovery.server-addr>
-                <resource.nacos.discovery.cluster-name></resource.nacos.discovery.cluster-name>
-
-                <!-- ribbon配置 -->
-                <resource.ribbon.ReadTimeout>600000</resource.ribbon.ReadTimeout>
-                <resource.ribbon.ConnectTimeout>600000</resource.ribbon.ConnectTimeout>
-
-                <!-- feign配置 -->
-                <resource.feign.client.config.default.loggerLevel>BASIC</resource.feign.client.config.default.loggerLevel>
-                <resource.feign.httpclient.enable>true</resource.feign.httpclient.enable>
-                <resource.feign.httpclient.max-connections>100</resource.feign.httpclient.max-connections>
-                <resource.feign.httpclient.max-connections-per-route>40</resource.feign.httpclient.max-connections-per-route>
-                <resource.feign.client.config.default.connectTimeout>100000</resource.feign.client.config.default.connectTimeout>
-                <resource.feign.client.config.default.readTimeout>6000000</resource.feign.client.config.default.readTimeout>
-
-                <!-- gateway配置 -->
-                <resource.gateway.server.port></resource.gateway.server.port>
-                <resource.gateway.allowedOrigins.front></resource.gateway.allowedOrigins.front>
-                <resource.gateway.allowedOrigins.backend></resource.gateway.allowedOrigins.backend>
-                <resource.gateway.filters.args.redis-rate-limiter.replenishRate></resource.gateway.filters.args.redis-rate-limiter.replenishRate>
-                <resource.gateway.filters.args.redis-rate-limiter.burstCapacity></resource.gateway.filters.args.redis-rate-limiter.burstCapacity>
-
-                <!-- auth-security配置 -->
-                <resource.auth-security.server.port></resource.auth-security.server.port>
-
-                <!-- rabbitmq配置 -->
-                <resource.rabbitmq.host></resource.rabbitmq.host>
-                <resource.rabbitmq.port></resource.rabbitmq.port>
-                <resource.rabbitmq.virtual-host></resource.rabbitmq.virtual-host>
-                <resource.rabbitmq.username></resource.rabbitmq.username>
-                <resource.rabbitmq.password></resource.rabbitmq.password>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>pro_env</id>
-            <properties>
-                <!-- 服务配置 -->
-                <resource.server.port.article></resource.server.port.article>
-                <resource.server.port.backstage></resource.server.port.backstage>
-                <resource.server.port.entertain></resource.server.port.entertain>
-                <resource.server.port.site></resource.server.port.site>
-                <resource.server.compression.enabled>true</resource.server.compression.enabled>
-
-                <!-- 邮箱配置 -->
-                <resource.mail.host></resource.mail.host>
-                <resource.mail.username></resource.mail.username>
-                <resource.mail.password></resource.mail.password>
-                <resource.mail.smtp.port></resource.mail.smtp.port>
-
-                <!-- mysql配置 -->
-                <resource.datasource.username></resource.datasource.username>
-                <resource.datasource.password></resource.datasource.password>
-                <resource.datasource.url></resource.datasource.url>
-                <resource.datasource.driver></resource.datasource.driver>
-
-                <!-- redis配置 -->
-                <resource.redis.database></resource.redis.database>
-                <resource.redis.host></resource.redis.host>
-                <resource.redis.port></resource.redis.port>
-                <resource.redis.password></resource.redis.password>
-                <resource.redis.timeout></resource.redis.timeout>
-                <resource.redis.jedis.pool.max-active></resource.redis.jedis.pool.max-active>
-                <resource.redis.jedis.pool.max-wait></resource.redis.jedis.pool.max-wait>
-                <resource.redis.jedis.pool.max-idle></resource.redis.jedis.pool.max-idle>
-                <resource.redis.jedis.pool.min-idle></resource.redis.jedis.pool.min-idle>
-
-                <!-- nacos配置 -->
-                <resource.nacos.discovery.server-addr></resource.nacos.discovery.server-addr>
-                <resource.nacos.discovery.cluster-name></resource.nacos.discovery.cluster-name>
-
-                <!-- ribbon配置 -->
-                <resource.ribbon.ReadTimeout>600000</resource.ribbon.ReadTimeout>
-                <resource.ribbon.ConnectTimeout>600000</resource.ribbon.ConnectTimeout>
-
-                <!-- feign配置 -->
-                <resource.feign.client.config.default.loggerLevel>BASIC</resource.feign.client.config.default.loggerLevel>
-                <resource.feign.httpclient.enable>true</resource.feign.httpclient.enable>
-                <resource.feign.httpclient.max-connections>100</resource.feign.httpclient.max-connections>
-                <resource.feign.httpclient.max-connections-per-route>40</resource.feign.httpclient.max-connections-per-route>
-                <resource.feign.client.config.default.connectTimeout>100000</resource.feign.client.config.default.connectTimeout>
-                <resource.feign.client.config.default.readTimeout>6000000</resource.feign.client.config.default.readTimeout>
-
-                <!-- gateway配置 -->
-                <resource.gateway.server.port></resource.gateway.server.port>
-                <resource.gateway.allowedOrigins.front></resource.gateway.allowedOrigins.front>
-                <resource.gateway.allowedOrigins.backend></resource.gateway.allowedOrigins.backend>
-                <resource.gateway.filters.args.redis-rate-limiter.replenishRate></resource.gateway.filters.args.redis-rate-limiter.replenishRate>
-                <resource.gateway.filters.args.redis-rate-limiter.burstCapacity></resource.gateway.filters.args.redis-rate-limiter.burstCapacity>
-
-                <!-- auth-security配置 -->
-                <resource.auth-security.server.port></resource.auth-security.server.port>
-
-                <!-- rabbitmq配置 -->
-                <resource.rabbitmq.host></resource.rabbitmq.host>
-                <resource.rabbitmq.port></resource.rabbitmq.port>
-                <resource.rabbitmq.virtual-host></resource.rabbitmq.virtual-host>
-                <resource.rabbitmq.username></resource.rabbitmq.username>
-                <resource.rabbitmq.password></resource.rabbitmq.password>
-            </properties>
-        </profile>
-    </profiles>
+    <version>2.0.0</version>
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud-dependencies.version>Hoxton.RELEASE</spring-cloud-dependencies.version>
-        <cloud-alibaba.version>0.2.2.RELEASE</cloud-alibaba.version>
         <mybatis-plus.version>3.5.0</mybatis-plus.version>
+        <eyesTools.version>0.0.1</eyesTools.version>
+        <eyesAuth.version>0.0.1</eyesAuth.version>
+        <nacos.version>2.2.6.RELEASE</nacos.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>
         <swagger-models.version>1.5.21</swagger-models.version>
-        <userAgentUtils.version>1.21</userAgentUtils.version>
-        <fastjson.version>1.2.49</fastjson.version>
-        <jjwt.version>0.7.0</jjwt.version>
-        <hutool.version>5.7.17</hutool.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <mapstruct-processor.version>1.4.2.Final</mapstruct-processor.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <hutool.version>5.7.17</hutool.version>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <!--Spring Cloud-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud-dependencies.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
-            <!-- fastjson -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
 
-            <!-- UserAgentUtils -->
-            <dependency>
-                <groupId>eu.bitwalker</groupId>
-                <artifactId>UserAgentUtils</artifactId>
-                <version>${userAgentUtils.version}</version>
-            </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 
-            <!-- swagger -->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${springfox-swagger2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>swagger-bootstrap-ui</artifactId>
-                <version>${swagger-bootstrap-ui.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.swagger</groupId>
-                <artifactId>swagger-models</artifactId>
-                <version>${swagger-models.version}</version>
-            </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
 
-            <!-- mybatis-plus -->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
 
-            <!-- JWT -->
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
-                <version>${jjwt.version}</version>
-            </dependency>
+        <dependency>
+            <groupId>com.eyes</groupId>
+            <artifactId>eyesTools-spring-boot-starter</artifactId>
+            <version>${eyesTools.version}</version>
+        </dependency>
 
-            <!--hutool-->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
+        <dependency>
+            <groupId>com.eyes</groupId>
+            <artifactId>eyesAuth-spring-boot-starter</artifactId>
+            <version>${eyesAuth.version}</version>
+        </dependency>
 
-            <!-- mapStruct -->
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct</artifactId>
-                <version>${mapstruct.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
-                <version>${mapstruct-processor.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-mapstruct-binding</artifactId>
-                <version>${lombok-mapstruct-binding.version}</version>
-                <scope>provided</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <version>${nacos.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct-processor.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok-mapstruct-binding</artifactId>
+            <version>${lombok-mapstruct-binding.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-swagger2.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mapstruct</groupId>
+                    <artifactId>mapstruct</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>${swagger-bootstrap-ui.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>${swagger-models.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+    </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.3.12.RELEASE</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct-processor.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>${lombok-mapstruct-binding.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

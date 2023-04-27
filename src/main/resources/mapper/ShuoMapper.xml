@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eyes.eyesspace.persistent.mapper.ShuoMapper">
+    <insert id="addShuoshuoPics">
+        insert into shuoshuo_pic (shuoshuo_id, pid, url, create_time) values
+        <foreach collection="picList" item="item" separator=",">
+            (
+                #{id},
+                #{item.pid},
+                #{item.url},
+                now()
+            )
+        </foreach>
+    </insert>
+
+    <select id="getShuoshuoData" resultType="com.eyes.eyesspace.persistent.po.ShuoDataPO">
+        select sum(views) viewsNum, sum(comments) commentsNum
+        from shuoshuo
+        <where>
+            <if test="role!='ROLE_admin'.toString()">
+                status = 0
+            </if>
+        </where>
+    </select>
+
+    <select id="getShuoshuoList" resultType="com.eyes.eyesspace.persistent.dto.ShuoshuoInfoDTO">
+        select id, content, views, comments, status, create_time
+        from shuoshuo
+        <where>
+            <choose>
+                <when test="role=='ROLE_admin'.toString()">
+                    status!=2
+                </when>
+                <otherwise>
+                    status=0
+                </otherwise>
+            </choose>
+        </where>
+        order by id desc
+        limit #{start}, #{pageSize}
+    </select>
+
+    <select id="getShuoshuoListInfo" resultType="java.lang.Integer">
+        select count(*) from shuoshuo
+        <where>
+            <if test="status!=null">
+                status=#{status}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr:
+        namespace:
+        file-extension: yaml
+        shared-configs:
+          - dataID: program.yaml
+            group: prod
+            refresh: true
+          - dataID: context.yaml
+            group: prod
+            refresh: true

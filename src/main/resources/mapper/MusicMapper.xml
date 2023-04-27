@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eyes.eyesspace.persistent.mapper.MusicMapper">
+    <select id="getMusicListInfo" resultType="java.lang.Integer">
+        select count(*) from music
+        <where>
+            <if test="status!=null">
+                status=#{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="getRandomMusicList" resultType="com.eyes.eyesspace.persistent.po.UserMusicPO">
+        select id, title, author, url, pic, views, likes, comments
+        from music as t1 join
+        (
+        select round(
+        rand() * (
+        (select max(id) from music) -
+        (select min(id) from music)
+        )
+        + (select min(id) from music)
+        ) AS tid
+        ) AS t2
+        <where>
+            t1.id >= t2.tid
+            <choose>
+                <when test="role=='ROLE_admin'.toString()">
+                    and status!=2
+                </when>
+                <when test="role=='ROLE_user'.toString()">
+                    and status=0
+                </when>
+                <otherwise>
+                    and 1=0
+                </otherwise>
+            </choose>
+        </where>
+        order by t1.id limit 5;
+    </select>
+</mapper>

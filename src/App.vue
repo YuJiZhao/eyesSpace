@@ -54,15 +54,17 @@ export default defineComponent({
       if(router.currentRoute.value.fullPath != errorPath.context) {
         localStorage.setItem(siteConfig.enterURL, router.currentRoute.value.fullPath);
       }
-      Promise.all([context(), user(), spaceVisit()]).then(async (values) => {
+      Promise.all([context(), user()]).then(async (values) => {
         const [contextData, userData] = values;
         initContext(contextData);
         initUser(userData);
-        listenWindow.initAll();
         doPreload();
-      }).catch((e) => {
+      }).catch(() => {
         jumpPath(errorPath.context)
-      });
+      }).finally(() => {
+        listenWindow.initAll();
+      })
+      spaceVisit();
     });
 
     async function spaceVisit() {
@@ -74,14 +76,14 @@ export default defineComponent({
     }
 
     async function user() {
-      if ($utils.getCookie(siteConfig.tokenHeader) == "") return "";
+      if ($utils.getCookie(siteConfig.tokenHeader.sToken) == "" || $utils.getCookie(siteConfig.tokenHeader.lToken) == "") return "";
       return await $api.getUserInfo();
     }
 
     function initContext(contextData: RespInterface) { 
       if (contextData.code == codeConfig.success) {
         $context.init(contextData.data);
-      } 
+      }
       else if(![codeConfig.authentication_error, codeConfig.authentication_error_illegal_jwt].includes(contextData.code)) {
         jumpPath(errorPath.context);
       }
@@ -117,12 +119,10 @@ export default defineComponent({
         success: () => {
           isShow.value = true;
           $process.loadHide();
-          isShow.value = true;
         }
       });
     }
 
-    // 路由跳转
     function jumpPath(path: string) {
       router.push(path);
       isShow.value = true;

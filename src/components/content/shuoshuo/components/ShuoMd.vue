@@ -1,5 +1,5 @@
 <template>
-  <div class="commentMd">
+  <div class="shuoMd">
       <md-editor 
         v-model="content"
         :editor-id="id"
@@ -21,7 +21,7 @@ export default defineComponent({
   setup(props) {
     return {
       content: props.content,
-      id: "commentId" + props.commentId
+      id: "shuoId" + props.commentId.replace(/\W/g, "")
     };
   },
 });

@@ -5,8 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, reactive, watch } from "vue";
-import { ProcessInterface } from "@/d.ts/plugin";
+import { defineComponent, nextTick, onMounted, reactive, watch } from "vue";
 import videoProcess from "@/components/content/video/businessTs/videoProcess";
 import { videoContext } from "@/components/content/video/businessTs/videoContext";
 import Player from "xgplayer/dist/core_player";
@@ -19,8 +18,6 @@ import usePageHidden from "@/hooks/usePageHidden";
 export default defineComponent({
   components: { },
   setup() {
-    const $process = inject<ProcessInterface>("$process")!;
-
     let videoInfo = reactive({
       videoUrl: "",
       pictureUrl: ""
@@ -64,6 +61,15 @@ export default defineComponent({
       initPlayer();
     }
 
+    // BUG：不知道为什么，切换视频时组件刷新，但原视频会覆盖新视频，我没找到原因，只能这么手动删除了
+    function clearVideo() {
+      nextTick(() => {
+        document.querySelectorAll("#player video").forEach((v, i) => {
+          if(!i) (v as HTMLElement).style.display = "none";
+        });
+      })
+    }
+
     watch(
       () => videoProcess.fullscreenSentry.value,
       () => { player.getFullscreen(player.root); }
@@ -71,6 +77,7 @@ export default defineComponent({
 
     onMounted(() => {
       initData();
+      clearVideo();
     })
 
     return {

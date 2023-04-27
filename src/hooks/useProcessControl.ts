@@ -1,5 +1,6 @@
 import Process from "@/modules/process";
 import { CardDirection, CardType, Cards, CardList } from "@/constant";
+import { RollType } from "@/hooks/useGoBoth";
 
 interface sideCardsInterface {
     direction: CardDirection;
@@ -9,16 +10,26 @@ interface sideCardsInterface {
     follow?: boolean;
 }
 
+interface ToolsInterface {
+    rollType?: RollType,
+    rollTime?: number,
+}
+
 type useProcessControlType = (
     header?: boolean,
     sideCard?: false | sideCardsInterface,
-    footer?: boolean
+    footer?: boolean,
+    tools?: ToolsInterface
 ) => void;
 
 const useProcessControl: useProcessControlType = (
     header = true,
     sideCard = false,
-    footer = true
+    footer = true,
+    tools = {
+        rollType: RollType.time,
+        rollTime: 1
+    }
 ) => {
     Process.headerStatus.value = header;
 
@@ -36,6 +47,10 @@ const useProcessControl: useProcessControlType = (
     }
     
     Process.footerStatus.value = footer;
+
+    // Process
+    Process.rollType.value = tools.rollType!;
+    Process.rollTime.value = tools.rollTime!;
 }
 
 export default useProcessControl;

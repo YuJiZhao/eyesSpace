@@ -12,10 +12,6 @@ export declare interface BlogDetailContextDataInterface {
     category: string;
     labels: Array<string>;
     views: number;
-    likes: number;
-    existLike: boolean;
-    collections: number;
-    existCollect: boolean;
     comments: number;
     words: number;
     createTime: string;

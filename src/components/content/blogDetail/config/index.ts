@@ -8,14 +8,6 @@ const DataCardConfig: Array<DataCardConfigInterface> = [
     {
         title: "阅读量",
         name: "views"
-    },    
-    {
-        title: "点赞量",
-        name: "likes"
-    },
-    {
-        title: "收藏量",
-        name: "collections"
     },
     {
         title: "评论量",

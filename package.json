@@ -22,6 +22,7 @@
     "nprogress": "^0.2.0",
     "reset-css": "^5.0.1",
     "sass": "^1.43.4",
+    "v3-img-preview": "^1.1.16",
     "vue": "^3.2.37",
     "vue-image-crop-upload": "^3.0.3",
     "vue-router": "^4.0.12",

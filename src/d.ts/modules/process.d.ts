@@ -1,5 +1,6 @@
 import { Ref, UnwrapNestedRefs } from "vue";
 import { Cards, CardList, CardType, Dialogs } from "@/constant";
+import { RollType } from "@/hooks/useGoBoth";
 
 export declare interface ProcessInterface extends PopupInterface, ComponentInterface {
 }
@@ -50,7 +51,7 @@ interface TipShowInterface {
 export declare interface ComponentInterface {
     headerStatus: Ref<boolean>;
     headerCheckLock: Ref<boolean>;
-    headerCheckSwitch: (clientHeight: number) => void;
+    headerCheckSwitch: (clientHeight: number, HTMLHeight: number) => void;
 
     sideCardStatus: Ref<boolean>;
     sideCardPosition: Ref<string>;
@@ -61,5 +62,8 @@ export declare interface ComponentInterface {
 
     footerStatus: Ref<boolean>;
     footerPosition: Ref<boolean>;
-    footerPositionSwitch: (clientHeight: number) => void;
+    footerPositionSwitch: (clientHeight: number, HTMLHeight: number) => void;
+
+    rollType: Ref<RollType>;
+    rollTime: Ref<number>;
 }

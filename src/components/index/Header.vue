@@ -2,12 +2,7 @@
   <div class="header">
     <div class="space" @click="pageJump('/')">{{ spaceName }}</div>
     <div class="left">
-      <div class="bar" v-if="mpSwitch">
-        <div class="barItem" v-for="item in headerConfig" :key="item.path" @click="pageJump(item.path)">
-          <img :src="item.icon" />
-          <div class="word">{{ item.word }}</div>
-        </div>
-      </div>
+      <HeaderItem v-if="mpSwitch" />
       <div class="menuBar" :style="{backgroundImage: 'url(' + menuBar + ')' }" @click="openSideBar" v-else></div>
       <div class="avatar" @click="avatarClick" :style="{ backgroundImage: 'url(' + avatar + ')' }"></div>
     </div>
@@ -19,13 +14,14 @@ import { defineComponent, inject, onMounted, ref, watch } from "vue";
 import { ContextInterface, WindowInterface, UserInterface, ProcessInterface } from "@/d.ts/plugin";
 import { useRouter } from "vue-router";
 import { siteConfig } from "@/config/program";
-import { headerConfig } from "@/config/site";
+import { headerConfig, userCenterContext, siteContext } from "@/config/site";
 import resource from "@/config/resource";
 import jQuery from "jquery";
-import useMouseWheel from "@/hooks/useMouseWheel"
-import { Dialogs } from "@/constant";
+import useMouseWheel from "@/hooks/useMouseWheel";
+import HeaderItem from "./components/HeaderItem.vue";
 
 export default defineComponent({
+  components: { HeaderItem },
   emits: ['openSideBar'],
   setup(prop, ctx) {
     const $context = inject<ContextInterface>("$context")!;
@@ -47,10 +43,10 @@ export default defineComponent({
     }
 
     function avatarClick() {
-      if(!$user.status) {
-        router.push("/login");
+      if($user.status) {
+        window.open(`${userCenterContext.info}?clientId=${siteContext.clientId}`);
       } else {
-        $process.dialogShow(Dialogs.idCard);
+        window.open(`${userCenterContext.auth}?clientId=${siteContext.clientId}&redirectUrl=${process.env.VITE_SITE_URL + userCenterContext.redirectUrl}`);
       }
     }
 
@@ -61,12 +57,6 @@ export default defineComponent({
       },
       { immediate: true }
     );
-
-    watch(
-      () => $window.height.value,
-      (value) => $process.headerCheckSwitch(value),
-      { immediate: true }
-    )
 
     watch(
       () => $window.scrollTop.value,
@@ -136,26 +126,6 @@ export default defineComponent({
   .left {
     display: flex;
     justify-content: space-between;
-    .bar {
-      display: flex;
-      .barItem {
-        width: 60px;
-        height: 20px;
-        margin-right: 20px;
-        cursor: pointer;
-        display: flex;
-        img {
-          width: 16px;
-          height: 16px;
-          display: block;
-          transform: translateY(2px);
-        }
-        .word {
-          line-height: 20px;
-          margin-left: 5px;
-        }
-      }
-    }
     .menuBar {
       width: 30px;
       height: 30px;

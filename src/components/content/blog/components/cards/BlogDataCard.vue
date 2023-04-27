@@ -4,8 +4,8 @@
       <div class="card blogDataCard">
         <ul>
             <li v-for="item in blogDataCardConfig" :key="item.name">
-                <div>{{item.title}}</div>
-                <div>{{blogData[item.name]}}</div>
+              <div>{{item.title}}</div>
+              <div>{{blogData[item.name]}}</div>
             </li>
         </ul>
       </div>
@@ -38,6 +38,7 @@ export default defineComponent({
       await $api.getBlogListInfo().then(({code, data}) => {
         if(code == codeConfig.success) {
           blogData.value = data;
+          // 给管理员看的真实数据
           if(data.deleteNum) {
             blogData.value.totalNum -= data.deleteNum;
           }

@@ -1,12 +1,11 @@
 import { MusicContextInterface, AplayerConfigInterface } from "@/components/content/music/d.ts/config";
-import Resource from "@/config/resource";
 
 const musicContext: MusicContextInterface = {
     storageItemKey: "musicAnnounce",
     storageItemValue: "hello world",
     storageRangeKey: "musicRange",
     storageRangeValue: "hello world",
-    lrcApiUrl: `${process.env.VITE_API_DOMAIN}/entertain/music/music/getMusicLrc?id=`,
+    lrcApiUrl: `${process.env.VITE_API_DOMAIN}/music/getMusicLrc?id=`,
     musicAnnounce: 
 `<pre>
 本站音乐均为站长多年来的珍藏，内容广泛。

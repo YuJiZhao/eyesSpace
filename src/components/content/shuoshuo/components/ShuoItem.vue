@@ -1,16 +1,18 @@
 <template>
   <div class="shuoItem">
-    <div class="content">{{props.content}}</div>
+    <div class="content">
+      <shuo-md :content="props.content" :commentId="props.id" />
+    </div>
     <div class="imgList" v-if="props.picList.length">
       <div class="shuoImg" v-for="item in props.picList" :key="item">
-        <Image :url="item" size="97px" />
+        <Image :imgArray="props.picList" :url="item" size="97px" />
       </div>
     </div>
     <div class="foot">
       <div class="time">{{props.createTime}}</div>
       <div class="data">
-        <div class="views">阅读: {{props.views}}</div>
-        <div class="comment" @click="doComment">评论: {{props.comments}}</div>
+        <div class="views">阅读:{{views}}</div>
+        <div class="comment" @click="doComment">评论:{{comments}}</div>
       </div>
     </div>
   </div>
@@ -18,12 +20,13 @@
 
 <script lang="ts">
 import { defineComponent, inject } from "vue";
-import { ProcessInterface } from "@/d.ts/plugin";
 import Resource from "@/config/resource";
 import Image from "@/components/general/image/Image.vue";
+import ShuoMd from "./ShuoMd.vue";
+import { HelpInterface } from "@/d.ts/plugin";
 
 export default defineComponent({
-  components: { Image },
+  components: { Image, ShuoMd },
   props: {
     id: String,
     content: String,
@@ -33,19 +36,13 @@ export default defineComponent({
     createTime: String
   },
   setup(props) {
-    const $process = inject<ProcessInterface>("$process")!;
-
-    function doComment() {
-      $process.alertShow({
-        title: "服务终止",
-        content: "评论功能暂未上线，敬请期待"
-      });
-    }
+    const $utils = inject<HelpInterface>("$utils")!;
 
     return {
       commentIcon: Resource.comment,
       props,
-      doComment
+      views: $utils.simplifyNum(props.views!),
+      comments: $utils.simplifyNum(props.comments!)
     };
   },
 });
@@ -84,6 +81,7 @@ export default defineComponent({
     margin-top: 10px;
     padding-top: 5px;
     line-height: 30px;
+    font-size: 15px;
     border-top: 1px dashed rgba($color: $black, $alpha: 0.5);
     .data {
       width: 140px;

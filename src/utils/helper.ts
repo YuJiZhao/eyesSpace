@@ -1,9 +1,7 @@
 import { HelpInterface } from "@/d.ts/utils/help";
 import { siteConfig } from "@/config/program";
 import CryptoJS from 'crypto-js';
-
-let key = CryptoJS.enc.Utf8.parse(siteConfig.aesKey);
-let iv = CryptoJS.enc.Utf8.parse(siteConfig.aesIV);
+import { SimplifyNumType } from "@/constant";
 
 const utils: HelpInterface = {
     // 检测Email是否规范
@@ -59,22 +57,26 @@ const utils: HelpInterface = {
 
     // 加密字符串
     encryption: (str) => {
-        let temp = CryptoJS.enc.Utf8.parse(str);
-        return CryptoJS.AES.encrypt(temp, key, {
-            mode: CryptoJS.mode.CBC,
-            padding: CryptoJS.pad.Pkcs7,
-            iv: iv
-        }).toString();
+        return CryptoJS.AES.encrypt(
+            CryptoJS.enc.Utf8.parse(str), 
+            CryptoJS.enc.Utf8.parse(siteConfig.aesKey), 
+            {
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7,
+                iv: CryptoJS.enc.Utf8.parse(siteConfig.aesIV)
+            }
+        ).toString();
     },
 
     // 获取时间差
     getTimeDisff: (t1, t2) => {
         let millisecond = t1.valueOf() - t2.valueOf();
         let miscod2d = 1000 * 60 * 60 * 24;
-        let miscod2h = 1000 * 60 * 60;
+        // let miscod2h = 1000 * 60 * 60;
         let day = Math.floor(millisecond / miscod2d);
-        let hour = Math.floor((millisecond - day * miscod2d) / miscod2h);
-        return day + "天" + hour + "小时";
+        // let hour = Math.floor((millisecond - day * miscod2d) / miscod2h);
+        // return day + "天" + hour + "小时";
+        return day + "天";
     },
 
     // 复制内容到剪贴板
@@ -126,6 +128,13 @@ const utils: HelpInterface = {
     iosAgent: () => {
         return navigator.userAgent.match(/(iPhone|iPod|iPad);?/i);
     },
+
+    // 大数字简写
+    simplifyNum: (num, type = SimplifyNumType.all) => {
+        if(num < 1000) return String(num);
+        if(type == SimplifyNumType.exclude_M || num / 1000 < 10) return (num / 1000).toFixed(1) + "K";
+        return (num / 10000).toFixed(1) + "M";
+    }
 };
 
 export default utils;

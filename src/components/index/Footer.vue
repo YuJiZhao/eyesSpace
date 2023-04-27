@@ -7,30 +7,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, inject } from 'vue';
-import { WindowInterface, ProcessInterface } from "@/d.ts/plugin";
+import { defineComponent, inject } from 'vue';
+import { ProcessInterface } from "@/d.ts/plugin";
 import { footerConfig } from "@/config/site";
 import { urlConfig } from "@/config/program";
 
 export default defineComponent({
   setup() {
-    const $window = inject<WindowInterface>("$window")!;
     const $process = inject<ProcessInterface>("$process")!;
 
     function jumpPage(path: string) {
       window.open(path);
     }
-
-    watch(
-      () => document.querySelector("html")!.offsetHeight,
-      (value) => $process.footerPositionSwitch(value)
-    )
-
-    watch(
-      () => $window.height.value,
-      (value) => $process.footerPositionSwitch(value),
-      { immediate: true }
-    )
 
     return {
       footerConfig,

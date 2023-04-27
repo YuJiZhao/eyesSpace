@@ -41,7 +41,7 @@ export default defineComponent({
         nextTick(() => {
           if(document.querySelector(`#${siteConfig.followCardId}`)) {
             sticky.value = "sticky";
-            stickyHeight.value = -((document.querySelector(`#${siteConfig.followCardId}`) as HTMLElement).offsetTop - 55) + "px";
+            stickyHeight.value = -((document.querySelector(`#${siteConfig.followCardId}`) as HTMLElement).offsetTop - 90) + "px";
           }
         })
       }

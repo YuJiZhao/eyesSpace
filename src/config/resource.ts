@@ -1,10 +1,8 @@
 import { urlConfig } from "@/config/program";
 
 const sitePrefix = "site/";
-const siteResource = urlConfig.resourceUrl + sitePrefix;
-
 const avatarPrefix = "avatar/";
-const avatarResource = urlConfig.resourceUrl + avatarPrefix;
+const siteResource = urlConfig.resourceUrl + sitePrefix;
 
 const icon = {
     success: siteResource + "success.png",
@@ -17,6 +15,8 @@ const icon = {
     shuoshuo: siteResource + "shuoshuo.png",
     music: siteResource + "music.png",
     video: siteResource + "video.png",
+    other: siteResource + "other.png",
+    message: siteResource + "message.png",
     about: siteResource + "about.png",
     menu: siteResource + "menu.png",
     before: siteResource + "before.png",
@@ -37,7 +37,11 @@ const icon = {
     load: siteResource + "load.png",
     category: siteResource + "category.png",
     label: siteResource + "label.png",
-    top: siteResource + "top.png",
+    toolBox: siteResource + "toolBox.png",
+    top: siteResource + "goTop.png",
+    bottom: siteResource + "goBottom.png",
+    showBar: siteResource + "switchCardList.png",
+    switchBar: siteResource + "swapCardList.png",
     collect: siteResource + "collect.png",
     collectActive: siteResource + "collectActive.png",
     reward: siteResource + "reward.png",
@@ -48,7 +52,7 @@ const icon = {
 
 const img = {
     errorPage: siteResource + "errorPage.png",
-    defaultAvatar: avatarResource + "default.jpg",
+    defaultAvatar: urlConfig.userResourceUrl + avatarPrefix + "space.jpg",
     alipay: siteResource + "alipay.png",
     wepay: siteResource + "wepay.png",
 }
@@ -58,7 +62,7 @@ const gif = {
 }
 
 const data = {
-    emojiJson: "http://eyescdn.eyescode.top/data/emoji.json"
+    emojiJson: "http://eyes-cdn.eyescode.top/data/emoji.json"
 }
 
 const resource = {

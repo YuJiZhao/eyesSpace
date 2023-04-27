@@ -122,9 +122,12 @@ export default defineComponent({
     margin: 0 auto;
     .title {
       font-size: 20px;
-      height: 50px;
+      min-height: 50px;
       line-height: 50px;
       color: $title;
+      white-space:normal; 
+      word-break:break-all;
+      overflow:hidden;
     }
   }
   .announce {

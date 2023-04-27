@@ -9,15 +9,13 @@
       :summary="item.summary"
       :date="item.createTime"
       :view="item.views"
-      :like="item.likes"
-      :collection="item.collections"
     />
     <div class="noDataTip" v-if="!blogListData.length">暂无数据</div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent } from "vue";
 import BlogItem from "@/components/content/blog/components/BlogItem.vue";
 import { blogContext } from "@/components/content/blog/businessTs/blogContext";
 

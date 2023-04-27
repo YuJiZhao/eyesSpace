@@ -4,13 +4,11 @@ import { AddHeaderType } from "@/d.ts/server/ajax";
 
 export let addHeader: AddHeaderType = (existent) => {
     let config = {...existent};
-    if($utils.getCookie(siteConfig.tokenHeader) == "") return config;
-    if(config.headers) {
-        config.headers.Authorization = $utils.getCookie(siteConfig.tokenHeader);
-    } else {
-        config.headers = {
-            Authorization: $utils.getCookie(siteConfig.tokenHeader)
-        }
+    if($utils.getCookie(siteConfig.tokenHeader.sToken) == "" || $utils.getCookie(siteConfig.tokenHeader.lToken) == "") {
+        return config;
     }
+    config.headers = config.headers || {};
+    config.headers[siteConfig.tokenHeader.sToken] = $utils.getCookie(siteConfig.tokenHeader.sToken);
+    config.headers[siteConfig.tokenHeader.lToken] = $utils.getCookie(siteConfig.tokenHeader.lToken);
     return config;
 };

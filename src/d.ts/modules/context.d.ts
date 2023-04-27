@@ -12,12 +12,6 @@ export declare interface ContextType {
     announce: string;
     announceVersion: number;
     buildTime: string;
-    
-    visitNum: number,
-    visitorNum: number,
-    userNum: number,
-    blogNum: number,
-    shuoNum: number,
 }
 
 export declare interface IconLinkType {

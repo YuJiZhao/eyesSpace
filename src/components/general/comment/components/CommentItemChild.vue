@@ -7,7 +7,8 @@
           <div class="infoBox">
             <div class="name">
               {{item.name}} 
-              <span class="replyObject">回复 <a :href="'#' + idPrefix + item.replyId">@{{item.replyName}}</a></span></div>
+              <span class="replyObject">回复 <a :href="'#' + idPrefix + item.replyId">@{{item.replyName}}</a></span>
+            </div>
             <div class="date">{{item.createTime}}</div>
           </div>
         </div>
@@ -80,6 +81,7 @@ export default defineComponent({
           .name {
             height: 15px;
             line-height: 15px;
+            overflow: hidden;
             .replyObject > a {
               color: $normal;
               text-decoration: none;

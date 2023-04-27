@@ -1,9 +1,9 @@
 import { createRouter, RouteRecordRaw, createWebHistory } from 'vue-router';
 import { context } from '@/modules/context';
 import process from "@/modules/process";
-import Window from '@/modules/window';
 import { errorPath } from '@/config/site';
 import { content } from './path';
+import { siteConfig } from "@/config/program";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -25,18 +25,12 @@ router.beforeEach((to, from, next) => {
         process.tipShow.warn("暂时无法跳转");
         return;
     };
+    // 清除工具按钮中关闭侧栏的localStorage
+    localStorage.removeItem(siteConfig.sideBarShowStorage);
     next();
 });
 
 router.afterEach((to, from) => {
-    // 调整首部导航栏伸缩
-    if(process.headerStatus.value) {
-        process.headerCheckSwitch(Window.height.value);
-    }
-    // 调整底栏模式
-    if(process.footerStatus.value) {
-        process.footerPositionSwitch(Window.height.value);
-    }
 });
 
 export default router;

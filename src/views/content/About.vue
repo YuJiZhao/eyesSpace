@@ -8,37 +8,51 @@
       showCodeRowNumber
       no-katex
     />
-    <Comment class="aboutComment" :objectId="objectId" :apiType="apiType" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onActivated } from "vue";
+import { defineComponent, onActivated, ref, inject } from "vue";
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import useProcessControl from "@/hooks/useProcessControl";
-import about from "@/config/about";
-import Comment from "@/components/general/comment/Comment.vue";
-import { CommentApiType } from "@/constant";
 import { writerMeta } from "@/router/help";
 import { metaInfo } from "@/config/site";
+import { ApiObject, ProcessInterface } from "@/d.ts/plugin";
+import { codeConfig } from "@/config/program";
 
 export default defineComponent({
   name: "About",
-  components: { MdEditor, Comment },
+  components: { MdEditor },
   beforeRouteEnter: () => {
     writerMeta(metaInfo.about);
   },
   setup() {
+    const $api = inject<ApiObject>("$api")!;
+    const $process = inject<ProcessInterface>("$process")!;
+
+    let content = ref("");
+
+    async function getAboutContent() {
+      $api.getAboutContent().then(({code, msg, data}) => {
+        if (code == codeConfig.success) {
+          content.value = data.content;
+        } else {
+          $process.tipShow.error(`内容获取失败！${msg}`);
+        }
+      });
+    }
+    
     onActivated(() => {
       useProcessControl();
-    })
+    });
+
+    // created生命周期执行
+    getAboutContent();
 
     return {
-      content: about,
+      content,
       editorId: "about",
-      objectId: 0,
-      apiType: CommentApiType.site,
     };
   },
 });
@@ -47,7 +61,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 :deep(.md) {
   background: none;
-  font-family: 'eyes';
 }
 
 .about {

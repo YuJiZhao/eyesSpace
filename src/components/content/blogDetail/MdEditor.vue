@@ -46,6 +46,5 @@ export default defineComponent({
 <style lang="scss" scoped>
 :deep(.md) {
   background: none;
-  font-family: 'eyes';
 }
 </style>

@@ -2,11 +2,11 @@ import { RouteRecordRaw } from 'vue-router';
 
 const publicPath = {
     home: "/",
-    login: "/login",
     blog: "/blog",
     shuoshuo: "/shuoshuo",
     music: "/music",
     video: "/video",
+    message: "/message",
     about: "/about",
     errorPath: {
         route: "/error/errorRoute",
@@ -16,9 +16,9 @@ const publicPath = {
 
 const common: Array<RouteRecordRaw> = [
     {
-        path: publicPath.login,
-        name: "login",
-        component: () => import("@/views/common/Login.vue"),
+        path: "/auth",
+        name: "auth",
+        component: () => import("@/views/common/Auth.vue"),
     },
     {
         path: "/error/:type",
@@ -77,6 +77,11 @@ const content: Array<RouteRecordRaw> = [
         path: publicPath.video,
         name: "video",
         component: () => import("@/views/content/Video.vue"),
+    },
+    {
+        path: publicPath.message,
+        name: "message",
+        component: () => import("@/views/content/Message.vue"),
     },
     {
         path: publicPath.about,

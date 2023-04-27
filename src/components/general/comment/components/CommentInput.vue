@@ -3,13 +3,13 @@
     <emoji-input ref="inputRef" @changeValue="changeValue" />
     <div class="publishBox">
         <div class="uploadImg" @click="uploadImg">上传图片</div>
-        <div class="publishBtn" @click="publish">发表评论</div>
+        <div class="publishBtn" @click="publish">立即发布</div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject, onMounted } from "vue";
+import { defineComponent, ref, inject } from "vue";
 import { UserInterface, ProcessInterface } from "@/d.ts/plugin";
 import EmojiInput from "@/components/general/input/EmojiInput.vue";
 import { codeConfig, urlConfig } from "@/config/program";

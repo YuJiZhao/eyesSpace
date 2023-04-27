@@ -37,8 +37,7 @@ export enum CardList {
 
 export enum Dialogs {
     "Reward",
-    "ContactMe",
-    "idCard"
+    "ContactMe"
 }
 
 export enum HomeType {
@@ -52,4 +51,9 @@ export enum CommentApiType {
     "music",
     "video",
     "site"
+}
+
+export enum SimplifyNumType {
+    "all",
+    "exclude_M"
 }

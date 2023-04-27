@@ -7,7 +7,6 @@ export declare interface RespInterface {
 
 // 统一api管理
 export declare interface ApiObject extends 
-    CommonInterface, 
     SiteInterface, 
     UserApiInterface, 
     MusicInterface, 
@@ -44,35 +43,15 @@ export declare type DelCommentInterface = Array<number>;
 
 /*
  ***************************************************************************************
- *                                    common
- ***************************************************************************************
- */
-export declare interface CommonInterface {
-    getImgCode: () => Promise<RespInterface>;
-    getEmailCode: (req: GetEmailCodeReqInterface) => Promise<RespInterface>;
-    login: (req: LoginReqInterface) => Promise<RespInterface>;
-}
-
-interface GetEmailCodeReqInterface {
-    email: string;
-    imgCode: string;
-    key: string;
-}
-
-interface LoginReqInterface {
-    email: string;
-    emailCode: string;
-}
-
-/*
- ***************************************************************************************
  *                                    site
  ***************************************************************************************
  */
 export declare interface SiteInterface {
     getContext: () => Promise<RespInterface>;
     getHomeList: (req: GetHomeListReqInterface) => Promise<RespInterface>;
+    getSiteData: () => Promise<RespInterface>;
     addSpaceVisit: (req: AddSpaceVisitReqInterface) => Promise<RespInterface>;
+    getAboutContent: () => Promise<RespInterface>;
     doAboutComment: (req: PublishCommentInterface) => Promise<RespInterface>;
     getAboutCommentList: (req: GetCommentListInterface) => Promise<RespInterface>;
     delAboutComment: (req: DelCommentInterface) => Promise<RespInterface>;

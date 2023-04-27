@@ -2,10 +2,16 @@
   <div class="sideBar">
     <owner-card class="ownerCard" />
     <div class="navBox">
-      <div class="navItem" v-for="item in headerConfig" :key="item.path" @click="pageJump(item.path)">
-        <img :src="item.icon" />
-        <div class="word">{{ item.word }}</div>
-      </div>
+      <template v-for="item in headerConfig" :key="item.word">
+        <div class="option" v-if="!item.children" @click="pageJump(item.path)">
+          <img :src="item.icon" />
+          <div class="word">{{ item.word }}</div>
+        </div>
+        <div class="option" v-for="child in item.children" :key="child.word" @click="pageJump(child.path)" v-else>
+          <img :src="child.icon" />
+          <div class="word">{{ child.word }}</div>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -65,8 +71,8 @@ export default defineComponent({
   .navBox {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    .navItem {
+    justify-content: flex-start;
+    .option {
       box-shadow: 0 0 5px rgba($color: $black, $alpha: 0.7);
       -webkit-box-shadow: 0 0 5px rgba($color: $black, $alpha: 0.7);
       -moz-box-shadow: 0 0 5px rgba($color: $black, $alpha: 0.7);
@@ -76,6 +82,8 @@ export default defineComponent({
       width: 80px;
       height: 50px;
       border-radius: 10px;
+      margin-left: calc(20px / 6);
+      margin-right: calc(20px / 6);
       margin-bottom: 10px;
       cursor: pointer;
       img {

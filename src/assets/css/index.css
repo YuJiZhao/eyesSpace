@@ -1,13 +1,15 @@
-@font-face {
-    font-family: "eyes";
-    src: url("https://cdn.jsdelivr.net/gh/YuJiZhao/picbed@material/font/eyesblog.woff2");
-    font-display: swap;
-}
-
-body {
-    font-family: eyes !important;
-}
-
 div {
     box-sizing: border-box;
+}
+
+#v3-img-preview-container-id .v-images-wrap {
+    z-index: 1100;
+}
+
+#v3-img-preview-container-id .img-container {
+    z-index: 1100;
+}
+
+#v3-img-preview-container-id .arrow, #v3-img-preview-container-id .v3-img-preview-toolbar, #v3-img-preview-container-id .close-btn {
+    z-index: 1101;
 }

@@ -19,14 +19,14 @@ export default defineComponent({
   setup() {
     const $process = inject<ProcessInterface>("$process")!;
 
-    let msgList: Ref<Array<UnwrapNestedRefs<{msg: string, type: number}>>> = ref([]);
+    let msgList: Ref<Array<UnwrapNestedRefs<{ msg: string; type: number }>>> = ref([]);
 
     watch(
       () => $process.tipSentry.value,
       () => {
         msgList.value.push({
-            msg: $process.tipList.msg,
-            type: $process.tipList.type
+          msg: $process.tipList.msg,
+          type: $process.tipList.type,
         });
         setTimeout(() => {
           msgList.value.splice(0, 1);
@@ -72,6 +72,7 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
+    color: $normal;
     img {
       width: 20px;
       height: 20px;

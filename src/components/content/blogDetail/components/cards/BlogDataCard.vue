@@ -4,8 +4,8 @@
       <div class="card blogDetailDataCard">
         <ul>
           <li v-for="item in DataCardConfig" :key="item.name">
-            <div class="title">{{item.title}}</div>
-            <div class="name">{{detailData[item.name]}}</div>
+            <div class="title">{{ item.title }}</div>
+            <div class="name">{{ detailData[item.name] }}</div>
           </li>
         </ul>
       </div>
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, reactive } from "vue";
+import { defineComponent, reactive } from "vue";
 import StandardCard from "@/components/general/card/components/StandardCard.vue";
 import resource from "@/config/resource";
 import { Wait } from "@/components/general/popup";
@@ -27,8 +27,6 @@ export default defineComponent({
   setup() {
     let detailData = reactive({
       views: 0,
-      likes: 0,
-      collections: 0,
       comments: 0,
       words: 0,
       createTime: ""
@@ -36,26 +34,10 @@ export default defineComponent({
 
     function initData() {
       detailData.views = blogDetailContext.data.views!;
-      detailData.likes = blogDetailContext.data.likes!;
-      detailData.collections = blogDetailContext.data.collections!;
       detailData.comments = blogDetailContext.data.comments!;
       detailData.words = blogDetailContext.data.words!;
       detailData.createTime = blogDetailContext.data.createTime!;
     }
-
-    watch(
-      () => blogDetailProcess.likesNumSentry.value,
-      () => {
-        detailData.likes += blogDetailProcess.likesNumStep.value
-      }
-    )
-
-    watch(
-      () => blogDetailProcess.collectNumSentry.value,
-      () => {
-        detailData.collections += blogDetailProcess.collectNumStep.value
-      }
-    )
 
     return {
       icon: resource.data,

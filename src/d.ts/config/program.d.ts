@@ -1,6 +1,8 @@
 export declare interface UrlConfigInterface {
     siteUrl: string;
     resourceUrl: string;
+    userResourceUrl: string;
+    eyesResourceUrl: string;
     warehouseUrl: string;
     zwfwUrl: string;
     picbedUrl: string;
@@ -8,7 +10,10 @@ export declare interface UrlConfigInterface {
 }
 
 export declare interface SiteConfigInterface {
-    tokenHeader: string;
+    tokenHeader: {
+        sToken: string;
+        lToken: string;
+    };
     tokenExpireTime: number;
     mpThreshold: number;
     aesKey: string;
@@ -18,6 +23,7 @@ export declare interface SiteConfigInterface {
     avatarMaxSize: number;
     avatarImgType: Array<string>;
     followCardId: string;
+    sideBarShowStorage: string;
 }
 
 export declare interface CodeConfigInterface {
@@ -27,9 +33,6 @@ export declare interface CodeConfigInterface {
     authentication_error_illegal_jwt: number;
     authentication_expired: number;
     account_freezing: number;
-    gateway_exception: number;
-    none_http_servlet_request: number;
-    gateway_bypassed: number;
-
+    account_not_found: number;
     no_time: number;
 }

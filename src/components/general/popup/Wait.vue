@@ -9,7 +9,6 @@
 
 <script lang="ts">
 import { defineComponent, inject, watch, ref } from "vue";
-import { ProcessInterface } from "@/d.ts/modules/process";
 import Resource from "@/config/resource";
 
 export default defineComponent({
@@ -26,8 +25,6 @@ export default defineComponent({
   },
   emits: ["callback"],
   setup(props, ctx) {
-    const $process = inject<ProcessInterface>("$process")!;
-
     const defaultColor = "rgba(0, 0, 0, 0)";
     const defaultSize = "50px";
 

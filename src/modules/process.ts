@@ -1,18 +1,19 @@
 import { ProcessInterface, PopupInterface, ComponentInterface } from "@/d.ts/modules/process";
-import { reactive, ref, nextTick } from "vue";
+import { reactive, ref } from "vue";
+import { RollType } from "@/hooks/useGoBoth";
 
 // 弹出层逻辑控制
 const Popup: PopupInterface = {
     // 黑色幕布
     maskStatus: ref(false),
-    maskClickFunc: ref(() => {}),
+    maskClickFunc: ref(() => { }),
     maskShow(clickFunc) {
         Popup.maskClickFunc.value = clickFunc || Popup.maskClickFunc.value;
-        Popup.maskStatus.value = true; 
+        Popup.maskStatus.value = true;
     },
-    maskHide() { 
-        Popup.maskClickFunc.value = () => {};
-        Popup.maskStatus.value = false; 
+    maskHide() {
+        Popup.maskClickFunc.value = () => { };
+        Popup.maskStatus.value = false;
     },
 
     // 页面跳转加载页面
@@ -56,7 +57,7 @@ const Popup: PopupInterface = {
         content: ""
     }),
     alertShow(msg) {
-        if(Popup.alertStatus.value = true) {
+        if (Popup.alertStatus.value = true) {
             Popup.alertStatus.value = false;
         }
         setTimeout(() => {
@@ -65,7 +66,7 @@ const Popup: PopupInterface = {
             Popup.alertStatus.value = true;
         }, 500);
     },
-    alertHide() { 
+    alertHide() {
         Popup.alertStatus.value = false;
     },
 
@@ -83,10 +84,8 @@ const Component: ComponentInterface = {
     // 顶部导航栏
     headerStatus: ref(true),
     headerCheckLock: ref(true),
-    headerCheckSwitch(clientHeight) {
-        nextTick(() => {
-            Component.headerCheckLock.value = document.querySelector("html")!.offsetHeight < clientHeight;
-        })
+    headerCheckSwitch(clientHeight, HTMLHeight) {
+        Component.headerCheckLock.value = HTMLHeight < clientHeight;
     },
 
     // 侧栏卡片
@@ -100,15 +99,14 @@ const Component: ComponentInterface = {
     // 底部组件
     footerStatus: ref(true),
     footerPosition: ref(true),
-    footerPositionSwitch(clientHeight) {
-        nextTick(() => {
-            if(!document.querySelector(".footer")) return;
-            Component.footerPosition.value = (
-                clientHeight < document.querySelector("html")!.offsetHeight
-                            + (document.querySelector(".footer") as HTMLElement).offsetHeight
-            );
-        })
-    }
+    footerPositionSwitch(clientHeight, HTMLHeight) {
+        if (!document.querySelector(".footer")) return;
+        Component.footerPosition.value = clientHeight < HTMLHeight;
+    },
+
+    // 全局工具按钮
+    rollType: ref(RollType.speed),
+    rollTime: ref(1),
 }
 
 const Process: ProcessInterface = {

@@ -7,6 +7,9 @@ const user: UserInterface = {
     init: (userInfo) => {
         Object.assign(user.data, userInfo);
     },
+    isLogin: () => {
+        return user.status == 1;
+    }
 };
 
 export { user };

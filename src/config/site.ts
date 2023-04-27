@@ -1,6 +1,7 @@
 import { 
     HeaderConfigType, 
     SiteDataType, 
+    UserCenterContextInterface,
     FooterConfigInterface, 
     ErrorPathInterface, 
     ErrorConfigInterface, 
@@ -16,13 +17,25 @@ import { pathConfig } from "@/config/program";
  ***************************************************************************************
  */
 const siteContext: SiteContextInterface = {
-    siteName: "瞳孔的个人空间",
+    clientId: 198344,
+    siteName: "耶瞳空间",
     siteNameEn: "eyesSpace",
-    spaceVersion: "3.0.0",
+    spaceVersion: "3.2.0",
     ownerEmail: "eyesyeager@gmail.com",
-    siteVideoBV: "BV1Fb4y1n7zq",
+    siteVideoBV: "BV1fg411b7sF",
     commentMaxLen: 1000
 };
+
+/*
+ ***************************************************************************************
+ *                                    UserCenter
+ ***************************************************************************************
+ */
+const userCenterContext: UserCenterContextInterface = {
+    info: "http://user.eyescode.top/",
+    auth: "http://user.eyescode.top/OAuth2",
+    redirectUrl: "/auth",
+}
 
 /*
  ***************************************************************************************
@@ -33,50 +46,57 @@ const metaInfo = {
     home: {
         title: siteContext.siteName + " | 首页",
         data: [
-            { keywords: "瞳孔的个人空间，个人网站，瞳孔，eyes，eyesyeager，程序员，博客，说说，音乐，视频" },
-            { description: "这是瞳孔的个人空间，是一个个人网站" }
+            { keywords: `${siteContext.siteName}，个人网站，耶瞳，eyes，eyesyeager，程序员，博客，说说，音乐，视频` },
+            { description: `这是${siteContext.siteName}，是一个个人网站` }
         ]
     },
     blog: {
         title: siteContext.siteName + " | 博客",
         data: [
-            { keywords: "瞳孔的个人空间，瞳孔，eyes，eyesyeager，程序员，博客，Java，JavaScript，Flutter，Python，PHP，Unity" },
-            { description: "这是瞳孔的个人空间，是一个个人网站，这是博客页面" }
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，程序员，博客，Java，JavaScript，Flutter，Python，PHP，Unity` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是博客页面` }
         ]
     },
     shuoshuo: {
         title: siteContext.siteName + " | 说说",
         data: [
-            { keywords: "瞳孔的个人空间，瞳孔，eyes，eyesyeager，生活，代码，程序员，音乐，视频" },
-            { description: "这是瞳孔的个人空间，是一个个人网站，这是说说页面" }
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，代码，程序员，音乐，视频` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是说说页面` }
         ]
     },
     music: {
         title: siteContext.siteName + " | 音乐",
         data: [
-            { keywords: "瞳孔的个人空间，瞳孔，eyes，eyesyeager，音乐" },
-            { description: "这是瞳孔的个人空间，是一个个人网站，这是音乐页面" }
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，音乐` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是音乐页面` }
         ]
     },
     video: {
         title: siteContext.siteName + " | 视频",
         data: [
-            { keywords: "瞳孔的个人空间，瞳孔，eyes，eyesyeager，视频" },
-            { description: "这是瞳孔的个人空间，是一个个人网站，这是视频页面" }
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，视频` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是视频页面` }
         ]
     },
     about: {
         title: siteContext.siteName + " | 关于",
         data: [
-            { keywords: "瞳孔的个人空间，瞳孔，eyes，eyesyeager，生活，代码，程序员，音乐，视频" },
-            { description: "这是瞳孔的个人空间，是一个个人网站，这是关于页面，一个懒得动弹的宅男" }
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，代码，程序员，音乐，视频` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是关于页面` }
+        ]
+    },
+    message: {
+        title: siteContext.siteName + " | 留言",
+        data: [
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，代码，程序员，音乐，视频` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是留言页面` }
         ]
     },
     login: {
         title: siteContext.siteName + " | 登录",
         data: [
-            { keywords: "瞳孔的个人空间，个人网站，瞳孔，eyes，eyesyeager，程序员，博客，说说，音乐，视频，登录" },
-            { description: "这是瞳孔的个人空间，是一个个人网站，这是登录页面" }
+            { keywords: `${siteContext.siteName}，个人网站，耶瞳，eyes，eyesyeager，程序员，博客，说说，音乐，视频，登录` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是登录页面` }
         ]
     },
 }
@@ -145,9 +165,20 @@ const headerConfig: HeaderConfigType = [
         word: "视频"
     },
     {
-        path: pathConfig.about,
-        icon: resource.about,
-        word: "关于",
+        icon: resource.other,
+        word: "其他",
+        children: [
+            {
+                path: pathConfig.message,
+                icon: resource.message,
+                word: "留言"
+            },
+            {
+                path: pathConfig.about,
+                icon: resource.about,
+                word: "关于",
+            }
+        ]
     }
 ];
 
@@ -159,19 +190,15 @@ const headerConfig: HeaderConfigType = [
 const siteData: SiteDataType = [
     {
         key: 0,
-        name: "本站访问量"
+        name: "本站运行时间"
     },
     {
         key: 1,
-        name: "本站总访客"
+        name: "本站访问量"
     },
     {
         key: 2,
-        name: "本站用户数"
-    },
-    {
-        key: 3,
-        name: "本站运行时间"
+        name: "本站总访客"
     }
 ]
 
@@ -181,9 +208,9 @@ const siteData: SiteDataType = [
  ***************************************************************************************
  */
 const footerConfig: FooterConfigInterface = {
-    copyright: "©2022 By 瞳孔",
+    copyright: "©2022 By 耶瞳",
     theme: "eyes",
-    techStack: "vue+springcloud",
+    techStack: "vue+spring",
     zwfwCode: "赣ICP备2022006255号"
 }
 
@@ -238,4 +265,4 @@ const errorConfig: ErrorConfigInterface = {
     }
 }
 
-export { siteContext, metaInfo, tipType, contactMeConfig, headerConfig, siteData, footerConfig, preloadList, errorPath, errorConfig };
+export { siteContext, userCenterContext, metaInfo, tipType, contactMeConfig, headerConfig, siteData, footerConfig, preloadList, errorPath, errorConfig };

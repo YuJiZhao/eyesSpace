@@ -1,7 +1,6 @@
 import { get, post, put, del } from "./ajax";
 import { 
     ApiObject, 
-    CommonInterface, 
     SiteInterface, 
     UserApiInterface, 
     MusicInterface, 
@@ -11,122 +10,115 @@ import {
 } from "@/d.ts/server/api";
 import { UrlReqType } from "@/constant";
 
-const common: CommonInterface = {
-    getImgCode: async () => {
-        return await get("/auth/login/getImgVeriCode");
-    },
-    getEmailCode: async (req) => {
-        return await post("/auth/login/sendEmail", req);
-    },
-    login: async (req) => {
-        return await post("/auth/login/doLogin", req);
-    },
-}
-
 const site: SiteInterface = {
     getContext: async () => {
-        return await get("/site/context/getContext");
+        return await get("/context/getContext");
     },
     getHomeList: async (req) => {
-        return await get("/site/home/getHomeList", req);
+        return await get("/home/getHomeList", req);
+    },
+    getSiteData: async () => {
+        return await get("/home/getSiteData");
     },
     addSpaceVisit: async (req) => {
-        return await post("/backstage/trace/addSpaceVisit", req);
+        return await post("/track/visitAdd", req);
+    },
+    getAboutContent: async () => {
+        return await get("/context/getAboutContext");
     },
     doAboutComment: async (req) => {
-        return await post("/site/about/doAboutComment", req);
+        return await post("/message/doMessage", req);
     },
     getAboutCommentList: async (req) => {
-        return await get("/site/about/getAboutCommentList", req);
+        return await get("/message/getMessageList", req);
     },
     delAboutComment: async (req) => {
-        return await del("/site/about/delAboutComment", req, UrlReqType.path);
+        return await del("/message/delMessage", req, UrlReqType.path);
     }
 }
 
 const blog: BlogInterface = {
     getBlogListInfo: async () => {
-        return await get("/article/blog/getBlogListInfo");
+        return await get("/blog/getBlogListInfo");
     },
     getBlogList: async (req) => {
-        return await get("/article/blog/getBlogList", req);
+        return await get("/blog/getBlogList", req);
     },
     getBlogInfo: async (req) => {
-        return await get("/article/blog/getBlogInfo", req, UrlReqType.path);
+        return await get("/blog/getBlogInfo", req, UrlReqType.path);
     },
     getBlogCategory: async () => {
-        return await get("/article/blog/getBlogCategory");
+        return await get("/blog/getBlogCategory");
     },
     getBlogLabel: async () => {
-        return await get("/article/blog/getBlogLabel");
+        return await get("/blog/getBlogLabel");
     },
     doBlogLike: async (req) => {
-        return await get("/article/blog/doBlogLike", req);
+        return await get("/blog/doBlogLike", req);
     },
     doBlogCollect: async (req) => {
-        return await get("/article/blog/doBlogCollect", req);
+        return await get("/blog/doBlogCollect", req);
     },
     doBlogComment: async (req) => {
-        return await post("/article/blog/doBlogComment", req);
+        return await post("/blog/doBlogComment", req);
     },
     getBlogCommentList: async (req) => {
-        return await get("/article/blog/getBlogCommentList", req);
+        return await get("/blog/getBlogCommentList", req);
     },
     delBlogComment: async (req) => {
-        return await del("/article/blog/delBlogComment", req, UrlReqType.path);
+        return await del("/blog/delBlogComment", req, UrlReqType.path);
     }
 }
 
 const shuoshuo: ShuoshuoInterface = {
     getShuoshuoList: async (req) => {
-        return await get("/article/shuoshuo/getShuoshuoList", req);
+        return await get("/shuo/getShuoList", req);
     },
     getShuoshuoListInfo: async () => {
-        return await get("/article/shuoshuo/getShuoshuoListInfo");
+        return await get("/shuo/getShuoListInfo");
     },
     getShuoshuoSingleInfo: async (req) => {
-        return await get("/article/shuoshuo/getSingleShuoshuoByString", req);
+        return await get("/shuo/getSingleShuoByString", req);
     },
     doShuoshuoComment: async (req) => {
-        return await post("/article/shuoshuo/doShuoComment", req);
+        return await post("/shuo/doShuoComment", req);
     },
     getShuoshuoCommentList: async (req) => {
-        return await get("/article/shuoshuo/getShuoCommentList", req);
+        return await get("/shuo/getShuoCommentList", req);
     },
     delShuoshuoComment: async (req) => {
-        return await del("/article/shuoshuo/delShuoComment", req, UrlReqType.path);
+        return await del("/shuo/delShuoComment", req, UrlReqType.path);
     }
 }
 
 const video: VideoInterface = {
     getVideoInfo: async () => {
-        return await get("/entertain/video/user/getVideoInfo");
+        return await get("/video/getVideoInfoByUser");
     },
     doVideoUserLike: async (req) => {
-        return await get("/entertain/video/user/doUserLike", req);
+        return await get("/video/doUserLike", req);
     }
 }
 
 const music: MusicInterface = {
     getMusicInfo: async () => {
-        return await get("/entertain/music/user/getMusicInfo");
+        return await get("/music/getMusicInfoByUser");
     },
     doMusicUserLike: async (req) => {
-        return await get("/entertain/music/user/doUserLike", req);
+        return await get("/music/doUserLike", req);
     }
 }
 
 const userApi: UserApiInterface = {
     getUserInfo: async () => {
-        return await get("/site/user/info/getUserInfo");
+        return await get("/user/getUserInfo");
     },
     updateUserInfo: async (req) => {
-        return await put("/site/user/info/updateUserInfo", req);
+        return await put("/user/updateUserInfo", req);
     }
 }
 
 const api: ApiObject = {
-    ...common,
     ...site,
     ...blog,
     ...shuoshuo,

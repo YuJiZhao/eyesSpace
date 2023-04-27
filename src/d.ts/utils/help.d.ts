@@ -1,3 +1,5 @@
+import { SimplifyNumType } from "@/constant";
+
 export declare interface HelpInterface {
     checkEmail: (email: string) => boolean;
     debounce: (fn: () => void, delay?: number) => void;
@@ -12,4 +14,5 @@ export declare interface HelpInterface {
     cursorMove: (el: any, spos: number) => void;
     byte2MB: (size: number) => number;
     iosAgent: () => any;
+    simplifyNum: (num: number, type?: SimplifyNumType) => string;
 }

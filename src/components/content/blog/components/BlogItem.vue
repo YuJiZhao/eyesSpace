@@ -12,9 +12,7 @@
     <div class="footer">
         <div class="time">{{props.date}}</div>
         <div class="data">
-            <div class="view">阅读:{{props.view}}</div>
-            <div class="like">点赞:{{props.like}}</div>
-            <div class="collection">收藏:{{props.collection}}</div>
+            <div class="view">阅读:{{view}}</div>
         </div>
     </div>
   </div>
@@ -27,7 +25,7 @@ import { useRouter } from "vue-router";
 
 export default defineComponent({
   components: { },
-  props: ["id", "title", "category", "words", "summary", "date", "view", "like", "collection"],
+  props: ["id", "title", "category", "words", "summary", "date", "view"],
   setup(props) {
     let router = useRouter();
     const $utils = inject<HelpInterface>("$utils")!;
@@ -39,6 +37,7 @@ export default defineComponent({
     return {
       props,
       time: $utils.estimateReadTime(props.words),
+      view: $utils.simplifyNum(props.view),
       jumpDetail
     };
   },
@@ -82,9 +81,9 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     .data {
-        width: 200px;
-        display: flex;
-        justify-content: space-around;
+      width: 200px;
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }

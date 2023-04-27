@@ -24,6 +24,7 @@ import { Wait } from "@/components/general/popup";
 import resource from "@/config/resource";
 import { writerMeta } from "@/router/help";
 import { metaInfo } from "@/config/site";
+import { RollType } from "@/hooks/useGoBoth";
 
 export default defineComponent({
   name: "Shuoshuo",
@@ -99,8 +100,12 @@ export default defineComponent({
       useProcessControl(true, {
         direction: CardDirection.row,
         cardType: CardType.CardList,
-        cardList: CardList.ShuoCardList
-      }, true);
+        cardList: CardList.ShuoCardList,
+        follow: false
+      }, true, {
+        rollType: RollType.time,
+        rollTime: 0.5
+      });
     })
 
     return {

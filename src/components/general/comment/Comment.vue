@@ -2,7 +2,7 @@
   <div class="comment">
     <comment-input />
     <div class="commentArea">
-      <div class="title">评论区</div>
+      <div class="title">内容区</div>
       <Wait :show="show" :fail="isFail" height="200px">
         <div class="commentList">
           <comment-item class="item" v-for="item in commentList" :key="item.id" :commentData="item" />

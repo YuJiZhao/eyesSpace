@@ -8,14 +8,6 @@ const blogDataCardConfig = [
         name: "viewsNum"
     },
     {
-        title: "总点赞量",
-        name: "likesNum"
-    },
-    {
-        title: "总收藏量",
-        name: "collectionsNum"
-    },
-    {
         title: "总评论量",
         name: "commentsNum"
     },

@@ -1,7 +1,8 @@
 <template>
   <div class="details">
-    <shuo-item 
+    <shuo-item
       class="shuoshuoItem"
+      :key="shuoSentry"
       :id="shuoData.id"
       :content="shuoData.content"
       :picList="shuoData.picList"
@@ -20,7 +21,7 @@ import useProcessControl from "@/hooks/useProcessControl";
 import { ProcessInterface, ApiObject } from "@/d.ts/plugin";
 import { CardDirection, CardList, CardType } from "@/constant";
 import { codeConfig } from "@/config/program";
-import useGoTop from "@/hooks/useGoTop";
+import { goBoth, GoBothType } from "@/hooks/useGoBoth";
 import Comment from "@/components/general/comment/Comment.vue";
 import { CommentApiType } from "@/constant";
 import ShuoItem from "@/components/content/shuoshuo/components/ShuoItem.vue"; 
@@ -43,6 +44,7 @@ export default defineComponent({
         comments: 0,
         createTime: ""
     });
+    let shuoSentry = ref(0);
 
     function setMeta() {
       writerMeta(buildMeta(
@@ -62,6 +64,7 @@ export default defineComponent({
               shuoData.comments = data.comments;
               shuoData.createTime = data.createTime;
               setMeta();
+              shuoSentry.value++;
             } else {
               $process.tipShow.error(msg);
             }
@@ -69,7 +72,7 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      useGoTop();
+      goBoth(GoBothType.TopSpeed);
       getShuoshuoInfo();
       useProcessControl(true, {
         direction: CardDirection.row,
@@ -81,6 +84,7 @@ export default defineComponent({
     return {
       shuoData,
       shuoshuoId,
+      shuoSentry,
       apiType: CommentApiType.shuoshuo,
     };
   },

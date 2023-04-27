@@ -4,6 +4,7 @@
       <home-list :key="homeSentry" :homeListData="homeListData" />
     </Wait>
     <Pagination
+      :key="homeSentry"
       :total="total"
       :size="pageSize"
       :initPage="page"
@@ -20,7 +21,7 @@ import { CardDirection, Cards } from "@/constant";
 import { codeConfig } from "@/config/program";
 import { useRouter } from "vue-router";
 import Pagination from "@/components/general/Pagination/pagination.vue";
-import useGoTop from "@/hooks/useGoTop";
+import { goBoth, GoBothType } from "@/hooks/useGoBoth";
 import { writerMeta } from "@/router/help";
 import { metaInfo } from "@/config/site";
 import HomeList from "@/components/content/home/HomeList.vue";
@@ -41,7 +42,8 @@ export default defineComponent({
     let show = ref(true);
     let isFail = ref(false);
     let page = ref(1);
-    let pageSize = ref(6);
+    let pageSize = ref(8);
+    let total = ref(0);
     let homeListData = ref([]);
     let homeSentry = ref(0);
 
@@ -51,10 +53,11 @@ export default defineComponent({
         pageSize: pageSize.value
       }).then(({code, msg, data}) => {
         if(code == codeConfig.success) {
-          homeListData.value = data;
+          homeListData.value = data.data;
+          total.value = data.total;
           show.value = false;
           homeSentry.value ++;
-          useGoTop();
+          goBoth(GoBothType.TopSpeed);
         } else {
           $process.tipShow.error("获取数据失败");
           isFail.value = true;
@@ -98,7 +101,7 @@ export default defineComponent({
 
     return {
       homeListData,
-      total: $context.data.blogNum! + $context.data.shuoNum!,
+      total,
       show,
       isFail,
       page,

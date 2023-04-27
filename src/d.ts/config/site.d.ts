@@ -1,10 +1,17 @@
 export declare interface SiteContextInterface {
+    clientId: number;
     siteName: string;
     siteNameEn: string;
     spaceVersion: string;
     ownerEmail: string;
     siteVideoBV: string;
     commentMaxLen: number;
+}
+
+export declare interface UserCenterContextInterface {
+    info: string;
+    auth: string;
+    redirectUrl: string;
 }
 
 export declare type ContactMeConfigType = Array<ContactMeConfigInterface>;
@@ -18,9 +25,14 @@ interface ContactMeConfigInterface {
 
 export declare type HeaderConfigType = Array<HeaderBarInterface>;
 interface HeaderBarInterface {
-    path: string;
+    path?: string;
     icon: string;
     word: string;
+    children?: Array<{
+        path: string;
+        icon: string;
+        word: string;
+    }>
 }
 
 export declare type SiteDataType = Array<KNInterface>;

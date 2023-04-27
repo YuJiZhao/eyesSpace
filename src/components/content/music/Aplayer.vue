@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject, onMounted, onDeactivated, onActivated, watch } from "vue";
+import { defineComponent, ref, onMounted, onDeactivated, onActivated, watch } from "vue";
 import "@/libs/aplayer/APlayer.min.js";
 import "@/libs/aplayer/APlayer.min.css";
 import { musicContext } from "@/components/content/music/businessTs/musicContext";
@@ -97,7 +97,6 @@ export default defineComponent({
     bottom: 10%;
     transform: translateX(-50%);
     overflow: visible;
-    font-family: eyes !important;
   }
   :deep(.aplayer-lrc) {
     width: 80%;

@@ -7,13 +7,13 @@
 <script lang="ts">
 import { defineComponent, inject } from "vue";
 import { ProcessInterface } from "@/d.ts/modules/process";
-import { Reward, ContactMe, idCard } from "./dialogComponent";
+import { Reward, ContactMe } from "./dialogComponent";
 
 export default defineComponent({
-  components: { Reward, ContactMe, idCard },
+  components: { Reward, ContactMe },
   setup() {
     const $process = inject<ProcessInterface>("$process")!;
-    const dialogComponents = [Reward, ContactMe, idCard];
+    const dialogComponents = [Reward, ContactMe];
     
     return {
       dialogComponents,

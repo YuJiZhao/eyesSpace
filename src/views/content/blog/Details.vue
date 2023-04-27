@@ -2,7 +2,6 @@
   <div class="details">
     <head-meta />
     <md-editor />
-    <func-bar />
     <reward-btn />
     <Comment :objectId="blogId" :apiType="apiType" />
   </div>
@@ -15,17 +14,18 @@ import useProcessControl from "@/hooks/useProcessControl";
 import { ProcessInterface, ApiObject } from "@/d.ts/plugin";
 import { CardDirection, CardList, CardType } from "@/constant";
 import { codeConfig } from "@/config/program";
-import { MdEditor, HeadMeta, FuncBar, RewardBtn } from "@/components/content/blogDetail";
-import useGoTop from "@/hooks/useGoTop";
+import { MdEditor, HeadMeta, RewardBtn } from "@/components/content/blogDetail";
+import { goBoth, GoBothType } from "@/hooks/useGoBoth";
 import { blogDetailContext } from "@/components/content/blogDetail/businessTs/blogDetailContext";
 import blogDetailProcess from "@/components/content/blogDetail/businessTs/blogDetailProcess";
 import Comment from "@/components/general/comment/Comment.vue";
 import { CommentApiType } from "@/constant";
 import { buildMeta, writerMeta } from "@/router/help";
 import { BlogDetailContextDataInterface } from "@/components/content/blogDetail/d.ts/blogDetailContext";
+import { RollType } from "@/hooks/useGoBoth";
 
 export default defineComponent({
-  components: { MdEditor, HeadMeta, FuncBar, RewardBtn, Comment },
+  components: { MdEditor, HeadMeta, RewardBtn, Comment },
   setup() {
     const router = useRouter();
     const $process = inject<ProcessInterface>("$process")!;
@@ -57,13 +57,16 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      useGoTop();
+      goBoth(GoBothType.TopSpeed);
       getBlogInfo();
       useProcessControl(true, {
         direction: CardDirection.row,
         cardType: CardType.CardList,
         cardList: CardList.BlogDetailCardList,
         follow: true
+      }, true, {
+        rollType: RollType.time,
+        rollTime: 0.5
       });
     });
 

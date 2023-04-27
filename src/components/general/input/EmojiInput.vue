@@ -121,7 +121,6 @@ export default defineComponent({
     width: 100%;
     height: 80px;
     color: $normal;
-    font-family: "eyes";
     background: none;
     border: none;
     border-radius: 5px;

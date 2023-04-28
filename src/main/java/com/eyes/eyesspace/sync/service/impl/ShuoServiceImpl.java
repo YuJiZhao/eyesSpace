@@ -59,8 +59,7 @@ public class ShuoServiceImpl implements ShuoService {
 
   private final CommentService commentService;
 
-  public ShuoServiceImpl(ShuoMapper shuoMapper, TrackMapper trackMapper, HomeMapper homeMapper,
-      CommentService commentService) {
+  public ShuoServiceImpl(ShuoMapper shuoMapper, TrackMapper trackMapper, HomeMapper homeMapper, CommentService commentService) {
     this.shuoMapper = shuoMapper;
     this.trackMapper = trackMapper;
     this.homeMapper = homeMapper;
@@ -75,8 +74,7 @@ public class ShuoServiceImpl implements ShuoService {
     }
 
     if (!shuoAddRequest.getPicList().isEmpty()) {
-      Integer insertShuoshuoPics = shuoMapper
-          .addShuoshuoPics(shuoAddRequest.getPicList(), shuoAddRequest.getId());
+      Integer insertShuoshuoPics = shuoMapper.addShuoshuoPics(shuoAddRequest.getPicList(), shuoAddRequest.getId());
       if (!insertShuoshuoPics.equals(shuoAddRequest.getPicList().size())) {
         throw new CustomException("插入说说图片失败！");
       }
@@ -86,9 +84,7 @@ public class ShuoServiceImpl implements ShuoService {
         HomeTypeEnum.SHUOSHUO.getType(),
         shuoAddRequest.getId(),
         shuoAddRequest.getStatus())
-    ) {
-      throw new CustomException("说说插入home失败！");
-    }
+    ) { throw new CustomException("说说插入home失败！"); }
   }
 
   @Override
@@ -109,9 +105,7 @@ public class ShuoServiceImpl implements ShuoService {
         UserInfoHolder.getUid(),
         FileMethodEnum.UPLOAD.getMethod(),
         url
-    )) {
-      log.error("Failed to record shuo pic upload log");
-    }
+    )) { log.error("Failed to record shuo pic upload log"); }
 
     return new FileUploadVO(url);
   }
@@ -155,12 +149,6 @@ public class ShuoServiceImpl implements ShuoService {
         ShuoListVO shuoListVO = ShuoConvert.INSTANCE.shuoshuoListPo2Dto(item);
         shuoListVO.setId(SecurityUtils.symmetricEncrypt(item.getId().toString()));
         shuoListVOS.add(shuoListVO);
-
-        Boolean addViewResult = shuoMapper.addView(item.getId());
-        if (!addViewResult) {
-          log.error("博客阅读量更新失败");
-          throw new CustomException("操作异常");
-        }
       }
     } catch (Exception e) {
       throw new CustomException("程序异常");
@@ -217,8 +205,7 @@ public class ShuoServiceImpl implements ShuoService {
     String role = UserInfoHolder.getRole();
     Long uid = UserInfoHolder.getUid();
 
-    CommentAddRequest commentAddRequest = ShuoConvert.INSTANCE.shuoshuo2Comment(
-        shuoCommentAddRequest);
+    CommentAddRequest commentAddRequest = ShuoConvert.INSTANCE.shuoshuo2Comment(shuoCommentAddRequest);
     try {
       String sid = SecurityUtils.symmetricDecrypt(shuoCommentAddRequest.getObjectId());
       commentAddRequest.setObjectId(Integer.valueOf(sid));
@@ -229,17 +216,12 @@ public class ShuoServiceImpl implements ShuoService {
     Integer shuoshuoStatus = shuoMapper.getShuoshuoStatus(commentAddRequest.getObjectId());
     if (
         Objects.isNull(shuoshuoStatus) ||
-            (AuthConfigConstant.ROLE_USER.equals(role) && !shuoshuoStatus
-                .equals(StatusEnum.PUBLIC.getStatus())) ||
-            (AuthConfigConstant.ROLE_ADMIN.equals(role) && shuoshuoStatus
-                .equals(StatusEnum.DELETE.getStatus()))
-    ) {
-      throw new CustomException("说说不存在");
-    }
+        (AuthConfigConstant.ROLE_USER.equals(role) && !shuoshuoStatus.equals(StatusEnum.PUBLIC.getStatus())) ||
+        (AuthConfigConstant.ROLE_ADMIN.equals(role) && shuoshuoStatus.equals(StatusEnum.DELETE.getStatus()))
+    ) { throw new CustomException("说说不存在"); }
 
     commentAddRequest.setUid(uid);
-    commentAddRequest.setUrl(siteUrl + shuoDetailPath + shuoCommentAddRequest
-        .getObjectId().replace("+", "%2B"));
+    commentAddRequest.setUrl(siteUrl + shuoDetailPath + shuoCommentAddRequest.getObjectId().replace("+", "%2B"));
     commentService.publishComment(commentAddRequest, CommentEnum.SHUOSHUO.getType(), true);
 
     if (!shuoMapper.updateShuoshuoComments(commentAddRequest.getObjectId(), 1)) {
@@ -248,8 +230,7 @@ public class ShuoServiceImpl implements ShuoService {
   }
 
   @Override
-  public List<CommentListVO> getShuoCommentList(String id, Integer page, Integer pageSize)
-      throws CustomException {
+  public List<CommentListVO> getShuoCommentList(String id, Integer page, Integer pageSize) throws CustomException {
     String role = UserInfoHolder.getRole();
     Long uid = UserInfoHolder.getUid();
 

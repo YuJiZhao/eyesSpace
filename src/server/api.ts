@@ -78,7 +78,7 @@ const shuoshuo: ShuoshuoInterface = {
         return await get("/shuo/getShuoListInfo");
     },
     getShuoshuoSingleInfo: async (req) => {
-        return await get("/shuo/getSingleShuoByString", req);
+        return await get("/shuo/getSingleShuo", req);
     },
     doShuoshuoComment: async (req) => {
         return await post("/shuo/doShuoComment", req);

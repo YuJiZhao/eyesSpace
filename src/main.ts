@@ -7,7 +7,6 @@ import resource from "@/config/resource";
 import './assets/css/index.css';
 import 'reset-css/reset.css';
 import "animate.css";
-import "./libs/ribbon.js";
 import '@/libs/statistics.js';
 
 const app = createApp(App);

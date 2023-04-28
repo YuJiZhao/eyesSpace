@@ -178,7 +178,7 @@ public class VideoServiceImpl implements VideoService {
      * 创建UserVideoKey
      */
     private UserVideoPO createUserVideoKey(Long uid, String role) {
-        UserVideoPO randomVideoInfo = videoMapper.getRandomVideoList(role).get(0);
+        UserVideoPO randomVideoInfo = videoMapper.getRandomVideo(role, null);
 
         // 获取id列表
         ArrayList<Integer> idList = new ArrayList<>();
@@ -214,16 +214,11 @@ public class VideoServiceImpl implements VideoService {
             throw new CustomException(ResultCode.NO_TIMES);
         }
         // 随机获取视频
-        UserVideoPO currentVideo = null;
-        do {
-            List<UserVideoPO> randomVideoList = videoMapper.getRandomVideoList(role);
-            for (UserVideoPO item: randomVideoList) {
-                if(userVideoKeyBean.getVideos().contains(item.getId())) continue;
-                userVideoKeyBean.getVideos().add(item.getId());
-                currentVideo = item;
-                break;
-            }
-        } while(Objects.isNull(currentVideo));
+        UserVideoPO currentVideo = videoMapper.getRandomVideo(role, userVideoKeyBean.getVideos());
+        if (Objects.isNull(currentVideo)) {
+            throw new CustomException("暂无有效视频");
+        }
+        userVideoKeyBean.getVideos().add(currentVideo.getId());
         // 如果记忆视频数超过最大限度，则释放list头部元素
         if(userVideoKeyBean.getVideos().size() > videoMemoryNum) {
             userVideoKeyBean.getVideos().subList(0, 5).clear();

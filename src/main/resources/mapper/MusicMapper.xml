@@ -13,15 +13,12 @@
 
     <select id="getRandomMusicList" resultType="com.eyes.eyesspace.persistent.po.UserMusicPO">
         select id, title, author, url, pic, views, likes, comments
-        from music as t1 join
-        (
-        select round(
-        rand() * (
-        (select max(id) from music) -
-        (select min(id) from music)
-        )
-        + (select min(id) from music)
-        ) AS tid
+        from music as t1 join (
+            select round(
+                rand() * (
+                    (select max(id) from music) - (select min(id) from music)
+                ) + (select min(id) from music)
+            ) AS tid
         ) AS t2
         <where>
             t1.id >= t2.tid
@@ -36,7 +33,13 @@
                     and 1=0
                 </otherwise>
             </choose>
+            <if test="ids!=null">
+                and id not in
+                <foreach collection='ids' item='item' index='index' open='(' separator=',' close=')'>
+                    #{item}
+                </foreach>
+            </if>
         </where>
-        order by t1.id limit 5;
+        order by t1.id limit 1;
     </select>
 </mapper>

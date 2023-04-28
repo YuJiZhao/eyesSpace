@@ -21,7 +21,7 @@ public class BlogAddRequest {
 
     @ApiModelProperty("博客摘要")
     @NotNull(message = "博客摘要不能为空")
-    @Length(max = 200, message = "摘要不能超过200字")
+    @Length(max = 250, message = "摘要不能超过250字")
     private String summary;
 
     @ApiModelProperty("博客字数")

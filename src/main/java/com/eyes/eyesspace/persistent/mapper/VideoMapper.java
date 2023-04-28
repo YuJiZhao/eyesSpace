@@ -38,7 +38,7 @@ public interface VideoMapper {
     @Select("select user_video_key from video_user where uid=#{uid}")
     String getUserVideoKey(Long uid);
 
-    List<UserVideoPO> getRandomVideoList(String role);
+    UserVideoPO getRandomVideo(String role, List<Integer> ids);
 
     @Insert("insert into video_user (uid, user_video_key) values (#{uid}, #{userVideoKey})")
     Boolean insertUserVideoKey(Long uid, String userVideoKey);

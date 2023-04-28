@@ -193,7 +193,7 @@ public class MusicServiceImpl implements MusicService {
      * 创建UserMusicKey
      */
     private UserMusicPO createUserMusicKey(Long uid, String role) {
-        UserMusicPO randomMusicInfo = musicMapper.getRandomMusicList(role).get(0);
+        UserMusicPO randomMusicInfo = musicMapper.getRandomMusicList(role, null);
 
         // 获取id列表
         ArrayList<Integer> idList = new ArrayList<>();
@@ -229,16 +229,11 @@ public class MusicServiceImpl implements MusicService {
             throw new CustomException(ResultCode.NO_TIMES);
         }
         // 随机获取音频
-        UserMusicPO currentMusic = null;
-        do {
-            List<UserMusicPO> randomMusicList = musicMapper.getRandomMusicList(role);
-            for (UserMusicPO item: randomMusicList) {
-                if(userMusicKeyBean.getMusicList().contains(item.getId())) continue;
-                userMusicKeyBean.getMusicList().add(item.getId());
-                currentMusic = item;
-                break;
-            }
-        } while(Objects.isNull(currentMusic));
+        UserMusicPO currentMusic = musicMapper.getRandomMusicList(role, userMusicKeyBean.getMusicList());
+        if (Objects.isNull(currentMusic)) {
+            throw new CustomException("暂无有效音频");
+        }
+        userMusicKeyBean.getMusicList().add(currentMusic.getId());
         // 如果记忆音频数超过最大限度，则释放list头部元素
         if(userMusicKeyBean.getMusicList().size() > musicMemoryNum) {
             userMusicKeyBean.getMusicList().subList(0, 5).clear();

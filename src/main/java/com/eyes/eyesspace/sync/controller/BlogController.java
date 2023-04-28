@@ -113,7 +113,7 @@ public class BlogController {
         return Result.success(blogService.getBlogCategory());
     }
 
-    @ApiOperation("获取部分博客标签")
+    @ApiOperation("获取博客标签")
     @Limiter
     @Permission
     @GetMapping("/getBlogLabel")

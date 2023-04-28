@@ -11,17 +11,14 @@
         </where>
     </select>
 
-    <select id="getRandomVideoList" resultType="com.eyes.eyesspace.persistent.po.UserVideoPO">
+    <select id="getRandomVideo" resultType="com.eyes.eyesspace.persistent.po.UserVideoPO">
         select id, title, original_author, picture_url, original_url, owner_comment, video_url, views, likes, comments, create_time
-        from video as t1 join
-        (
-        select round(
-        rand() * (
-        (select max(id) from video) -
-        (select min(id) from video)
-        )
-        + (select min(id) from video)
-        ) AS tid
+        from video as t1 join (
+            select round(
+                rand() * (
+                    (select max(id) from video) - (select min(id) from video)
+                ) + (select min(id) from video)
+            ) AS tid
         ) AS t2
         <where>
             t1.id >= t2.tid
@@ -36,7 +33,13 @@
                     and 1=0
                 </otherwise>
             </choose>
+            <if test="ids!=null">
+                and id not in
+                <foreach collection='ids' item='item' index='index' open='(' separator=',' close=')'>
+                    #{item}
+                </foreach>
+            </if>
         </where>
-        order by t1.id limit 5;
+        order by t1.id limit 1;
     </select>
 </mapper>

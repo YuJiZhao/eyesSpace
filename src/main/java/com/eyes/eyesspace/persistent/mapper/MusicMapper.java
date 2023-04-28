@@ -40,7 +40,7 @@ public interface MusicMapper {
     @Select("select user_music_key from music_user where uid=#{uid}")
     String getUserMusicKey(Long uid);
 
-    List<UserMusicPO> getRandomMusicList(String role);
+    UserMusicPO getRandomMusicList(String role, List<Integer> ids);
 
     @Insert("insert into music_user (uid, user_music_key) values (#{uid}, #{userMusicKey})")
     Boolean insertUserMusicKey(Long uid, String userMusicKey);

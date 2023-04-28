@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ShuoshuoInfoDTO {
+public class ShuoInfoDTO {
     private Integer id;
 
     private String content;

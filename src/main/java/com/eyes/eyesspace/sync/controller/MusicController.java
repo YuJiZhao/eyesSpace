@@ -5,27 +5,30 @@ import com.eyes.eyesAuth.permission.Permission;
 import com.eyes.eyesAuth.permission.PermissionEnum;
 import com.eyes.eyesTools.common.exception.CustomException;
 import com.eyes.eyesTools.common.result.Result;
-import com.eyes.eyesspace.sync.model.vo.FileUploadVO;
-import com.eyes.eyesspace.sync.model.vo.MusicAddVO;
 import com.eyes.eyesspace.persistent.dto.MusicInfoDTO;
 import com.eyes.eyesspace.persistent.dto.MusicListDTO;
+import com.eyes.eyesspace.sync.model.request.MusicAddRequest;
+import com.eyes.eyesspace.sync.model.vo.FileUploadVO;
+import com.eyes.eyesspace.sync.model.vo.MusicAddVO;
 import com.eyes.eyesspace.sync.model.vo.MusicListInfoVO;
 import com.eyes.eyesspace.sync.model.vo.UserMusicInfoVO;
-import com.eyes.eyesspace.sync.model.request.MusicAddRequest;
 import com.eyes.eyesspace.sync.service.MusicService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import java.util.Objects;
+import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Objects;
 
 @Api(tags = "音乐模块")
 @RestController
@@ -64,7 +67,6 @@ public class MusicController {
     }
 
     @ApiOperation("获取歌曲列表")
-    @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "页数", defaultValue="1")})
     @Permission(PermissionEnum.ADMIN)
     @GetMapping("/getMusicList")
     public Result<List<MusicListDTO>> getMusicList(@RequestParam(required = false) Integer page) {
@@ -95,6 +97,7 @@ public class MusicController {
     }
 
     @ApiOperation("获取随机歌曲信息")
+    @Limiter
     @Permission(PermissionEnum.USER)
     @GetMapping("/getMusicInfoByUser")
     public Result<UserMusicInfoVO> getMusicInfoByUser() throws CustomException {

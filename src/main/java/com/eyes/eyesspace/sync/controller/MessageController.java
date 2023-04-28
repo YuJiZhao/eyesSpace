@@ -34,6 +34,7 @@ public class MessageController {
     }
 
     @ApiOperation("发布留言")
+    @Limiter
     @Permission(PermissionEnum.USER)
     @PostMapping("/doMessage")
     public Result<Void> doMessage(@Validated @RequestBody CommentAddRequest commentAddRequest) throws CustomException {
@@ -53,6 +54,7 @@ public class MessageController {
     }
 
     @ApiOperation("删除留言")
+    @Limiter
     @Permission(PermissionEnum.USER)
     @DeleteMapping("/delMessage/{id}")
     public Result<Void> delMessage(@PathVariable Integer id) throws CustomException {

@@ -83,12 +83,16 @@ public class BlogServiceImpl implements BlogService {
         } else {
             BlogAddCategoryDTO blogAddCategoryDto = new BlogAddCategoryDTO();
             blogAddCategoryDto.setCategory(blogAddRequest.getCategory());
-            if(!blogMapper.addCategory(blogAddCategoryDto)) throw new CustomException("新增分类失败！");
+            if(!blogMapper.addCategory(blogAddCategoryDto)) {
+                throw new CustomException("新增分类失败！");
+            }
             blogAddBo.setCategory(blogAddCategoryDto.getId());
         }
 
         // 插入博客
-        if(!blogMapper.addBlog(blogAddBo)) throw new CustomException("新增博客失败！");
+        if(!blogMapper.addBlog(blogAddBo)) {
+            throw new CustomException("新增博客失败！");
+        }
 
         // 插入标签
         List<String> labels = blogAddBo.getLabels();
@@ -180,6 +184,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public List<BlogListDTO> getBlogListByIds(List<Integer> ids) {
+        return blogMapper.getBlogListByIds(ids);
+    }
+
+    @Override
     public BlogInfoDTO getBlogInfo(Integer id) throws CustomException {
         String role = UserInfoHolder.getRole();
 
@@ -214,11 +223,6 @@ public class BlogServiceImpl implements BlogService {
         return AuthConfigConstant.ROLE_ADMIN.equals(role)
                 ? blogMapper.getBlogLabel(StatusEnum.DELETE.getStatus())
                 : blogMapper.getBlogLabel(StatusEnum.PUBLIC.getStatus());
-    }
-
-    @Override
-    public BlogListDTO getBlogSummaryInfo(Integer id) {
-        return blogMapper.getBlogSummaryInfo(id);
     }
 
     @Override

@@ -25,13 +25,13 @@ public interface BlogService {
 
     PageBind<BlogListDTO> getBlogList(Integer page, Integer pageSize, String category, String label) throws CustomException;
 
+    List<BlogListDTO> getBlogListByIds(List<Integer> ids);
+
     BlogInfoDTO getBlogInfo(Integer id) throws CustomException;
 
     List<BlogCategoryDTO> getBlogCategory() throws CustomException;
 
     List<BlogLabelDTO> getBlogLabel() throws CustomException;
-
-    BlogListDTO getBlogSummaryInfo(Integer id) throws CustomException;
 
     void doBlogComment(CommentAddRequest commentAddRequest) throws CustomException;
 

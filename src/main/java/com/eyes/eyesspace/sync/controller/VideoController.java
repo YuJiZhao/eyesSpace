@@ -82,6 +82,7 @@ public class VideoController {
     }
 
     @ApiOperation("获取随机视频信息")
+    @Limiter
     @Permission(PermissionEnum.USER)
     @GetMapping("/getVideoInfoByUser")
     public Result<UserVideoInfoVO> getVideoInfoByUser() throws CustomException {

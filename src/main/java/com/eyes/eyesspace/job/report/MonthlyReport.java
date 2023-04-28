@@ -13,6 +13,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
+ * 月报
+ * @BUG: 没生效
  * @author eyesYeager
  * @date 2023/2/9 14:20
  */

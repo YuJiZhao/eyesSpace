@@ -1,16 +1,14 @@
 package com.eyes.eyesspace.sync.model.vo;
 
-import com.eyes.eyesspace.sync.model.bean.HomeListBean;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 @ApiModel
-public class ShuoListVO implements HomeListBean {
+public class ShuoListVO {
     @ApiModelProperty("加密id")
     private String id;
 

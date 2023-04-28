@@ -6,16 +6,21 @@ import com.eyes.eyesTools.common.exception.CustomException;
 import com.eyes.eyesTools.utils.PageBind;
 import com.eyes.eyesspace.constant.HomeTypeEnum;
 import com.eyes.eyesspace.constant.StatusEnum;
+import com.eyes.eyesspace.persistent.dto.BlogListDTO;
 import com.eyes.eyesspace.persistent.mapper.HomeMapper;
 import com.eyes.eyesspace.persistent.mapper.TrackMapper;
 import com.eyes.eyesspace.persistent.po.HomeListPO;
+import com.eyes.eyesspace.sync.model.dto.ShuoListDTO;
 import com.eyes.eyesspace.sync.model.vo.HomeListVO;
 import com.eyes.eyesspace.sync.model.vo.SiteDataVO;
 import com.eyes.eyesspace.sync.service.BlogService;
 import com.eyes.eyesspace.sync.service.HomeService;
 import com.eyes.eyesspace.sync.service.ShuoService;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -41,24 +46,52 @@ public class HomeServiceImpl implements HomeService {
   @Override
   public PageBind<HomeListVO> getHomeList(Integer page, Integer pageSize) throws CustomException {
     String role = UserInfoHolder.getRole();
-
     List<HomeListVO> homeListBeanList = new ArrayList<>();
-    int status = AuthConfigConstant.ROLE_ADMIN.equals(role) ? StatusEnum.DELETE.getStatus()
-        : StatusEnum.PUBLIC.getStatus();
+
+    // 获取home列表
+    int status = AuthConfigConstant.ROLE_ADMIN.equals(role) ? StatusEnum.DELETE.getStatus() : StatusEnum.PUBLIC.getStatus();
     List<HomeListPO> homeList = homeMapper.getHomeList((page - 1) * pageSize, pageSize, status);
 
-    for (HomeListPO item : homeList) {
-      if (item.getType().equals(HomeTypeEnum.BLOG.getType())) {
-        homeListBeanList.add(new HomeListVO(
-            HomeTypeEnum.BLOG.getType(),
-            blogService.getBlogSummaryInfo(item.getCid())
-        ));
+    // 整合相同类型内容
+    Map<Integer, List<Integer>> homeMap = new HashMap<>();
+    for (HomeListPO item: homeList) {
+      if (homeMap.containsKey(item.getType())) {
+        homeMap.get(item.getType()).add(item.getCid());
+      } else {
+        List<Integer> list = new ArrayList<>();
+        list.add(item.getCid());
+        homeMap.put(item.getType(), list);
       }
-      if (item.getType().equals(HomeTypeEnum.SHUOSHUO.getType())) {
-        homeListBeanList.add(new HomeListVO(
-            HomeTypeEnum.SHUOSHUO.getType(),
-            shuoService.getShuoshuoInfo(item.getCid())
-        ));
+    }
+
+    // 执行查询
+    Map<Integer, BlogListDTO> blogMap = new HashMap<>();
+    Map<Integer, ShuoListDTO> shuoMap = new HashMap<>();
+    for (Map.Entry<Integer, List<Integer>> entry: homeMap.entrySet()) {
+      if (HomeTypeEnum.BLOG.getType().equals(entry.getKey())) {  // 博客列表
+        List<BlogListDTO> blogList = blogService.getBlogListByIds(entry.getValue());
+        blogMap = blogList.stream().collect(Collectors.toMap(BlogListDTO::getId, o -> o, (front, behind) -> front));
+      } else if (HomeTypeEnum.SHUOSHUO.getType().equals(entry.getKey())) {  // 说说列表
+        List<ShuoListDTO> shuoList = shuoService.getShuoListByIds(entry.getValue());
+        shuoMap = shuoList.stream().collect(Collectors.toMap(ShuoListDTO::getOriginalId, o -> o, (front, behind) -> front));
+      } else {
+        log.error("wrong content type: " + entry.getKey());
+      }
+    }
+
+    // 组装数据
+    for (HomeListPO item: homeList) {
+      HomeListVO homeItem = new HomeListVO();
+      if (HomeTypeEnum.BLOG.getType().equals(item.getType())) {  // 博客列表
+        homeItem.setType(HomeTypeEnum.BLOG.getType());
+        homeItem.setHomeList(blogMap.get(item.getCid()));
+        homeListBeanList.add(homeItem);
+      } else if (HomeTypeEnum.SHUOSHUO.getType().equals(item.getType())) {  // 说说列表
+        homeItem.setType(HomeTypeEnum.SHUOSHUO.getType());
+        homeItem.setHomeList(shuoMap.get(item.getCid()));
+        homeListBeanList.add(homeItem);
+      } else {
+        log.error("wrong content type: " + item.getType());
       }
     }
 

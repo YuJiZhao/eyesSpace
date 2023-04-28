@@ -5,25 +5,30 @@ import com.eyes.eyesAuth.permission.Permission;
 import com.eyes.eyesAuth.permission.PermissionEnum;
 import com.eyes.eyesTools.common.exception.CustomException;
 import com.eyes.eyesTools.common.result.Result;
+import com.eyes.eyesspace.sync.model.request.ShuoAddRequest;
+import com.eyes.eyesspace.sync.model.request.ShuoCommentAddRequest;
 import com.eyes.eyesspace.sync.model.vo.CommentListVO;
 import com.eyes.eyesspace.sync.model.vo.FileUploadVO;
-import com.eyes.eyesspace.sync.model.request.ShuoCommentAddRequest;
 import com.eyes.eyesspace.sync.model.vo.ShuoListInfoVO;
 import com.eyes.eyesspace.sync.model.vo.ShuoListVO;
-import com.eyes.eyesspace.sync.model.request.ShuoAddRequest;
 import com.eyes.eyesspace.sync.service.ShuoService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import java.util.Objects;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
-import java.util.Objects;
 
 @Api(tags = "说说模块")
 @RefreshScope
@@ -47,7 +52,7 @@ public class ShuoController {
     @Permission(PermissionEnum.ADMIN)
     @PostMapping("/addShuo")
     public Result<Void> addShuo(@RequestBody ShuoAddRequest shuoAddRequest) throws CustomException {
-        shuoService.addShuoshuo(shuoAddRequest);
+        shuoService.addShuo(shuoAddRequest);
         return Result.success();
     }
 
@@ -55,33 +60,36 @@ public class ShuoController {
     @Permission(PermissionEnum.ADMIN)
     @PostMapping("/uploadShuoPic")
     public Result<FileUploadVO> uploadShuoPic(@RequestPart("file") MultipartFile multipartFile) throws CustomException {
-        return Result.success(shuoService.uploadShuoshuoPic(multipartFile));
+        return Result.success(shuoService.uploadShuoPic(multipartFile));
     }
 
     @ApiOperation("获取说说整体信息")
+    @Limiter
     @Permission
     @GetMapping("/getShuoListInfo")
     public Result<ShuoListInfoVO> getShuoListInfo() throws CustomException {
-        return Result.success(shuoService.getShuoshuoListInfo());
+        return Result.success(shuoService.getShuoListInfo());
     }
 
     @ApiOperation("获取说说列表")
     @Limiter
     @Permission
-    @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "页数", defaultValue="1")})
     @GetMapping("/getShuoList")
     public Result<List<ShuoListVO>> getShuoList (@RequestParam(required = false) Integer page) throws CustomException {
         page = (Objects.isNull(page) || page < 1) ? 1 : page;
-        return Result.success(shuoService.getShuoshuoList(page, shuoPageSize));
+        return Result.success(shuoService.getShuoList(page, shuoPageSize));
     }
 
     @ApiOperation("获取说说单条信息")
-    @GetMapping("/getSingleShuoByString")
+    @Limiter
+    @Permission
+    @GetMapping("/getSingleShuo")
     public Result<ShuoListVO> getShuoInfoByString (String id) throws CustomException {
-        return Result.success(shuoService.getShuoshuoInfoByString(id));
+        return Result.success(shuoService.getShuoInfo(id));
     }
 
     @ApiOperation("发表说说评论")
+    @Limiter
     @Permission(PermissionEnum.USER)
     @PostMapping("/doShuoComment")
     public Result<Void> doShuoComment(@Validated @RequestBody ShuoCommentAddRequest shuoCommentAddRequest) throws CustomException {
@@ -90,8 +98,8 @@ public class ShuoController {
     }
 
     @ApiOperation("获取说说评论列表")
+    @Limiter
     @Permission
-    @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "页数", defaultValue="1")})
     @GetMapping("/getShuoCommentList")
     public Result<List<CommentListVO>> getShuoCommentList(
             String id,
@@ -101,6 +109,7 @@ public class ShuoController {
     }
 
     @ApiOperation("删除说说评论")
+    @Limiter
     @Permission(PermissionEnum.USER)
     @DeleteMapping("/delShuoComment/{id}")
     public Result<Void> delShuoComment(@PathVariable Integer id) throws CustomException {

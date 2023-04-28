@@ -40,6 +40,7 @@ public class WebLogAdvice {
         long start = System.currentTimeMillis();
         Object result = pjp.proceed();
         log.info("result: {}, time: {}", JSON.toJSON(result), System.currentTimeMillis() - start + "ms");
+        // TODO: 封装好一点
         // 清除ThreadLocal
         UserInfoHolder.removeAll();
         return result;

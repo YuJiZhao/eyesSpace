@@ -1,5 +1,6 @@
 package com.eyes.eyesspace.sync.controller;
 
+import com.eyes.eyesAuth.limiter.Limiter;
 import com.eyes.eyesAuth.permission.Permission;
 import com.eyes.eyesTools.common.exception.CustomException;
 import com.eyes.eyesTools.common.result.Result;
@@ -26,6 +27,7 @@ public class ContextController {
     }
 
     @ApiOperation("获取网站配置")
+    @Limiter
     @Permission
     @GetMapping("/getContext")
     public Result<ContextVO> getContext() throws CustomException {
@@ -33,6 +35,7 @@ public class ContextController {
     }
 
     @ApiOperation("获取关于页面内容")
+    @Limiter
     @Permission
     @GetMapping("/getAboutContext")
     public Result<ContextAboutContentVO> getAboutContent() {

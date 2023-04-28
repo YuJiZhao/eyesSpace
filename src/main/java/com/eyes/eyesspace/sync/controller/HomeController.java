@@ -50,6 +50,7 @@ public class HomeController {
     }
 
     @ApiOperation("获取网站数据")
+    @Limiter
     @Permission
     @GetMapping("/getSiteData")
     public Result<SiteDataVO> getSiteData() throws CustomException {

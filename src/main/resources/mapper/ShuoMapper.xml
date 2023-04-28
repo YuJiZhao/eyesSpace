@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.eyes.eyesspace.persistent.mapper.ShuoMapper">
-    <insert id="addShuoshuoPics">
+    <insert id="addShuoPics">
         insert into shuoshuo_pic (shuoshuo_id, pid, url, create_time) values
         <foreach collection="picList" item="item" separator=",">
             (
@@ -14,7 +14,7 @@
         </foreach>
     </insert>
 
-    <select id="getShuoshuoData" resultType="com.eyes.eyesspace.persistent.po.ShuoDataPO">
+    <select id="getShuoData" resultType="com.eyes.eyesspace.persistent.po.ShuoDataPO">
         select sum(views) viewsNum, sum(comments) commentsNum
         from shuoshuo
         <where>
@@ -24,7 +24,7 @@
         </where>
     </select>
 
-    <select id="getShuoshuoList" resultType="com.eyes.eyesspace.persistent.dto.ShuoshuoInfoDTO">
+    <select id="getShuoList" resultType="com.eyes.eyesspace.persistent.dto.ShuoInfoDTO">
         select id, content, views, comments, status, create_time
         from shuoshuo
         <where>
@@ -41,7 +41,7 @@
         limit #{start}, #{pageSize}
     </select>
 
-    <select id="getShuoshuoListInfo" resultType="java.lang.Integer">
+    <select id="getShuoListInfo" resultType="java.lang.Integer">
         select count(*) from shuoshuo
         <where>
             <if test="status!=null">

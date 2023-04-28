@@ -62,8 +62,15 @@ public interface BlogMapper {
     @Select("select status from blog where id=#{id}")
     Integer getBlogStatus(Integer id);
 
-    @Select("select b.id, title, summary, category, views, words, create_time from blog b, blog_category bc where b.id=#{id} and b.category_id=bc.id")
-    BlogListDTO getBlogSummaryInfo(Integer id);
+    @Select("<script>"
+        + "select b.id, b.title, b.summary, bc.category, b.views, b.words, b.create_time "
+        + "from blog b, blog_category bc "
+        + "where b.category_id=bc.id and b.id in "
+        + "<foreach collection='ids' item='item' index='index' open='(' separator=',' close=')'>"
+        + "#{item}"
+        + "</foreach>"
+        + "</script>")
+    List<BlogListDTO> getBlogListByIds(List<Integer> ids);
 
     Integer getBlogListNum(Integer status, String category, String label);
 

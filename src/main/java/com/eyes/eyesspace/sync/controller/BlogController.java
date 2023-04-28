@@ -18,18 +18,23 @@ import com.eyes.eyesspace.sync.model.vo.CommentListVO;
 import com.eyes.eyesspace.sync.model.vo.FileUploadVO;
 import com.eyes.eyesspace.sync.service.BlogService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import java.util.Objects;
+import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * @author eyesYeager
@@ -67,6 +72,7 @@ public class BlogController {
     }
 
     @ApiOperation("获取博客总体信息")
+    @Limiter
     @Permission
     @GetMapping("/getBlogListInfo")
     public Result<BlogListInfoVO> getBlogListInfo() throws CustomException {
@@ -74,7 +80,6 @@ public class BlogController {
     }
 
     @ApiOperation("获取博客列表")
-    @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "页数", defaultValue="1")})
     @Limiter
     @Permission
     @GetMapping("/getBlogList")
@@ -91,6 +96,7 @@ public class BlogController {
     }
 
     @ApiOperation("获取单个博客详细信息")
+    @Limiter
     @Permission
     @GetMapping("/getBlogInfo/{id}")
     public Result<BlogInfoDTO> getBlogInfo(
@@ -100,6 +106,7 @@ public class BlogController {
     }
 
     @ApiOperation("获取所有博客分类")
+    @Limiter
     @Permission
     @GetMapping("/getBlogCategory")
     public Result<List<BlogCategoryDTO>> getBlogCategory() throws CustomException {
@@ -107,6 +114,7 @@ public class BlogController {
     }
 
     @ApiOperation("获取部分博客标签")
+    @Limiter
     @Permission
     @GetMapping("/getBlogLabel")
     public Result<List<BlogLabelDTO>> getBlogLabel() throws CustomException {
@@ -114,6 +122,7 @@ public class BlogController {
     }
 
     @ApiOperation("评论博客")
+    @Limiter
     @Permission(PermissionEnum.USER)
     @PostMapping("/doBlogComment")
     public Result<Void> doBlogComment(@Validated @RequestBody CommentAddRequest commentAddRequest) throws CustomException {
@@ -133,6 +142,7 @@ public class BlogController {
     }
 
     @ApiOperation("删除博客评论")
+    @Limiter
     @Permission(PermissionEnum.USER)
     @DeleteMapping("/delBlogComment/{id}")
     public Result<Void> delBlogComment(@PathVariable Integer id) throws CustomException {

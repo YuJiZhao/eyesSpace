@@ -3,11 +3,12 @@ package com.eyes.eyesspace.persistent.mapper;
 import com.eyes.eyesspace.persistent.dto.BlogCategoryDTO;
 import com.eyes.eyesspace.persistent.dto.BlogInfoDTO;
 import com.eyes.eyesspace.persistent.dto.BlogLabelDTO;
+import com.eyes.eyesspace.persistent.po.BlogAddLabelPO;
 import com.eyes.eyesspace.sync.model.bo.BlogAddBO;
-import com.eyes.eyesspace.sync.model.dto.*;
 import com.eyes.eyesspace.persistent.po.CommentDelInfoPO;
 import com.eyes.eyesspace.persistent.dto.BlogListDTO;
 import com.eyes.eyesspace.persistent.po.BlogDataPO;
+import com.eyes.eyesspace.persistent.po.BlogAddCategoryPO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -15,11 +16,11 @@ import java.util.List;
 @Mapper
 public interface BlogMapper {
     @Select("select id from blog_category where category=#{category}")
-    Integer isExistCategory(String category);
+    Integer getCategoryIdByName(String category);
 
     @Insert("insert into blog_category (category) values (#{category})")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
-    Boolean addCategory(BlogAddCategoryDTO blogAddCategoryDto);
+    Boolean addCategory(BlogAddCategoryPO blogAddCategoryDto);
 
     @Insert("insert into blog " +
             "(title, summary, content, category_id, status, words, create_time) " +
@@ -30,11 +31,11 @@ public interface BlogMapper {
     Boolean addBlog(BlogAddBO blogAddBo);
 
     @Select("select id from blog_label where label=#{label}")
-    Integer isExistLabel(String label);
+    Integer getLabelIdByName(String label);
 
     @Insert("insert into blog_label (label) values (#{label})")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
-    Boolean addBlogLabel(BlogAddLabelDTO blogAddLabelDto);
+    Boolean addBlogLabel(BlogAddLabelPO blogAddLabelDto);
 
     @Insert("insert into blog_label_id (blog_id, label_id) values (#{id}, #{label})")
     Boolean addBlogLabelId(Integer id, Integer label);

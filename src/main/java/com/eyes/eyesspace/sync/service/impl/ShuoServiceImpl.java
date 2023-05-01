@@ -75,7 +75,7 @@ public class ShuoServiceImpl implements ShuoService {
       throw new CustomException("插入说说失败！");
     }
 
-    if (!shuoAddRequest.getPicList().isEmpty()) {
+    if (Objects.nonNull(shuoAddRequest.getPicList()) && !shuoAddRequest.getPicList().isEmpty()) {
       Integer insertShuoshuoPics = shuoMapper.addShuoPics(shuoAddRequest.getPicList(), shuoAddRequest.getId());
       if (!insertShuoshuoPics.equals(shuoAddRequest.getPicList().size())) {
         throw new CustomException("插入说说图片失败！");

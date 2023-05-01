@@ -21,14 +21,14 @@ import com.eyes.eyesspace.persistent.po.BlogDataPO;
 import com.eyes.eyesspace.persistent.po.CommentDelInfoPO;
 import com.eyes.eyesspace.sync.convert.BlogConvert;
 import com.eyes.eyesspace.sync.model.bo.BlogAddBO;
-import com.eyes.eyesspace.sync.model.dto.BlogAddCategoryDTO;
-import com.eyes.eyesspace.sync.model.vo.BlogAddVO;
-import com.eyes.eyesspace.sync.model.dto.BlogAddLabelDTO;
-import com.eyes.eyesspace.sync.model.vo.BlogListInfoVO;
+import com.eyes.eyesspace.persistent.po.BlogAddCategoryPO;
+import com.eyes.eyesspace.persistent.po.BlogAddLabelPO;
+import com.eyes.eyesspace.sync.model.request.BlogAddRequest;
 import com.eyes.eyesspace.sync.model.request.CommentAddRequest;
+import com.eyes.eyesspace.sync.model.vo.BlogAddVO;
+import com.eyes.eyesspace.sync.model.vo.BlogListInfoVO;
 import com.eyes.eyesspace.sync.model.vo.CommentListVO;
 import com.eyes.eyesspace.sync.model.vo.FileUploadVO;
-import com.eyes.eyesspace.sync.model.request.BlogAddRequest;
 import com.eyes.eyesspace.sync.service.BlogService;
 import com.eyes.eyesspace.sync.service.CommentService;
 import java.util.List;
@@ -77,16 +77,16 @@ public class BlogServiceImpl implements BlogService {
         BlogAddBO blogAddBo = BlogConvert.INSTANCE.BlogAddVo2Bo(blogAddRequest);
 
         // 获得博客分类
-        Integer categoryIndex = blogMapper.isExistCategory(blogAddRequest.getCategory());
+        Integer categoryIndex = blogMapper.getCategoryIdByName(blogAddRequest.getCategory());
         if(Objects.nonNull(categoryIndex)) {
             blogAddBo.setCategory(categoryIndex);
         } else {
-            BlogAddCategoryDTO blogAddCategoryDto = new BlogAddCategoryDTO();
-            blogAddCategoryDto.setCategory(blogAddRequest.getCategory());
-            if(!blogMapper.addCategory(blogAddCategoryDto)) {
+            BlogAddCategoryPO blogAddCategoryPO = new BlogAddCategoryPO();
+            blogAddCategoryPO.setCategory(blogAddRequest.getCategory());
+            if(!blogMapper.addCategory(blogAddCategoryPO)) {
                 throw new CustomException("新增分类失败！");
             }
-            blogAddBo.setCategory(blogAddCategoryDto.getId());
+            blogAddBo.setCategory(blogAddCategoryPO.getId());
         }
 
         // 插入博客
@@ -98,18 +98,18 @@ public class BlogServiceImpl implements BlogService {
         List<String> labels = blogAddBo.getLabels();
         if(!labels.isEmpty()) {
             for(String label: labels) {
-                Integer labelIndex = blogMapper.isExistLabel(label);
+                Integer labelIndex = blogMapper.getLabelIdByName(label);
                 if(Objects.nonNull(labelIndex)) {
                     if(!blogMapper.addBlogLabelId(blogAddBo.getId(), labelIndex)) {
                         throw new CustomException("博客插入标签 '" + label + "' 失败！");
                     }
                 } else {
-                    BlogAddLabelDTO blogAddLabelDto = new BlogAddLabelDTO();
-                    blogAddLabelDto.setLabel(label);
-                    if(!blogMapper.addBlogLabel(blogAddLabelDto)) {
+                    BlogAddLabelPO blogAddLabelPO = new BlogAddLabelPO();
+                    blogAddLabelPO.setLabel(label);
+                    if(!blogMapper.addBlogLabel(blogAddLabelPO)) {
                         throw new CustomException("新增标签 '" + label + "' 失败！");
                     }
-                    if(!blogMapper.addBlogLabelId(blogAddBo.getId(), blogAddLabelDto.getId())) {
+                    if(!blogMapper.addBlogLabelId(blogAddBo.getId(), blogAddLabelPO.getId())) {
                         throw new CustomException("博客插入标签 '" + label + "' 失败！");
                     }
                 }

@@ -51,7 +51,7 @@ public class ShuoController {
     @ApiOperation("发布说说")
     @Permission(PermissionEnum.ADMIN)
     @PostMapping("/addShuo")
-    public Result<Void> addShuo(@RequestBody ShuoAddRequest shuoAddRequest) throws CustomException {
+    public Result<Void> addShuo(@Validated @RequestBody ShuoAddRequest shuoAddRequest) throws CustomException {
         shuoService.addShuo(shuoAddRequest);
         return Result.success();
     }

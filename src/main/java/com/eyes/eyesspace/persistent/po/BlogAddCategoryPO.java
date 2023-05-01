@@ -1,9 +1,9 @@
-package com.eyes.eyesspace.sync.model.dto;
+package com.eyes.eyesspace.persistent.po;
 
 import lombok.Data;
 
 @Data
-public class BlogAddCategoryDTO {
+public class BlogAddCategoryPO {
     private Integer id;
 
     private String category;

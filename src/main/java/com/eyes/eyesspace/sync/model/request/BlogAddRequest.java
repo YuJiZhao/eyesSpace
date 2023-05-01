@@ -1,5 +1,6 @@
 package com.eyes.eyesspace.sync.model.request;
 
+import com.eyes.eyesspace.constant.StatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -29,8 +30,7 @@ public class BlogAddRequest {
     private Integer words;
 
     @ApiModelProperty("博客状态")
-    @NotNull(message = "博客状态不能为空")
-    private Integer status;
+    private Integer status = StatusEnum.PUBLIC.getStatus();
 
     @ApiModelProperty("博客标签")
     @NotNull(message = "博客标签不能为空")

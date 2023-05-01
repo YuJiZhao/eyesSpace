@@ -48,7 +48,7 @@ public class MusicController {
     @ApiOperation("添加歌曲信息")
     @Permission(PermissionEnum.ADMIN)
     @PostMapping("/addMusic")
-    public Result<MusicAddVO> addMusic(@RequestBody MusicAddRequest musicAddRequest) throws CustomException {
+    public Result<MusicAddVO> addMusic(@Validated @RequestBody MusicAddRequest musicAddRequest) throws CustomException {
         return Result.success(musicService.addMusic(musicAddRequest));
     }
 

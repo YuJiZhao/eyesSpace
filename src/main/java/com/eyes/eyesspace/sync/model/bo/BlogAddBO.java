@@ -14,9 +14,9 @@ public class BlogAddBO {
 
     private String summary;
 
-    private Integer status;
-
     private Integer words;
+
+    private Integer status;
 
     private List<String> labels;
 

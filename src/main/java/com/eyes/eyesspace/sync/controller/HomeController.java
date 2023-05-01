@@ -9,8 +9,6 @@ import com.eyes.eyesspace.sync.model.vo.HomeListVO;
 import com.eyes.eyesspace.sync.model.vo.SiteDataVO;
 import com.eyes.eyesspace.sync.service.HomeService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,7 +40,6 @@ public class HomeController {
     @ApiOperation("获取首页内容列表")
     @Limiter
     @Permission
-    @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "页数", defaultValue="1")})
     @GetMapping("/getHomeList")
     public Result<PageBind<HomeListVO>> getHomeList(@RequestParam(required = false) Integer page) throws CustomException {
         page = (Objects.isNull(page) || page < 1) ? 1 : page;
@@ -53,7 +50,7 @@ public class HomeController {
     @Limiter
     @Permission
     @GetMapping("/getSiteData")
-    public Result<SiteDataVO> getSiteData() throws CustomException {
+    public Result<SiteDataVO> getSiteData() {
         return Result.success(homeService.getSiteData());
     }
 }

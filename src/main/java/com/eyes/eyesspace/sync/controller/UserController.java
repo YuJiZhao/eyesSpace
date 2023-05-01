@@ -6,20 +6,13 @@ import com.eyes.eyesAuth.permission.PermissionEnum;
 import com.eyes.eyesTools.common.exception.CustomException;
 import com.eyes.eyesTools.common.result.Result;
 import com.eyes.eyesspace.sync.model.vo.UserInfoVO;
-import com.eyes.eyesspace.sync.model.request.UserInfoUpdateRequest;
-import com.eyes.eyesspace.sync.model.vo.UserAvatarUpdateVO;
 import com.eyes.eyesspace.sync.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author eyesYeager
@@ -45,20 +38,20 @@ public class UserController {
     return Result.success(userService.getUserInfo());
   }
 
-  @ApiOperation("修改用户基本信息")
-  @Limiter
-  @Permission(PermissionEnum.USER)
-  @PutMapping("/updateUserInfo")
-  public Result<Void> updateUserInfo(@Validated @RequestBody UserInfoUpdateRequest userInfoUpdateRequest) throws CustomException {
-    userService.updateUserInfo(userInfoUpdateRequest);
-    return Result.success();
-  }
+//  @ApiOperation("修改用户基本信息")
+//  @Limiter
+//  @Permission(PermissionEnum.USER)
+//  @PutMapping("/updateUserInfo")
+//  public Result<Void> updateUserInfo(@Validated @RequestBody UserInfoUpdateRequest userInfoUpdateRequest) throws CustomException {
+//    userService.updateUserInfo(userInfoUpdateRequest);
+//    return Result.success();
+//  }
 
-  @ApiOperation("修改用户头像")
-  @Limiter
-  @Permission(PermissionEnum.USER)
-  @PostMapping("/updateUserAvatar")
-  public Result<UserAvatarUpdateVO> updateUserAvatar(@RequestPart("file") MultipartFile file) throws CustomException {
-    return Result.success(userService.updateUserAvatar(file));
-  }
+//  @ApiOperation("修改用户头像")
+//  @Limiter
+//  @Permission(PermissionEnum.USER)
+//  @PostMapping("/updateUserAvatar")
+//  public Result<UserAvatarUpdateVO> updateUserAvatar(@RequestPart("file") MultipartFile file) throws CustomException {
+//    return Result.success(userService.updateUserAvatar(file));
+//  }
 }

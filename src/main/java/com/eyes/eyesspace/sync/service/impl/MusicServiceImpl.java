@@ -63,7 +63,7 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public MusicAddVO addMusic(MusicAddRequest musicAddRequest) throws CustomException {
         if (!musicMapper.addMusic(musicAddRequest)) {
-            throw new CustomException("视频添加失败！");
+            throw new CustomException("音频添加失败！");
         }
         return new MusicAddVO(musicAddRequest.getId());
     }
@@ -123,9 +123,9 @@ public class MusicServiceImpl implements MusicService {
             Integer musicId = Integer.valueOf(SecurityUtils.symmetricDecrypt(id));
             return musicMapper.getMusicLrc(musicId);
         } catch (NumberFormatException e) {
-            throw new CustomException("这就很神奇了，但是没有音频给你");
+            throw new CustomException("这就很神奇了，但是没有歌词给你");
         } catch(Exception e) {
-            throw new CustomException("歌曲不存在");
+            throw new CustomException("歌词不存在");
         }
     }
 
@@ -173,7 +173,7 @@ public class MusicServiceImpl implements MusicService {
         try {
             musicId = Integer.valueOf(SecurityUtils.symmetricDecrypt(id));
         } catch (NumberFormatException e) {
-            throw new CustomException("这就很神奇了，但是没有音频给你点赞");
+            throw new CustomException("这就很神奇了，但是没法点赞");
         } catch(Exception e) {
             throw new CustomException("歌曲不存在");
         }

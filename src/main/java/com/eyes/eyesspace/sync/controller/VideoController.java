@@ -5,27 +5,34 @@ import com.eyes.eyesAuth.permission.Permission;
 import com.eyes.eyesAuth.permission.PermissionEnum;
 import com.eyes.eyesTools.common.exception.CustomException;
 import com.eyes.eyesTools.common.result.Result;
+import com.eyes.eyesspace.persistent.dto.VideoInfoDTO;
+import com.eyes.eyesspace.persistent.dto.VideoListDTO;
+import com.eyes.eyesspace.sync.model.request.VideoAddRequest;
 import com.eyes.eyesspace.sync.model.vo.FileUploadVO;
 import com.eyes.eyesspace.sync.model.vo.UserVideoInfoVO;
 import com.eyes.eyesspace.sync.model.vo.VideoAddVO;
-import com.eyes.eyesspace.persistent.dto.VideoInfoDTO;
-import com.eyes.eyesspace.persistent.dto.VideoListDTO;
 import com.eyes.eyesspace.sync.model.vo.VideoListInfoVO;
-import com.eyes.eyesspace.sync.model.request.VideoAddRequest;
 import com.eyes.eyesspace.sync.service.VideoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
-import java.util.Objects;
 
 @Api(tags = "视频模块")
 @RefreshScope
+@Validated
 @RestController
 @RequestMapping("/video")
 public class VideoController {
@@ -41,7 +48,7 @@ public class VideoController {
     @ApiOperation("发布视频")
     @Permission(PermissionEnum.ADMIN)
     @PostMapping("/addVideo")
-    public Result<VideoAddVO> addVideo(@RequestBody VideoAddRequest videoAddRequest) throws CustomException {
+    public Result<VideoAddVO> addVideo(@Validated @RequestBody VideoAddRequest videoAddRequest) throws CustomException {
         return Result.success(videoService.addVideo(videoAddRequest));
     }
 

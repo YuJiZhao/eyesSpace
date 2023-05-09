@@ -1,0 +1,20 @@
+{
+  "common": {
+    "primaryColor": "#0074F8FF",
+    "primaryColorHover": "#00BBFFFF",
+    "primaryColorPressed": "#003CFFFF",
+    "primaryColorSuppl": "#009DFFFF",
+    "baseColor": "#FFF"
+  },
+  "Menu": {
+    "itemColorActive": "rgba(0, 116, 248, 0.85)",
+    "itemTextColorActive": "#FFFFFFFF",
+    "itemIconColorActive": "#FFFFFFFF",
+    "itemTextColor": "rgba(255, 255, 255, 0.6)",
+    "itemTextColorHover": "#FFFFFFFF",
+    "itemIconColor": "rgba(255, 255, 255, 0.6)",
+    "itemIconColorHover": "#FFFFFFFF",
+    "arrowColorHover": "#FFFFFFFF",
+    "arrowColor": "rgba(255, 255, 255, 0.6)"
+  }
+}

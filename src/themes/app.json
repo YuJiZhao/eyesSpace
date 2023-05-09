@@ -1,0 +1,12 @@
+{
+  "common": {
+    "primaryColor": "#0074F8FF",
+    "primaryColorHover": "#00BBFFFF",
+    "primaryColorPressed": "#003CFFFF",
+    "primaryColorSuppl": "#009DFFFF",
+    "baseColor": "#FFF"
+  },
+  "LoadingBar": {
+    "colorLoading": "#00A6FFFF"
+  }
+}

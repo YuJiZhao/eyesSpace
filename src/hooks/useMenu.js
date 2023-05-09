@@ -38,11 +38,6 @@ function useMenuOptions() {
                     label: "说说",
                     key: "content/shuoshuo",
                     icon: useRenderIcon(ChatboxEllipses),
-                },
-                {
-                    label: "习题",
-                    key: "content/exercises",
-                    icon: useRenderIcon(ReceiptSharp),
                 }
             ]
         },

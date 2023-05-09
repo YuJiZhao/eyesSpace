@@ -19,11 +19,6 @@ const systemAdministor = [
                 path: '/content/shuoshuo',
                 name: '说说',
                 component: () => import('@/views/content/shuoshuo')
-            },
-            {
-                path: '/content/exercises',
-                name: '习题',
-                component: () => import('@/views/content/exercises')
             }
         ]
     },

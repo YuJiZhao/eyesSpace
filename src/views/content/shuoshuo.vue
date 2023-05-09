@@ -10,11 +10,11 @@
       <n-tab-pane name="shuoshuoManagement" tab="说说管理">
         <ShuoshuoManagement />
       </n-tab-pane>
-      <n-tab-pane name="shuoshuoPublish" tab="发布说说">
-        <ShuoshuoPublish />
-      </n-tab-pane>
       <n-tab-pane name="shuoshuoComment" tab="评论管理">
         <ShuoshuoComment />
+      </n-tab-pane>
+      <n-tab-pane name="shuoshuoPublish" tab="发布说说">
+        <ShuoshuoPublish />
       </n-tab-pane>
     </n-tabs>
   </div>

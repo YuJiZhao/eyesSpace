@@ -7,14 +7,14 @@
       animated
       class="tabs"
     >
-      <n-tab-pane name="blogPublish" tab="发布博客">
-        <BlogPublish />
-      </n-tab-pane>
       <n-tab-pane name="blogManagement" tab="博客管理">
         <BlogManagement />
       </n-tab-pane>
       <n-tab-pane name="blogComment" tab="评论管理">
         <BlogComment />
+      </n-tab-pane>
+      <n-tab-pane name="blogPublish" tab="发布博客">
+        <BlogPublish />
       </n-tab-pane>
       <n-tab-pane name="blogPage" tab="博客页面">
         <BlogPage />

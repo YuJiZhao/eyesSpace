@@ -57,6 +57,7 @@ export default defineComponent({
       Promise.all([context(), user()]).then(async (values) => {
         const [contextData, userData] = values;
         initContext(contextData);
+        closeLoad();
         initUser(userData);
         doPreload();
       }).catch(() => {
@@ -116,15 +117,18 @@ export default defineComponent({
     function doPreload() {
       preload({
         data: preloadList,
-        success: () => {
-          isShow.value = true;
-          $process.loadHide();
-        }
+        success: () => {}
       });
     }
 
+    // 页面跳转
     function jumpPath(path: string) {
       router.push(path);
+      closeLoad();
+    }
+
+    // 关闭遮罩层
+    function closeLoad() {
       isShow.value = true;
       $process.loadHide();
     }

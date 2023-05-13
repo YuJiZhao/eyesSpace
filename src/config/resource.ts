@@ -58,7 +58,7 @@ const img = {
 }
 
 const gif = {
-    loading: siteResource + "loading.gif",
+    loading: siteResource + "loading.png",
 }
 
 const data = {

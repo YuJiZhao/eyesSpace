@@ -17,17 +17,20 @@ import com.eyes.eyesspace.persistent.po.VideoDataPO;
 import com.eyes.eyesspace.sync.common.result.ResultCode;
 import com.eyes.eyesspace.sync.convert.VideoConvert;
 import com.eyes.eyesspace.sync.model.bean.UserVideoKeyBean;
+import com.eyes.eyesspace.sync.model.request.VideoAddBatchBiliRequest;
+import com.eyes.eyesspace.sync.model.request.VideoAddRequest;
 import com.eyes.eyesspace.sync.model.vo.FileUploadVO;
 import com.eyes.eyesspace.sync.model.vo.UserVideoInfoVO;
+import com.eyes.eyesspace.sync.model.vo.VideoAddCoverFailVO;
 import com.eyes.eyesspace.sync.model.vo.VideoAddVO;
 import com.eyes.eyesspace.sync.model.vo.VideoListInfoVO;
-import com.eyes.eyesspace.sync.model.request.VideoAddRequest;
 import com.eyes.eyesspace.sync.service.VideoService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -38,6 +41,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @Service
 public class VideoServiceImpl implements VideoService {
+    // bilibili视频页面的base url，拼接bv号后成为原视频链接
+    private static final String BILI_VIDEO_BASE_URL = "https://www.bilibili.com/video/";
+
     @Value("${path.folder.video}")
     private String videoPath;
 
@@ -65,6 +71,44 @@ public class VideoServiceImpl implements VideoService {
             throw new CustomException("视频添加失败！");
         }
         return new VideoAddVO(videoAddRequest.getId());
+    }
+
+    @Override
+    public List<VideoAddCoverFailVO> addBatchBiliVideo(List<VideoAddBatchBiliRequest> videoAddBatchBiliRequestList) {
+        // 批量处理视频信息
+        List<VideoAddCoverFailVO> failVideoList = new ArrayList<>();
+        List<VideoAddRequest> videoAddRequestList = videoAddBatchBiliRequestList.stream().map(v -> {
+            VideoAddRequest videoAddRequest = VideoConvert.INSTANCE.BatchBiliAdd2RequestAdd(v);
+            // 构建视频原链接
+            videoAddRequest.setOriginalUrl(BILI_VIDEO_BASE_URL + v.getBvid());
+            // 上传视频封面
+            try {
+                String url = FileUtils.uploadByUrl(v.getCover(), videoCoverPath);
+                videoAddRequest.setPictureUrl(url);
+            } catch (Exception e) {
+                log.error("fail to add bili video: {}", e.getMessage());
+                e.printStackTrace();
+                failVideoList.add(new VideoAddCoverFailVO(
+                    v.getTitle(),
+                    v.getBvid(),
+                    e.getMessage()
+                ));
+            }
+            return videoAddRequest;
+        }).collect(Collectors.toList());
+
+        // 批量插入视频信息
+        videoAddRequestList.forEach(v -> {
+            if (!videoMapper.addVideo(v)) {
+                failVideoList.add(new VideoAddCoverFailVO(
+                    v.getTitle(),
+                    v.getOriginalUrl(),
+                    "视频添加失败"
+                ));
+            }
+        });
+
+        return failVideoList;
     }
 
     @Override

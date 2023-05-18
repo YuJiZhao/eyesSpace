@@ -7,9 +7,11 @@ import com.eyes.eyesTools.common.exception.CustomException;
 import com.eyes.eyesTools.common.result.Result;
 import com.eyes.eyesspace.persistent.dto.VideoInfoDTO;
 import com.eyes.eyesspace.persistent.dto.VideoListDTO;
+import com.eyes.eyesspace.sync.model.request.VideoAddBatchBiliRequest;
 import com.eyes.eyesspace.sync.model.request.VideoAddRequest;
 import com.eyes.eyesspace.sync.model.vo.FileUploadVO;
 import com.eyes.eyesspace.sync.model.vo.UserVideoInfoVO;
+import com.eyes.eyesspace.sync.model.vo.VideoAddCoverFailVO;
 import com.eyes.eyesspace.sync.model.vo.VideoAddVO;
 import com.eyes.eyesspace.sync.model.vo.VideoListInfoVO;
 import com.eyes.eyesspace.sync.service.VideoService;
@@ -50,6 +52,13 @@ public class VideoController {
     @PostMapping("/addVideo")
     public Result<VideoAddVO> addVideo(@Validated @RequestBody VideoAddRequest videoAddRequest) throws CustomException {
         return Result.success(videoService.addVideo(videoAddRequest));
+    }
+
+    @ApiOperation("批量发布视频——bilibili专属")
+    @Permission(PermissionEnum.ADMIN)
+    @PostMapping("/addBatchBiliVideo")
+    public Result<List<VideoAddCoverFailVO>> addBatchBiliVideo(@Validated @RequestBody List<VideoAddBatchBiliRequest> videoAddBatchBiliRequestList) {
+        return Result.success(videoService.addBatchBiliVideo(videoAddBatchBiliRequestList));
     }
 
     @ApiOperation("上传视频封面")

@@ -33,5 +33,5 @@ public class VideoAddBatchBiliRequest {
   private String videoUrl;
 
   @ApiModelProperty("站长感言")
-  private String comment = "暂无";
+  private String ownerComment;
 }

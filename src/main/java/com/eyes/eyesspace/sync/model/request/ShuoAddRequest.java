@@ -1,14 +1,12 @@
 package com.eyes.eyesspace.sync.model.request;
 
 import com.eyes.eyesspace.constant.StatusEnum;
-import com.eyes.eyesspace.sync.model.dto.ShuoAddPicDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.List;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 @ApiModel
@@ -25,5 +23,5 @@ public class ShuoAddRequest {
     private Integer status = StatusEnum.PUBLIC.getStatus();
 
     @ApiModelProperty("说说图片列表")
-    private List<ShuoAddPicDTO> picList;
+    private List<String> picList;
 }

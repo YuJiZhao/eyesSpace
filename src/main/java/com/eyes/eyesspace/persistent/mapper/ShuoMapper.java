@@ -1,13 +1,15 @@
 package com.eyes.eyesspace.persistent.mapper;
 
-import com.eyes.eyesspace.sync.model.request.ShuoAddRequest;
-import com.eyes.eyesspace.sync.model.dto.ShuoAddPicDTO;
+import com.eyes.eyesspace.persistent.dto.ShuoInfoDTO;
 import com.eyes.eyesspace.persistent.po.CommentDelInfoPO;
 import com.eyes.eyesspace.persistent.po.ShuoDataPO;
-import com.eyes.eyesspace.persistent.dto.ShuoInfoDTO;
-import org.apache.ibatis.annotations.*;
-
+import com.eyes.eyesspace.sync.model.request.ShuoAddRequest;
 import java.util.List;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface ShuoMapper {
@@ -15,7 +17,7 @@ public interface ShuoMapper {
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     Boolean addShuo(ShuoAddRequest shuoAddRequest);
 
-    Integer addShuoPics(List<ShuoAddPicDTO> picList, Integer id);
+    Integer addShuoPics(List<String> picList, Integer id);
 
     Integer getShuoListInfo(Integer status);
 

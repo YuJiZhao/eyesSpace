@@ -3,12 +3,11 @@
 
 <mapper namespace="com.eyes.eyesspace.persistent.mapper.ShuoMapper">
     <insert id="addShuoPics">
-        insert into shuoshuo_pic (shuoshuo_id, pid, url, create_time) values
+        insert into shuoshuo_pic (shuoshuo_id, url, create_time) values
         <foreach collection="picList" item="item" separator=",">
             (
                 #{id},
-                #{item.pid},
-                #{item.url},
+                #{item},
                 now()
             )
         </foreach>

@@ -50,7 +50,6 @@ export default defineComponent({
     async function getVersionList() {
       $api.getVersionList({page: page.value}).then(({code, msg, data}) => {
         if (code == codeConfig.success) {
-          console.log(data);
           versionListData.value = data.data;
           total.value = data.total;
           show.value = false;

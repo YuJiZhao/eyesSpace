@@ -27,7 +27,6 @@
       class="item versionItem"
       v-if="data.type == HomeType.version"
       :data="data.homeList"
-      @click.capture.stop="jumpVersion"
     />
 </template>
 
@@ -53,24 +52,17 @@ export default defineComponent({
       }).href, "_blank");
     }
 
-    function jumpVersion() {
-      window.open(router.resolve({
-        path: "/version"
-      }).href, "_blank");
-    }
-
     return {
       HomeType,
       data: props.data,
       jumpDetail,
-      jumpVersion
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.shuoshuoItem, .versionItem {
+.shuoshuoItem {
   cursor: pointer;
 }
 </style>

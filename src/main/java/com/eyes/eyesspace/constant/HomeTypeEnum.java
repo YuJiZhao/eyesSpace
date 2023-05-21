@@ -8,7 +8,9 @@ import lombok.Getter;
 public enum HomeTypeEnum {
     BLOG(0, "博客"),
 
-    SHUOSHUO(1, "说说");
+    SHUOSHUO(1, "说说"),
+
+    VERSION(2, "版本");
 
     private final Integer type;
 

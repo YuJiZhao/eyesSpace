@@ -11,11 +11,13 @@ import com.eyes.eyesspace.persistent.mapper.HomeMapper;
 import com.eyes.eyesspace.persistent.mapper.TrackMapper;
 import com.eyes.eyesspace.persistent.po.HomeListPO;
 import com.eyes.eyesspace.sync.model.dto.ShuoListDTO;
+import com.eyes.eyesspace.sync.model.dto.VersionListDTO;
 import com.eyes.eyesspace.sync.model.vo.HomeListVO;
 import com.eyes.eyesspace.sync.model.vo.SiteDataVO;
 import com.eyes.eyesspace.sync.service.BlogService;
 import com.eyes.eyesspace.sync.service.HomeService;
 import com.eyes.eyesspace.sync.service.ShuoService;
+import com.eyes.eyesspace.sync.service.VersionService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,11 +38,14 @@ public class HomeServiceImpl implements HomeService {
 
   private final ShuoService shuoService;
 
-  public HomeServiceImpl(HomeMapper homeMapper, TrackMapper trackMapper, BlogService blogService, ShuoService shuoService) {
+  private final VersionService versionService;
+
+  public HomeServiceImpl(HomeMapper homeMapper, TrackMapper trackMapper, BlogService blogService, ShuoService shuoService, VersionService versionService) {
     this.homeMapper = homeMapper;
     this.trackMapper = trackMapper;
     this.blogService = blogService;
     this.shuoService = shuoService;
+    this.versionService = versionService;
   }
 
   @Override
@@ -67,6 +72,7 @@ public class HomeServiceImpl implements HomeService {
     // 执行查询
     Map<Integer, BlogListDTO> blogMap = new HashMap<>();
     Map<Integer, ShuoListDTO> shuoMap = new HashMap<>();
+    Map<Integer, VersionListDTO> versionMap = new HashMap<>();
     for (Map.Entry<Integer, List<Integer>> entry: homeMap.entrySet()) {
       if (HomeTypeEnum.BLOG.getType().equals(entry.getKey())) {  // 博客列表
         List<BlogListDTO> blogList = blogService.getBlogListByIds(entry.getValue());
@@ -74,6 +80,9 @@ public class HomeServiceImpl implements HomeService {
       } else if (HomeTypeEnum.SHUOSHUO.getType().equals(entry.getKey())) {  // 说说列表
         List<ShuoListDTO> shuoList = shuoService.getShuoListByIds(entry.getValue());
         shuoMap = shuoList.stream().collect(Collectors.toMap(ShuoListDTO::getOriginalId, o -> o, (front, behind) -> front));
+      } else if (HomeTypeEnum.VERSION.getType().equals(entry.getKey())) {
+        List<VersionListDTO> versionList = versionService.getVersionListByIds(entry.getValue());
+        versionMap = versionList.stream().collect(Collectors.toMap(VersionListDTO::getId, o -> o, (front, behind) -> front));
       } else {
         log.error("wrong content type: " + entry.getKey());
       }
@@ -89,6 +98,10 @@ public class HomeServiceImpl implements HomeService {
       } else if (HomeTypeEnum.SHUOSHUO.getType().equals(item.getType())) {  // 说说列表
         homeItem.setType(HomeTypeEnum.SHUOSHUO.getType());
         homeItem.setHomeList(shuoMap.get(item.getCid()));
+        homeListBeanList.add(homeItem);
+      } else if (HomeTypeEnum.VERSION.getType().equals(item.getType())) {
+        homeItem.setType(HomeTypeEnum.VERSION.getType());
+        homeItem.setHomeList(versionMap.get(item.getCid()));
         homeListBeanList.add(homeItem);
       } else {
         log.error("wrong content type: " + item.getType());

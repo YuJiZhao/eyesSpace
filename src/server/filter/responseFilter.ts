@@ -24,4 +24,5 @@ export default (response: AxiosResponse<any, any>) => {
         $utils.delCookie(siteConfig.tokenHeader.lToken);
         location.replace(`${userCenterContext.auth}?clientId=${siteContext.clientId}&redirectUrl=${process.env.VITE_SITE_URL + userCenterContext.redirectUrl}`);
     }
+    // TODO: 限流
 }

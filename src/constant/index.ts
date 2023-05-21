@@ -33,6 +33,7 @@ export enum CardList {
     "ShuoCardList",
     "BlogCardList",
     "BlogDetailCardList",
+    "VersionCardList"
 }
 
 export enum Dialogs {
@@ -42,7 +43,8 @@ export enum Dialogs {
 
 export enum HomeType {
     "blog",
-    "shuoshuo"
+    "shuoshuo",
+    "version"
 }
 
 export enum CommentApiType {

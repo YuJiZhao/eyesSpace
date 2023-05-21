@@ -12,7 +12,8 @@ export declare interface ApiObject extends
     MusicInterface, 
     VideoInterface,
     ShuoshuoInterface,
-    BlogInterface
+    BlogInterface,
+    VersionInterface
 {}
 
 // 分页
@@ -152,3 +153,16 @@ export declare interface UserApiInterface {
 interface UpdateUserInfoReqInterface {
     name: string
 }
+
+/*
+ ***************************************************************************************
+ *                                    version
+ ***************************************************************************************
+ */
+
+export declare interface VersionInterface {
+    getVersionInfo: () => Promise<RespInterface>;
+    getVersionList: (req: GetVersionListReqInterface) => Promise<RespInterface>;
+}
+
+interface GetVersionListReqInterface extends PageInterface {}

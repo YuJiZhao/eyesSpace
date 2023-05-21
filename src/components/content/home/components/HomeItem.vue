@@ -23,17 +23,25 @@
       :createTime="data.homeList.createTime"
       @click.capture.stop="jumpDetail(data.homeList.id)"
     />
+    <version-item
+      class="item versionItem"
+      v-if="data.type == HomeType.version"
+      :data="data.homeList"
+      @click.capture.stop="jumpVersion"
+    />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import BlogItem from "@/components/content/blog/components/BlogItem.vue";
 import ShuoItem from "@/components/content/shuoshuo/components/ShuoItem.vue";
+import VersionItem from "@/components/content/version/components/VersionItem.vue";
 import { HomeType } from "@/constant";
 import { useRouter } from "vue-router";
+import Version from "@/views/content/Version.vue";
 
 export default defineComponent({
-  components: { BlogItem, ShuoItem },
+  components: { BlogItem, ShuoItem, VersionItem, Version },
   props: ["data"],
   setup(props) {
     let router = useRouter();
@@ -45,17 +53,24 @@ export default defineComponent({
       }).href, "_blank");
     }
 
+    function jumpVersion() {
+      window.open(router.resolve({
+        path: "/version"
+      }).href, "_blank");
+    }
+
     return {
       HomeType,
       data: props.data,
       jumpDetail,
+      jumpVersion
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.shuoshuoItem {
+.shuoshuoItem, .versionItem {
   cursor: pointer;
 }
 </style>

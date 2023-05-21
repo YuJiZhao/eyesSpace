@@ -17,6 +17,7 @@ const icon = {
     video: siteResource + "video.png",
     other: siteResource + "other.png",
     message: siteResource + "message.png",
+    version: siteResource + "version.png",
     about: siteResource + "about.png",
     menu: siteResource + "menu.png",
     before: siteResource + "before.png",

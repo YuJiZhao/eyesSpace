@@ -18,18 +18,19 @@ import VideoCardList from "@/components/content/video/VideoCardList.vue";
 import ShuoCardList from "@/components/content/shuoshuo/ShuoCardList.vue";
 import BlogCardList from "@/components/content/blog/BlogCardList.vue";
 import BlogDetailCardList from "@/components/content/blogDetail/BlogDetailCardList.vue";
+import VersionDataCardList from "@/components/content/version/VersionCardList.vue";
 import { siteConfig } from "@/config/program";
 
 export default defineComponent({
   components: { 
     AnnounceCard, InfoCard, LabelCard, NewPubCard, OwnerCard, RandomPubCard,
-    VideoCardList, ShuoCardList, BlogCardList, BlogDetailCardList
+    VideoCardList, ShuoCardList, BlogCardList, BlogDetailCardList, VersionDataCardList
   },
   setup() {
     const $process = inject<ProcessInterface>("$process")!;
     const $window = inject<WindowInterface>("$window")!;
     const cardComponents = [AnnounceCard, InfoCard, LabelCard, NewPubCard, OwnerCard, RandomPubCard];
-    const cardListComponents = [VideoCardList, ShuoCardList, BlogCardList, BlogDetailCardList];
+    const cardListComponents = [VideoCardList, ShuoCardList, BlogCardList, BlogDetailCardList, VersionDataCardList];
 
     let sticky = ref("static");
     let stickyHeight = ref("0px");

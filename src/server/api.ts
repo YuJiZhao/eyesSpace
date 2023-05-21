@@ -6,7 +6,8 @@ import {
     MusicInterface, 
     VideoInterface, 
     ShuoshuoInterface, 
-    BlogInterface 
+    BlogInterface,
+    VersionInterface
 } from "@/d.ts/server/api";
 import { UrlReqType } from "@/constant";
 
@@ -118,13 +119,23 @@ const userApi: UserApiInterface = {
     }
 }
 
+const versionApi: VersionInterface = {
+    getVersionInfo: async () => {
+        return await get("/version/getVersionInfo");
+    },
+    getVersionList: async (req) => {
+        return await get("/version/getVersionList", req);
+    }
+}
+
 const api: ApiObject = {
     ...site,
     ...blog,
     ...shuoshuo,
     ...video,
     ...music,
-    ...userApi
+    ...userApi,
+    ...versionApi
 }
 
 export default api;

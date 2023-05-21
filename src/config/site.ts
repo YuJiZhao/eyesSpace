@@ -40,6 +40,8 @@ const userCenterContext: UserCenterContextInterface = {
 /*
  ***************************************************************************************
  *                                    meta
+ * 
+ * 对于单页面应用，这玩意儿对SEO一点用也没有，但还是写着玩玩吧
  ***************************************************************************************
  */
 const metaInfo = {
@@ -78,13 +80,6 @@ const metaInfo = {
             { description: `这是${siteContext.siteName}，是一个个人网站，这是视频页面` }
         ]
     },
-    about: {
-        title: siteContext.siteName + " | 关于",
-        data: [
-            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，代码，程序员，音乐，视频` },
-            { description: `这是${siteContext.siteName}，是一个个人网站，这是关于页面` }
-        ]
-    },
     message: {
         title: siteContext.siteName + " | 留言",
         data: [
@@ -92,13 +87,20 @@ const metaInfo = {
             { description: `这是${siteContext.siteName}，是一个个人网站，这是留言页面` }
         ]
     },
-    login: {
-        title: siteContext.siteName + " | 登录",
+    version: {
+        title: siteContext.siteName + " | 版本信息",
         data: [
-            { keywords: `${siteContext.siteName}，个人网站，耶瞳，eyes，eyesyeager，程序员，博客，说说，音乐，视频，登录` },
-            { description: `这是${siteContext.siteName}，是一个个人网站，这是登录页面` }
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，代码，程序员，音乐，视频，版本，更新，日志` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是版本信息页面` }
         ]
     },
+    about: {
+        title: siteContext.siteName + " | 关于",
+        data: [
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，代码，程序员，音乐，视频` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是关于页面` }
+        ]
+    }
 }
 
 /*
@@ -172,6 +174,11 @@ const headerConfig: HeaderConfigType = [
                 path: pathConfig.message,
                 icon: resource.message,
                 word: "留言"
+            },
+            {
+                path: pathConfig.version,
+                icon: resource.version,
+                word: "版本"
             },
             {
                 path: pathConfig.about,

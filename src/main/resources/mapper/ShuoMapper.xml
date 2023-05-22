@@ -23,23 +23,6 @@
         </where>
     </select>
 
-    <select id="getShuoList" resultType="com.eyes.eyesspace.persistent.dto.ShuoInfoDTO">
-        select id, content, views, comments, status, create_time
-        from shuoshuo
-        <where>
-            <choose>
-                <when test="role=='ROLE_admin'.toString()">
-                    status!=2
-                </when>
-                <otherwise>
-                    status=0
-                </otherwise>
-            </choose>
-        </where>
-        order by id desc
-        limit #{start}, #{pageSize}
-    </select>
-
     <select id="getShuoListInfo" resultType="java.lang.Integer">
         select count(*) from shuoshuo
         <where>

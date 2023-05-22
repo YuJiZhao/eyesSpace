@@ -35,12 +35,7 @@
                , blog_label bl, blog_label_id bli
            </if>
         <where>
-            <if test="status==2">
-                b.status!=2
-            </if>
-            <if test="status==0">
-                b.status=0
-            </if>
+            ${statusCondition}
             <if test="category!=null">
                 and category=#{category}
             </if>
@@ -60,12 +55,7 @@
             , blog_label bl, blog_label_id bli
         </if>
         <where>
-            <if test="status == 2">
-                b.status!=2
-            </if>
-            <if test="status == 0">
-                b.status=0
-            </if>
+            ${statusCondition}
             <if test="category!=null">
                 and category=#{category}
             </if>
@@ -74,42 +64,6 @@
             </if>
             and b.category_id = bc.id
         </where>
-    </select>
-
-    <select id="getBlogCategory" resultType="com.eyes.eyesspace.persistent.dto.BlogCategoryDTO">
-        select bc.category, count(*) num
-        from blog b, blog_category bc
-        <where>
-            <choose>
-                <when test="status == 2">
-                    b.status != 2
-                </when>
-                <otherwise>
-                    b.status = 0
-                </otherwise>
-            </choose>
-            and bc.id = b.category_id
-        </where>
-        group by bc.category
-    </select>
-
-    <select id="getBlogLabel" resultType="com.eyes.eyesspace.persistent.dto.BlogLabelDTO">
-        select bl.label, count(*) num
-        from blog b, blog_label bl, blog_label_id bli
-        <where>
-            <choose>
-                <when test="status == 2">
-                    b.status != 2
-                </when>
-                <otherwise>
-                    b.status = 0
-                </otherwise>
-            </choose>
-            and b.id = bli.blog_id and bli.label_id = bl.id
-        </where>
-        group by bl.label having num > 2
-        order by num desc
-        limit 20
     </select>
 
     <select id="getBlogListWords" resultType="java.lang.Integer">

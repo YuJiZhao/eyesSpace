@@ -17,12 +17,12 @@ import com.eyes.eyesspace.persistent.dto.BlogListDTO;
 import com.eyes.eyesspace.persistent.mapper.BlogMapper;
 import com.eyes.eyesspace.persistent.mapper.HomeMapper;
 import com.eyes.eyesspace.persistent.mapper.TrackMapper;
+import com.eyes.eyesspace.persistent.po.BlogAddCategoryPO;
+import com.eyes.eyesspace.persistent.po.BlogAddLabelPO;
 import com.eyes.eyesspace.persistent.po.BlogDataPO;
 import com.eyes.eyesspace.persistent.po.CommentDelInfoPO;
 import com.eyes.eyesspace.sync.convert.BlogConvert;
 import com.eyes.eyesspace.sync.model.bo.BlogAddBO;
-import com.eyes.eyesspace.persistent.po.BlogAddCategoryPO;
-import com.eyes.eyesspace.persistent.po.BlogAddLabelPO;
 import com.eyes.eyesspace.sync.model.request.BlogAddRequest;
 import com.eyes.eyesspace.sync.model.request.CommentAddRequest;
 import com.eyes.eyesspace.sync.model.vo.BlogAddVO;
@@ -31,6 +31,7 @@ import com.eyes.eyesspace.sync.model.vo.CommentListVO;
 import com.eyes.eyesspace.sync.model.vo.FileUploadVO;
 import com.eyes.eyesspace.sync.service.BlogService;
 import com.eyes.eyesspace.sync.service.CommentService;
+import com.eyes.eyesspace.utils.AuthUtils;
 import java.util.List;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +45,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RefreshScope
 @Service
 public class BlogServiceImpl implements BlogService {
+    // 展示最大标签数
+    private static final Integer LABEL_MAX_NUM = 20;
+
     @Value("${path.url.site}")
     private String siteUrl;
 
@@ -165,20 +169,14 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public PageBind<BlogListDTO> getBlogList(Integer page, Integer pageSize, String category, String label) {
         String role = UserInfoHolder.getRole();
-
-        List<BlogListDTO> blogList;
-        Integer status = AuthConfigConstant.ROLE_ADMIN.equals(role)
-                       ? StatusEnum.DELETE.getStatus()
-                       : StatusEnum.PUBLIC.getStatus();
-        blogList = blogMapper.getBlogList((page - 1) * pageSize, pageSize, status, category, label);
-
+        String statusCondition = AuthUtils.statusSqlCondition(role);
+        List<BlogListDTO> blogList = blogMapper.getBlogList((page - 1) * pageSize, pageSize, statusCondition, category, label);
         if (!AuthConfigConstant.ROLE_ADMIN.equals(role)) {
             blogList.forEach((v) -> v.setStatus(null));
         }
-
         return new PageBind<>(
             page,
-            blogMapper.getBlogListNum(status, category, label),
+            blogMapper.getBlogListNum(statusCondition, category, label),
             blogList
         );
     }
@@ -191,57 +189,51 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BlogInfoDTO getBlogInfo(Integer id) throws CustomException {
         String role = UserInfoHolder.getRole();
-
-        BlogInfoDTO blogInfoDto = blogMapper.getBlogInfo(id);
-        if (
-            Objects.isNull(blogInfoDto) ||
-            (!AuthConfigConstant.ROLE_ADMIN.equals(role) && blogInfoDto.getStatus() != 0)
-        ) { throw new CustomException("暂无数据"); }
-
-        if (!AuthConfigConstant.ROLE_ADMIN.equals(role)) blogInfoDto.setStatus(null);
+        String statusCondition = AuthUtils.statusSqlCondition(role);
+        BlogInfoDTO blogInfoDto = blogMapper.getBlogInfo(id, statusCondition);
+        if (Objects.isNull(blogInfoDto)) {
+            throw new CustomException("暂无数据");
+        }
+        if (!AuthConfigConstant.ROLE_ADMIN.equals(role)) {
+            blogInfoDto.setStatus(null);
+        }
         blogInfoDto.setLabels(blogMapper.getLabelsById(id));
-
         if (!blogMapper.addView(id)) {
             log.error("博客阅读量更新失败");
-            throw new CustomException("操作异常");
         }
-
         return blogInfoDto;
     }
 
     @Override
     public List<BlogCategoryDTO> getBlogCategory() {
         String role = UserInfoHolder.getRole();
-        return AuthConfigConstant.ROLE_ADMIN.equals(role)
-                ? blogMapper.getBlogCategory(StatusEnum.DELETE.getStatus())
-                : blogMapper.getBlogCategory(StatusEnum.PUBLIC.getStatus());
+        String statusCondition = AuthUtils.statusSqlCondition(role);
+        return blogMapper.getBlogCategory(statusCondition);
     }
 
     @Override
     public List<BlogLabelDTO> getBlogLabel() {
         String role = UserInfoHolder.getRole();
-        return AuthConfigConstant.ROLE_ADMIN.equals(role)
-                ? blogMapper.getBlogLabel(StatusEnum.DELETE.getStatus())
-                : blogMapper.getBlogLabel(StatusEnum.PUBLIC.getStatus());
+        String statusCondition = AuthUtils.statusSqlCondition(role);
+        return blogMapper.getBlogLabel(LABEL_MAX_NUM, statusCondition);
     }
 
     @Override
     @Transactional
     public void doBlogComment(CommentAddRequest commentAddRequest) throws CustomException {
+        // 校验可行性
         String role = UserInfoHolder.getRole();
+        String statusCondition = AuthUtils.statusSqlCondition(role);
+        BlogInfoDTO blogInfoDTO = blogMapper.getBlogInfo(commentAddRequest.getObjectId(), statusCondition);
+        if (Objects.isNull(blogInfoDTO)) {
+            throw new CustomException("博客不存在");
+        }
+
+        // 执行评论业务
         Long uid = UserInfoHolder.getUid();
-
-        Integer blogStatus = blogMapper.getBlogStatus(commentAddRequest.getObjectId());
-        if (
-            Objects.isNull(blogStatus) ||
-            (AuthConfigConstant.ROLE_USER.equals(role) && !blogStatus.equals(StatusEnum.PUBLIC.getStatus())) ||
-            (AuthConfigConstant.ROLE_ADMIN.equals(role) && blogStatus.equals(StatusEnum.DELETE.getStatus()))
-        ) { throw new CustomException("博客不存在"); }
-
         commentAddRequest.setUid(uid);
         commentAddRequest.setUrl(siteUrl + blogDetailsPath + commentAddRequest.getObjectId());
         commentService.publishComment(commentAddRequest, CommentEnum.BLOG.getType(), blogNoticeSwitch);
-
         if (!blogMapper.updateBlogComments(commentAddRequest.getObjectId(), 1)) {
             throw new CustomException("评论数据更新失败");
         }
@@ -249,24 +241,22 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<CommentListVO> getBlogCommentList(Integer id, Integer page, Integer pageSize) throws CustomException {
+        // 校验可行性
         String role = UserInfoHolder.getRole();
+        String statusCondition = AuthUtils.statusSqlCondition(role);
+        BlogInfoDTO blogInfoDTO = blogMapper.getBlogInfo(id, statusCondition);
+        if (Objects.isNull(blogInfoDTO)) {
+            throw new CustomException("博客不存在");
+        }
+
+        // 执行业务
         Long uid = UserInfoHolder.getUid();
-
-        Integer blogStatus = blogMapper.getBlogStatus(id);
-        if (
-            Objects.isNull(blogStatus) ||
-            (AuthConfigConstant.ROLE_USER.equals(role) && !blogStatus.equals(StatusEnum.PUBLIC.getStatus())) ||
-            (AuthConfigConstant.ROLE_ADMIN.equals(role) && blogStatus.equals(StatusEnum.DELETE.getStatus()))
-        ) { throw new CustomException("博客不存在"); }
-
         return commentService.getCommentList(id, CommentEnum.BLOG.getType(), uid, page, pageSize);
     }
 
     @Override
     public void delBlogComment(Integer id) throws CustomException {
         String role = UserInfoHolder.getRole();
-        Long uid = UserInfoHolder.getUid();
-
         // 可行性检查
         CommentDelInfoPO commentDelInfoPo = blogMapper.getBlogCommentInfo(id);
         if (
@@ -276,9 +266,9 @@ public class BlogServiceImpl implements BlogService {
             (AuthConfigConstant.ROLE_ADMIN.equals(role) && StatusEnum.DELETE.getStatus().equals(commentDelInfoPo.getStatus()))
         ) { throw new CustomException("博客不存在"); }
 
+        // 执行业务
+        Long uid = UserInfoHolder.getUid();
         commentService.delComment(id, uid);
-
-        // 更新博客
         if (!blogMapper.updateBlogComments(commentDelInfoPo.getObjectId(), -1)) {
             throw new CustomException("评论数据更新失败");
         }

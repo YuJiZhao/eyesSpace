@@ -44,24 +44,25 @@ public interface BlogMapper {
 
     BlogDataPO getBlogData(String role);
 
-    List<BlogListDTO> getBlogList(Integer start, Integer pageSize, Integer status, String category, String label);
+    List<BlogListDTO> getBlogList(Integer start, Integer pageSize, String statusCondition, String category, String label);
 
     @Select("select title, summary, content, bc.category, views, comments, words, status, create_time" +
             " from blog b, blog_category bc " +
-            " where b.id=#{id} and b.category_id = bc.id")
-    BlogInfoDTO getBlogInfo(Integer id);
+            " where ${statusCondition} and b.id=#{id} and b.category_id = bc.id")
+    BlogInfoDTO getBlogInfo(Integer id, String statusCondition);
 
     @Select("select bl.label from blog b, blog_label bl, blog_label_id bli where b.id = #{id} and bli.blog_id = b.id and bli.label_id = bl.id;")
     List<String> getLabelsById(Integer id);
 
-    List<BlogCategoryDTO> getBlogCategory(Integer status);
+    @Select("select bc.category, count(*) num from blog b, blog_category bc where ${statusCondition} and bc.id = b.category_id group by bc.category")
+    List<BlogCategoryDTO> getBlogCategory(String statusCondition);
 
-    List<BlogLabelDTO> getBlogLabel(Integer status);
+    @Select("select bl.label, count(*) num from blog b, blog_label bl, blog_label_id bli "
+        + "where ${statusCondition} and b.id = bli.blog_id and bli.label_id = bl.id "
+        + "group by bl.label having num>2 order by num desc limit #{size}")
+    List<BlogLabelDTO> getBlogLabel(Integer size, String statusCondition);
 
     Integer getBlogListWords(Integer status);
-
-    @Select("select status from blog where id=#{id}")
-    Integer getBlogStatus(Integer id);
 
     @Select("<script>"
         + "select b.id, b.title, b.summary, bc.category, b.views, b.words, b.create_time "
@@ -73,7 +74,7 @@ public interface BlogMapper {
         + "</script>")
     List<BlogListDTO> getBlogListByIds(List<Integer> ids);
 
-    Integer getBlogListNum(Integer status, String category, String label);
+    Integer getBlogListNum(String statusCondition, String category, String label);
 
     @Update("update blog set views=views+1 where id=#{id}")
     Boolean addView(Integer id);

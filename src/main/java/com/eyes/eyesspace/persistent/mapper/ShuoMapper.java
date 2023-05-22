@@ -23,13 +23,14 @@ public interface ShuoMapper {
 
     ShuoDataPO getShuoData(String role);
 
-    List<ShuoInfoDTO> getShuoList(Integer start, Integer pageSize, String role);
+    @Select("select id, content, views, comments, status, create_time from shuoshuo where ${statusCondition} order by id desc limit #{start}, #{pageSize}")
+    List<ShuoInfoDTO> getShuoList(Integer start, Integer pageSize, String statusCondition);
 
     @Select("select url from shuoshuo_pic where shuoshuo_id=#{id}")
     List<String> getShuoPics(Integer id);
 
-    @Select("select id, content, views, comments, status, create_time from shuoshuo where id=#{id}")
-    ShuoInfoDTO getShuoInfo(Integer id);
+    @Select("select id, content, views, comments, status, create_time from shuoshuo where id=#{id} and ${statusCondition}")
+    ShuoInfoDTO getShuoInfo(Integer id, String statusCondition);
 
     @Select("<script>"
         + "select id, content, views, comments, status, create_time "
@@ -43,9 +44,6 @@ public interface ShuoMapper {
 
     @Update("update shuoshuo set views=views+1 where id=#{id}")
     Boolean addView(Integer id);
-
-    @Select("select status from shuoshuo where id=#{objectId}")
-    Integer getShuoStatus(Integer objectId);
 
     @Update("update shuoshuo set comments = comments + #{i} where id=#{objectId}")
     boolean updateShuoComments(Integer objectId, int i);

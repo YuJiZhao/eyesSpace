@@ -1,11 +1,9 @@
 package com.eyes.eyesspace.sync.service.impl;
 
-import com.eyes.eyesAuth.constant.AuthConfigConstant;
 import com.eyes.eyesAuth.context.UserInfoHolder;
 import com.eyes.eyesTools.common.exception.CustomException;
 import com.eyes.eyesTools.utils.PageBind;
 import com.eyes.eyesspace.constant.HomeTypeEnum;
-import com.eyes.eyesspace.constant.StatusEnum;
 import com.eyes.eyesspace.persistent.dto.BlogListDTO;
 import com.eyes.eyesspace.persistent.mapper.HomeMapper;
 import com.eyes.eyesspace.persistent.mapper.TrackMapper;
@@ -18,6 +16,7 @@ import com.eyes.eyesspace.sync.service.BlogService;
 import com.eyes.eyesspace.sync.service.HomeService;
 import com.eyes.eyesspace.sync.service.ShuoService;
 import com.eyes.eyesspace.sync.service.VersionService;
+import com.eyes.eyesspace.utils.AuthUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,11 +50,10 @@ public class HomeServiceImpl implements HomeService {
   @Override
   public PageBind<HomeListVO> getHomeList(Integer page, Integer pageSize) throws CustomException {
     String role = UserInfoHolder.getRole();
-    List<HomeListVO> homeListBeanList = new ArrayList<>();
+    String statusCondition = AuthUtils.statusSqlCondition(role);
 
     // 获取home列表
-    int status = AuthConfigConstant.ROLE_ADMIN.equals(role) ? StatusEnum.DELETE.getStatus() : StatusEnum.PUBLIC.getStatus();
-    List<HomeListPO> homeList = homeMapper.getHomeList((page - 1) * pageSize, pageSize, status);
+    List<HomeListPO> homeList = homeMapper.getHomeList((page - 1) * pageSize, pageSize, statusCondition);
 
     // 整合相同类型内容
     Map<Integer, List<Integer>> homeMap = new HashMap<>();
@@ -89,6 +87,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     // 组装数据
+    List<HomeListVO> homeListBeanList = new ArrayList<>();
     for (HomeListPO item: homeList) {
       HomeListVO homeItem = new HomeListVO();
       if (HomeTypeEnum.BLOG.getType().equals(item.getType())) {  // 博客列表
@@ -111,7 +110,7 @@ public class HomeServiceImpl implements HomeService {
     PageBind<HomeListVO> result = new PageBind<>();
     result.setData(homeListBeanList);
     result.setPage(page);
-    result.setTotal(homeMapper.getHomeListTotal(status));
+    result.setTotal(homeMapper.getHomeListTotal(statusCondition));
     return result;
   }
 

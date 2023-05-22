@@ -28,6 +28,7 @@ import com.eyes.eyesspace.sync.model.vo.ShuoListInfoVO;
 import com.eyes.eyesspace.sync.model.vo.ShuoListVO;
 import com.eyes.eyesspace.sync.service.CommentService;
 import com.eyes.eyesspace.sync.service.ShuoService;
+import com.eyes.eyesspace.utils.AuthUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -142,8 +143,8 @@ public class ShuoServiceImpl implements ShuoService {
   @Transactional
   public List<ShuoListVO> getShuoList(Integer page, Integer pageSize) throws CustomException {
     String role = UserInfoHolder.getRole();
-
-    List<ShuoInfoDTO> shuoInfoDTOS = shuoMapper.getShuoList((page - 1) * pageSize, pageSize, role);
+    String statusCondition = AuthUtils.statusSqlCondition(role);
+    List<ShuoInfoDTO> shuoInfoDTOS = shuoMapper.getShuoList((page - 1) * pageSize, pageSize, statusCondition);
     List<ShuoListVO> shuoListVOS = new ArrayList<>();
     try {
       for (ShuoInfoDTO item : shuoInfoDTOS) {
@@ -185,15 +186,12 @@ public class ShuoServiceImpl implements ShuoService {
     Integer originalId = Integer.valueOf(originalStrId);
 
     // 结果校验
-    ShuoInfoDTO shuoInfoDto = shuoMapper.getShuoInfo(originalId);
+    String role = UserInfoHolder.getRole();
+    String statusCondition = AuthUtils.statusSqlCondition(role);
+    ShuoInfoDTO shuoInfoDto = shuoMapper.getShuoInfo(originalId, statusCondition);
     if (Objects.isNull(shuoInfoDto)) {
       throw new CustomException("说说不存在");
     }
-    String role = UserInfoHolder.getRole();
-    if (
-        !StatusEnum.PUBLIC.getStatus().equals(shuoInfoDto.getStatus()) &&
-        !AuthConfigConstant.ROLE_ADMIN.equals(role)
-    ) { throw new CustomException("说说不存在"); }
 
     // 组装数据
     shuoInfoDto.setPicList(shuoMapper.getShuoPics(originalId));
@@ -219,6 +217,7 @@ public class ShuoServiceImpl implements ShuoService {
     String role = UserInfoHolder.getRole();
     Long uid = UserInfoHolder.getUid();
 
+    // 获取原始id
     CommentAddRequest commentAddRequest = ShuoConvert.INSTANCE.shuoshuo2Comment(shuoCommentAddRequest);
     try {
       String sid = SecurityUtils.symmetricDecrypt(shuoCommentAddRequest.getObjectId());
@@ -227,17 +226,17 @@ public class ShuoServiceImpl implements ShuoService {
       throw new CustomException("程序错误");
     }
 
-    Integer shuoshuoStatus = shuoMapper.getShuoStatus(commentAddRequest.getObjectId());
-    if (
-        Objects.isNull(shuoshuoStatus) ||
-        (AuthConfigConstant.ROLE_USER.equals(role) && !shuoshuoStatus.equals(StatusEnum.PUBLIC.getStatus())) ||
-        (AuthConfigConstant.ROLE_ADMIN.equals(role) && shuoshuoStatus.equals(StatusEnum.DELETE.getStatus()))
-    ) { throw new CustomException("说说不存在"); }
+    // 校验可行性
+    String statusCondition = AuthUtils.statusSqlCondition(role);
+    ShuoInfoDTO shuoInfoDTO = shuoMapper.getShuoInfo(commentAddRequest.getObjectId(), statusCondition);
+    if (Objects.isNull(shuoInfoDTO)) {
+      throw new CustomException("说说不存在");
+    }
 
+    // 执行业务
     commentAddRequest.setUid(uid);
     commentAddRequest.setUrl(siteUrl + shuoDetailPath + shuoCommentAddRequest.getObjectId().replace("+", "%2B"));
     commentService.publishComment(commentAddRequest, CommentEnum.SHUOSHUO.getType(), true);
-
     if (!shuoMapper.updateShuoComments(commentAddRequest.getObjectId(), 1)) {
       throw new CustomException("评论数据更新失败");
     }
@@ -248,19 +247,21 @@ public class ShuoServiceImpl implements ShuoService {
     String role = UserInfoHolder.getRole();
     Long uid = UserInfoHolder.getUid();
 
+    // 解析原始id
     Integer originalId;
     try {
       String s = SecurityUtils.symmetricDecrypt(id);
       originalId = Integer.valueOf(s);
     } catch (Exception e) { throw new CustomException("程序错误"); }
 
-    Integer shuoshuoStatus = shuoMapper.getShuoStatus(originalId);
-    if (
-        Objects.isNull(shuoshuoStatus) ||
-        (AuthConfigConstant.ROLE_USER.equals(role) && !shuoshuoStatus.equals(StatusEnum.PUBLIC.getStatus())) ||
-        (AuthConfigConstant.ROLE_ADMIN.equals(role) && shuoshuoStatus.equals(StatusEnum.DELETE.getStatus()))
-    ) { throw new CustomException("说说不存在"); }
+    // 校验可行性
+    String statusCondition = AuthUtils.statusSqlCondition(role);
+    ShuoInfoDTO shuoInfoDTO = shuoMapper.getShuoInfo(originalId, statusCondition);
+    if (Objects.isNull(shuoInfoDTO)) {
+      throw new CustomException("说说不存在");
+    }
 
+    // 执行业务
     return commentService.getCommentList(originalId, CommentEnum.SHUOSHUO.getType(), uid, page, pageSize);
   }
 

@@ -22,10 +22,7 @@ export enum CardType {
 export enum Cards {
     "AnnounceCard",
     "InfoCard",
-    "LabelCard",
-    "NewPubCard",
-    "OwnerCard",
-    "RandomPubCard"
+    "OwnerCard"
 }
 
 export enum CardList {
@@ -33,6 +30,7 @@ export enum CardList {
     "ShuoCardList",
     "BlogCardList",
     "BlogDetailCardList",
+    "AnimeCardList",
     "VersionCardList"
 }
 

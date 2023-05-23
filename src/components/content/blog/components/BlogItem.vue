@@ -74,6 +74,7 @@ export default defineComponent({
     min-height: 40px;
     margin-bottom: 5px;
     font-size: 15px;
+    line-height: 18px;
   }
   .footer {
     height: 20px;

@@ -22,7 +22,7 @@ const siteConfig: SiteConfigInterface = {
     aesKey: "",
     aesIV: "",
     enterURL: "enterURL",
-    keepAliveRoute: ["Home", "Blog", "Shuoshuo", "Music", "Video", "Message", "About", "Login", "Version"],
+    keepAliveRoute: ["Home", "Blog", "Shuoshuo", "Music", "Video", "Anime", "Message", "Version", "About"],
     avatarMaxSize: 5,
     avatarImgType: ["image/png", "image/jpg", "image/jpeg"],
     followCardId: "stickyCard",

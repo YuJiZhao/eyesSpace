@@ -80,6 +80,13 @@ const metaInfo = {
             { description: `这是${siteContext.siteName}，是一个个人网站，这是视频页面` }
         ]
     },
+    anime: {
+        title: siteContext.siteName + " | 动漫",
+        data: [
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，动漫` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是动漫页面` }
+        ]
+    },
     message: {
         title: siteContext.siteName + " | 留言",
         data: [
@@ -157,14 +164,31 @@ const headerConfig: HeaderConfigType = [
         word: "说说"
     },
     {
-        path: pathConfig.music,
-        icon: resource.music,
-        word: "音乐"
+        icon: resource.entertainment,
+        word: "娱乐",
+        children: [
+            {
+                path: pathConfig.music,
+                icon: resource.music,
+                word: "音乐"
+            },
+            {
+                path: pathConfig.video,
+                icon: resource.video,
+                word: "视频"
+            }
+        ]
     },
     {
-        path: pathConfig.video,
-        icon: resource.video,
-        word: "视频"
+        icon: resource.warehouse,
+        word: "仓库",
+        children: [
+            {
+                path: pathConfig.anime,
+                icon: resource.anime,
+                word: "动漫"
+            }
+        ]
     },
     {
         icon: resource.other,

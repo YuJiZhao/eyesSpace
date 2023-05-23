@@ -2,11 +2,12 @@ import { get, post, put, del } from "./ajax";
 import { 
     ApiObject, 
     SiteInterface, 
-    UserApiInterface, 
-    MusicInterface, 
-    VideoInterface, 
+    UserInterface, 
     ShuoshuoInterface, 
     BlogInterface,
+    MusicInterface, 
+    VideoInterface,
+    AnimeInterface,
     VersionInterface
 } from "@/d.ts/server/api";
 import { UrlReqType } from "@/constant";
@@ -35,6 +36,12 @@ const site: SiteInterface = {
     },
     delAboutComment: async (req) => {
         return await del("/message/delMessage", req, UrlReqType.path);
+    }
+}
+
+const user: UserInterface = {
+    getUserInfo: async () => {
+        return await get("/user/getUserInfo");
     }
 }
 
@@ -92,15 +99,6 @@ const shuoshuo: ShuoshuoInterface = {
     }
 }
 
-const video: VideoInterface = {
-    getVideoInfo: async () => {
-        return await get("/video/getVideoInfoByUser");
-    },
-    doVideoUserLike: async (req) => {
-        return await get("/video/doUserLike", req);
-    }
-}
-
 const music: MusicInterface = {
     getMusicInfo: async () => {
         return await get("/music/getMusicInfoByUser");
@@ -110,16 +108,40 @@ const music: MusicInterface = {
     }
 }
 
-const userApi: UserApiInterface = {
-    getUserInfo: async () => {
-        return await get("/user/getUserInfo");
+const video: VideoInterface = {
+    getVideoInfo: async () => {
+        return await get("/video/getVideoInfoByUser");
     },
-    updateUserInfo: async (req) => {
-        return await put("/user/updateUserInfo", req);
+    doVideoUserLike: async (req) => {
+        return await get("/video/doUserLike", req);
     }
 }
 
-const versionApi: VersionInterface = {
+const anime: AnimeInterface = {
+    getAnimeNotice: async () => {
+        return await get("/anime/getAnimeNotice");
+    },
+    getAnimeListInfo: async () => {
+        return await get("/anime/getAnimeListInfo");
+    },
+    getAnimeList: async (req) => {
+        return await get("/anime/getAnimeList", req);
+    },
+    getAnimeInfo: async (req) => {
+        return await get("/anime/getAnimeInfo", req, UrlReqType.path);
+    },
+    doAnimeComment: async (req) => {
+        return await post("/anime/doAnimeComment", req);
+    },
+    getAnimeCommentList: async (req) => {
+        return await get("/anime/getAnimeCommentList", req);
+    },
+    delAnimeComment: async (req) => {
+        return await del("/anime/delAnimeComment", req, UrlReqType.path);
+    }
+}
+
+const version: VersionInterface = {
     getVersionInfo: async () => {
         return await get("/version/getVersionInfo");
     },
@@ -130,12 +152,13 @@ const versionApi: VersionInterface = {
 
 const api: ApiObject = {
     ...site,
+    ...user,
     ...blog,
     ...shuoshuo,
-    ...video,
     ...music,
-    ...userApi,
-    ...versionApi
+    ...video,
+    ...anime,
+    ...version
 }
 
 export default api;

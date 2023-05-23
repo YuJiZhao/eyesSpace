@@ -30,6 +30,7 @@ export default defineComponent({
 .announceCard {
   .announce {
     color: $normal;
+    line-height: 18px;
   }
 }
 </style>

@@ -42,7 +42,8 @@ export enum Dialogs {
 export enum HomeType {
     "blog",
     "shuoshuo",
-    "version"
+    "version",
+    "anime"
 }
 
 export enum CommentApiType {
@@ -50,7 +51,8 @@ export enum CommentApiType {
     "shuoshuo",
     "music",
     "video",
-    "site"
+    "site",
+    "anime"
 }
 
 export enum SimplifyNumType {

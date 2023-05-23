@@ -8,11 +8,12 @@ export declare interface RespInterface {
 // 统一api管理
 export declare interface ApiObject extends 
     SiteInterface, 
-    UserApiInterface, 
+    UserInterface, 
+    BlogInterface,
+    ShuoshuoInterface,
     MusicInterface, 
     VideoInterface,
-    ShuoshuoInterface,
-    BlogInterface,
+    AnimeInterface,
     VersionInterface
 {}
 
@@ -66,6 +67,15 @@ interface AddSpaceVisitReqInterface {
 
 /*
  ***************************************************************************************
+ *                                    user
+ ***************************************************************************************
+ */
+export declare interface UserInterface {
+    getUserInfo: () => Promise<RespInterface>;
+}
+
+/*
+ ***************************************************************************************
  *                                    blog
  ***************************************************************************************
  */
@@ -114,20 +124,6 @@ interface ShuoshuoSingleInfoReqInterface {
 
 /*
  ***************************************************************************************
- *                                    video
- ***************************************************************************************
- */
-export declare interface VideoInterface {
-    getVideoInfo: () => Promise<RespInterface>;
-    doVideoUserLike: (req: DoVideoUserLikeReqInterface) => Promise<RespInterface>;
-}
-
-interface DoVideoUserLikeReqInterface {
-    id: string;
-}
-
-/*
- ***************************************************************************************
  *                                    music
  ***************************************************************************************
  */
@@ -142,17 +138,35 @@ interface DoMusicUserLikeReqInterface {
 
 /*
  ***************************************************************************************
- *                                    user
+ *                                    video
  ***************************************************************************************
  */
-export declare interface UserApiInterface {
-    getUserInfo: () => Promise<RespInterface>;
-    updateUserInfo: (req: UpdateUserInfoReqInterface) => Promise<RespInterface>;
+export declare interface VideoInterface {
+    getVideoInfo: () => Promise<RespInterface>;
+    doVideoUserLike: (req: DoVideoUserLikeReqInterface) => Promise<RespInterface>;
 }
 
-interface UpdateUserInfoReqInterface {
-    name: string
+interface DoVideoUserLikeReqInterface {
+    id: string;
 }
+
+/*
+ ***************************************************************************************
+ *                                    anime
+ ***************************************************************************************
+ */
+
+export declare interface AnimeInterface {
+    getAnimeNotice: () => Promise<RespInterface>;
+    getAnimeListInfo: () => Promise<RespInterface>;
+    getAnimeList: (req: GetAnimeListReqInterface) => Promise<RespInterface>;
+    getAnimeInfo: (req: Array<any>) => Promise<RespInterface>;
+    doAnimeComment: (req: PublishCommentInterface) => Promise<RespInterface>;
+    getAnimeCommentList: (req: GetCommentListInterface) => Promise<RespInterface>;
+    delAnimeComment: (req: DelCommentInterface) => Promise<RespInterface>;
+}
+
+interface GetAnimeListReqInterface extends PageInterface {}
 
 /*
  ***************************************************************************************

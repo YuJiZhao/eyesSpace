@@ -1,10 +1,10 @@
 <template>
-  <div class="version">
+  <div class="anime">
     <Wait :show="show" :fail="isFail" height="400px">
-      <version-list :key="versionSentry" :versionListData="versionListData" />
+      <anime-list :key="animeSentry" :animeListData="animeListData" />
     </Wait>
     <Pagination
-      :key="versionSentry"
+      :key="animeSentry"
       :total="total"
       :size="pageSize"
       :initPage="page"
@@ -24,13 +24,13 @@ import { codeConfig } from "@/config/program";
 import { goBoth, GoBothType } from "@/hooks/useGoBoth";
 import { Wait } from "@/components/general/popup";
 import Pagination from "@/components/general/Pagination/pagination.vue";
-import { VersionList } from "@/components/content/version";
+import { AnimeList } from "@/components/content/anime";
 
 export default defineComponent({
-  name: "Version",
-  components: { Pagination, Wait, VersionList },
+  name: "Anime",
+  components: { Pagination, Wait, AnimeList },
   beforeRouteEnter: () => {
-    writerMeta(metaInfo.version);
+    writerMeta(metaInfo.anime);
   },
   setup() {
     const $api = inject<ApiObject>("$api")!;
@@ -41,38 +41,38 @@ export default defineComponent({
     let page = ref(1);
     let pageSize = ref(6);
     let total = ref(0);
-    let versionListData = ref([]);
-    let versionSentry = ref(0);
+    let animeSentry = ref(0);
+    let animeListData = ref([]);
 
-    async function getVersionList() {
-      $api.getVersionList({page: page.value}).then(({code, msg, data}) => {
+    async function getAnimeList() {
+      $api.getAnimeList({page: page.value}).then(({code, data}) => {
         if (code == codeConfig.success) {
-          versionListData.value = data.data;
+          animeListData.value = data.data;
           total.value = data.total;
           show.value = false;
-          versionSentry.value++;
+          animeSentry.value++;
           goBoth(GoBothType.TopSpeed);
         } else {
           $process.tipShow.error("获取数据失败");
           isFail.value = true;
         }
-      });
+      })
     }
 
     function pageChange(target: number) {
       page.value = target;
-      getVersionList();
+      getAnimeList();
     }
 
     onBeforeMount(() => {
-      getVersionList();
+      getAnimeList();
     })
 
     onActivated(() => {
       useProcessControl(true, {
         direction: CardDirection.row,
         cardType: CardType.CardList,
-        cardList: CardList.VersionCardList
+        cardList: CardList.AnimeCardList
       });
     })
 
@@ -82,8 +82,8 @@ export default defineComponent({
       total,
       page,
       pageSize,
-      versionListData,
-      versionSentry,
+      animeSentry,
+      animeListData,
       pageChange
     };
   },
@@ -91,7 +91,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.version {
+.anime {
   width: 100%;
 }
 </style>

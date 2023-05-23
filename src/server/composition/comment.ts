@@ -9,7 +9,8 @@ export async function publishComment(type: CommentApiType, req: PublishCommentIn
         api.doShuoshuoComment,
         api.doBlogComment,
         api.doBlogComment,
-        api.doAboutComment
+        api.doAboutComment,
+        api.doAnimeComment
     ][type](req);
 }
 
@@ -20,7 +21,8 @@ export async function getCommentList(type: CommentApiType, req: GetCommentListIn
         api.getShuoshuoCommentList,
         api.getBlogCommentList,
         api.getBlogCommentList,
-        api.getAboutCommentList
+        api.getAboutCommentList,
+        api.getAnimeCommentList
     ][type](req);
 }
 
@@ -31,6 +33,7 @@ export async function delComment(type: CommentApiType, req: DelCommentInterface)
         api.delShuoshuoComment,
         api.delBlogComment,
         api.delBlogComment,
-        api.delAboutComment
+        api.delAboutComment,
+        api.delAnimeComment
     ][type](req);
 }

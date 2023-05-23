@@ -21,12 +21,18 @@
       :views="data.homeList.views"
       :comments="data.homeList.comments"
       :createTime="data.homeList.createTime"
-      @click.capture.stop="jumpDetail(data.homeList.id)"
+      @click.capture.stop="jumpShuo(data.homeList.id)"
     />
     <version-item
       class="item versionItem"
       v-if="data.type == HomeType.version"
       :data="data.homeList"
+    />
+    <anime-item
+      class="item animeItem"
+      v-if="data.type == HomeType.anime"
+      :data="data.homeList"
+      @click="jumpAnime(data.homeList.id)"
     />
 </template>
 
@@ -37,32 +43,37 @@ import ShuoItem from "@/components/content/shuoshuo/components/ShuoItem.vue";
 import VersionItem from "@/components/content/version/components/VersionItem.vue";
 import { HomeType } from "@/constant";
 import { useRouter } from "vue-router";
-import Version from "@/views/content/Version.vue";
+import { AnimeItem } from "@/components/content/anime";
 
 export default defineComponent({
-  components: { BlogItem, ShuoItem, VersionItem, Version },
+  components: { BlogItem, ShuoItem, VersionItem, AnimeItem },
   props: ["data"],
   setup(props) {
     let router = useRouter();
 
-    function jumpDetail(id: string) {
+    function jumpShuo(id: string) {
       window.open(router.resolve({
         path: "/shuoshuo/details",
         query: { id }
       }).href, "_blank");
     }
 
+    function jumpAnime(id: number) {
+      window.open(router.resolve(`/anime/details/${id}`).href, "_blank");
+    }
+
     return {
       HomeType,
       data: props.data,
-      jumpDetail,
+      jumpShuo,
+      jumpAnime
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.shuoshuoItem {
+.shuoshuoItem, .animeItem {
   cursor: pointer;
 }
 </style>

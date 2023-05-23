@@ -8,10 +8,12 @@ import com.eyes.eyesspace.persistent.dto.BlogListDTO;
 import com.eyes.eyesspace.persistent.mapper.HomeMapper;
 import com.eyes.eyesspace.persistent.mapper.TrackMapper;
 import com.eyes.eyesspace.persistent.po.HomeListPO;
+import com.eyes.eyesspace.sync.model.dto.AnimeListDTO;
 import com.eyes.eyesspace.sync.model.dto.ShuoListDTO;
 import com.eyes.eyesspace.sync.model.dto.VersionListDTO;
 import com.eyes.eyesspace.sync.model.vo.HomeListVO;
 import com.eyes.eyesspace.sync.model.vo.SiteDataVO;
+import com.eyes.eyesspace.sync.service.AnimeService;
 import com.eyes.eyesspace.sync.service.BlogService;
 import com.eyes.eyesspace.sync.service.HomeService;
 import com.eyes.eyesspace.sync.service.ShuoService;
@@ -22,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -29,23 +32,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class HomeServiceImpl implements HomeService {
 
-  private final HomeMapper homeMapper;
+  @Resource
+  private HomeMapper homeMapper;
 
-  private final TrackMapper trackMapper;
+  @Resource
+  private TrackMapper trackMapper;
 
-  private final BlogService blogService;
+  @Resource
+  private BlogService blogService;
 
-  private final ShuoService shuoService;
+  @Resource
+  private ShuoService shuoService;
 
-  private final VersionService versionService;
+  @Resource
+  private VersionService versionService;
 
-  public HomeServiceImpl(HomeMapper homeMapper, TrackMapper trackMapper, BlogService blogService, ShuoService shuoService, VersionService versionService) {
-    this.homeMapper = homeMapper;
-    this.trackMapper = trackMapper;
-    this.blogService = blogService;
-    this.shuoService = shuoService;
-    this.versionService = versionService;
-  }
+  @Resource
+  private AnimeService animeService;
 
   @Override
   public PageBind<HomeListVO> getHomeList(Integer page, Integer pageSize) throws CustomException {
@@ -71,6 +74,7 @@ public class HomeServiceImpl implements HomeService {
     Map<Integer, BlogListDTO> blogMap = new HashMap<>();
     Map<Integer, ShuoListDTO> shuoMap = new HashMap<>();
     Map<Integer, VersionListDTO> versionMap = new HashMap<>();
+    Map<Integer, AnimeListDTO> animeMap = new HashMap<>();
     for (Map.Entry<Integer, List<Integer>> entry: homeMap.entrySet()) {
       if (HomeTypeEnum.BLOG.getType().equals(entry.getKey())) {  // 博客列表
         List<BlogListDTO> blogList = blogService.getBlogListByIds(entry.getValue());
@@ -78,9 +82,12 @@ public class HomeServiceImpl implements HomeService {
       } else if (HomeTypeEnum.SHUOSHUO.getType().equals(entry.getKey())) {  // 说说列表
         List<ShuoListDTO> shuoList = shuoService.getShuoListByIds(entry.getValue());
         shuoMap = shuoList.stream().collect(Collectors.toMap(ShuoListDTO::getOriginalId, o -> o, (front, behind) -> front));
-      } else if (HomeTypeEnum.VERSION.getType().equals(entry.getKey())) {
+      } else if (HomeTypeEnum.VERSION.getType().equals(entry.getKey())) {  // 版本列表
         List<VersionListDTO> versionList = versionService.getVersionListByIds(entry.getValue());
         versionMap = versionList.stream().collect(Collectors.toMap(VersionListDTO::getId, o -> o, (front, behind) -> front));
+      } else if (HomeTypeEnum.ANIME.getType().equals(entry.getKey())) {  // 动漫列表
+        List<AnimeListDTO> animeList =  animeService.getAnimeListByIds(entry.getValue());
+        animeMap = animeList.stream().collect(Collectors.toMap(AnimeListDTO::getId, o -> o, (front, behind) -> front));
       } else {
         log.error("wrong content type: " + entry.getKey());
       }
@@ -101,6 +108,10 @@ public class HomeServiceImpl implements HomeService {
       } else if (HomeTypeEnum.VERSION.getType().equals(item.getType())) {
         homeItem.setType(HomeTypeEnum.VERSION.getType());
         homeItem.setHomeList(versionMap.get(item.getCid()));
+        homeListBeanList.add(homeItem);
+      } else if (HomeTypeEnum.ANIME.getType().equals(item.getType())) {
+        homeItem.setType(HomeTypeEnum.ANIME.getType());
+        homeItem.setHomeList(animeMap.get(item.getCid()));
         homeListBeanList.add(homeItem);
       } else {
         log.error("wrong content type: " + item.getType());

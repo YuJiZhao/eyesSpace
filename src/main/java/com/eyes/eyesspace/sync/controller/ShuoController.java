@@ -75,7 +75,7 @@ public class ShuoController {
     @Limiter
     @Permission
     @GetMapping("/getShuoList")
-    public Result<List<ShuoListVO>> getShuoList (@RequestParam(required = false) Integer page) throws CustomException {
+    public Result<List<ShuoListVO>> getShuoList(@RequestParam(required = false) Integer page) throws CustomException {
         page = (Objects.isNull(page) || page < 1) ? 1 : page;
         return Result.success(shuoService.getShuoList(page, shuoPageSize));
     }

@@ -79,7 +79,7 @@ public interface BlogMapper {
     @Update("update blog set views=views+1 where id=#{id}")
     Boolean addView(Integer id);
 
-    @Update("update blog set comments = comments + #{i} where id=#{objectId}")
+    @Update("update blog set comments=comments+#{i} where id=#{objectId}")
     Boolean updateBlogComments(Integer objectId, int i);
 
     @Select("select c.type, c.object_id objectId, b.status from comment c, blog b where c.id=#{id} and c.object_id=b.id")

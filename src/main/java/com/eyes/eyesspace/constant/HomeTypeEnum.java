@@ -10,7 +10,9 @@ public enum HomeTypeEnum {
 
     SHUOSHUO(1, "说说"),
 
-    VERSION(2, "版本");
+    VERSION(2, "版本"),
+
+    ANIME(3, "动漫");
 
     private final Integer type;
 

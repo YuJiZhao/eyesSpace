@@ -16,4 +16,8 @@ public class FileOperationLogConstant {
   public static final int VIDEO = 4;
 
   public static final int VIDEO_COVER = 5;
+
+  public static final int VERSION = 6;
+
+  public static final int ANIME = 7;
 }

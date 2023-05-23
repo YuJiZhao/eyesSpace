@@ -14,7 +14,9 @@ public enum CommentEnum {
 
     VIDEO(3, "视频评论"),
 
-    MESSAGE(4,  "全站留言");
+    MESSAGE(4,  "全站留言"),
+
+    ANIME(5, "动漫评论");
 
     private final Integer type;
 

@@ -20,7 +20,7 @@ const siteContext: SiteContextInterface = {
     clientId: 198344,
     siteName: "耶瞳空间",
     siteNameEn: "eyesSpace",
-    spaceVersion: "3.2.0",
+    spaceVersion: "3.3.0",
     ownerEmail: "eyesyeager@gmail.com",
     siteVideoBV: "BV1fg411b7sF",
     commentMaxLen: 1000

@@ -69,7 +69,7 @@ export default defineComponent({
     width: 60%;
     padding: 10px;
     .title {
-        height: 40px;
+        min-height: 40px;
         font-size: 24px;
         text-align: center;
         line-height: 30px;

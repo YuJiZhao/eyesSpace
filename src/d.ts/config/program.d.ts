@@ -22,7 +22,6 @@ export declare interface SiteConfigInterface {
     keepAliveRoute: Array<string>;
     avatarMaxSize: number;
     avatarImgType: Array<string>;
-    followCardId: string;
     sideBarShowStorage: string;
 }
 

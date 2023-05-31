@@ -25,7 +25,6 @@ const siteConfig: SiteConfigInterface = {
     keepAliveRoute: ["Home", "Blog", "Shuoshuo", "Music", "Video", "Anime", "Message", "Version", "About"],
     avatarMaxSize: 5,
     avatarImgType: ["image/png", "image/jpg", "image/jpeg"],
-    followCardId: "stickyCard",
     sideBarShowStorage: "isSideBarShow"
 }
 

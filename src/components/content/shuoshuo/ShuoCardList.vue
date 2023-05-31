@@ -1,7 +1,7 @@
 <template>
   <div class="shuoCard">
     <owner-card class="card" />
-    <shuo-data-card class="card" :id="followId" />
+    <shuo-data-card class="card" />
     <info-card class="card" />
   </div>
 </template>
@@ -16,7 +16,6 @@ export default defineComponent({
   components: { InfoCard, OwnerCard, ShuoDataCard },
   setup() {
     return {
-      followId: siteConfig.followCardId
     };
   },
 });

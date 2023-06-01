@@ -48,7 +48,7 @@ const metaInfo = {
     home: {
         title: siteContext.siteName + " | 首页",
         data: [
-            { keywords: `${siteContext.siteName}，个人网站，耶瞳，eyes，eyesyeager，程序员，博客，说说，音乐，视频` },
+            { keywords: `${siteContext.siteName}，个人网站，耶瞳，eyes，eyesyeager，程序员，博客，说说，音乐，视频，动漫，留言，友联，版本，关于` },
             { description: `这是${siteContext.siteName}，是一个个人网站` }
         ]
     },
@@ -62,49 +62,56 @@ const metaInfo = {
     shuoshuo: {
         title: siteContext.siteName + " | 说说",
         data: [
-            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，代码，程序员，音乐，视频` },
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，说说` },
             { description: `这是${siteContext.siteName}，是一个个人网站，这是说说页面` }
         ]
     },
     music: {
         title: siteContext.siteName + " | 音乐",
         data: [
-            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，音乐` },
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，音乐` },
             { description: `这是${siteContext.siteName}，是一个个人网站，这是音乐页面` }
         ]
     },
     video: {
         title: siteContext.siteName + " | 视频",
         data: [
-            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，视频` },
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，视频` },
             { description: `这是${siteContext.siteName}，是一个个人网站，这是视频页面` }
         ]
     },
     anime: {
         title: siteContext.siteName + " | 动漫",
         data: [
-            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，动漫` },
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，动漫` },
             { description: `这是${siteContext.siteName}，是一个个人网站，这是动漫页面` }
         ]
     },
     message: {
         title: siteContext.siteName + " | 留言",
         data: [
-            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，代码，程序员，音乐，视频` },
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，留言` },
             { description: `这是${siteContext.siteName}，是一个个人网站，这是留言页面` }
         ]
+    },
+    friend: {
+        title: siteContext.siteName + " | 友链",
+        data: [
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，友链` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是友链页面` }
+        ] 
     },
     version: {
         title: siteContext.siteName + " | 版本信息",
         data: [
-            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，代码，程序员，音乐，视频，版本，更新，日志` },
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，版本，更新，日志` },
             { description: `这是${siteContext.siteName}，是一个个人网站，这是版本信息页面` }
         ]
     },
     about: {
         title: siteContext.siteName + " | 关于",
         data: [
-            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，代码，程序员，音乐，视频` },
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活` },
             { description: `这是${siteContext.siteName}，是一个个人网站，这是关于页面` }
         ]
     }
@@ -198,6 +205,11 @@ const headerConfig: HeaderConfigType = [
                 path: pathConfig.message,
                 icon: resource.message,
                 word: "留言"
+            },
+            {
+                path: pathConfig.friend,
+                icon: resource.friend,
+                word: "友链"
             },
             {
                 path: pathConfig.version,

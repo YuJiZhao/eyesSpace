@@ -31,6 +31,7 @@ export enum CardList {
     "BlogCardList",
     "BlogDetailCardList",
     "AnimeCardList",
+    "FriendCardList",
     "VersionCardList"
 }
 

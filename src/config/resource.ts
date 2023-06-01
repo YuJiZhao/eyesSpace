@@ -20,6 +20,7 @@ const icon = {
     anime: siteResource + "anime.png",
     other: siteResource + "other.png",
     message: siteResource + "message.png",
+    friend: siteResource + "friend.png",
     version: siteResource + "version.png",
     about: siteResource + "about.png",
     menu: siteResource + "menu.png",

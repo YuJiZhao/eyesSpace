@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, nextTick, ref, watch } from "vue";
-import { ProcessInterface, WindowInterface } from "@/d.ts/plugin";
+import { defineComponent, inject } from "vue";
+import { ProcessInterface } from "@/d.ts/plugin";
 import { CardType } from "@/constant";
 import { AnnounceCard, InfoCard, OwnerCard } from "@/components/general/card";
 import VideoCardList from "@/components/content/video/VideoCardList.vue";
@@ -19,8 +19,8 @@ import ShuoCardList from "@/components/content/shuoshuo/ShuoCardList.vue";
 import BlogCardList from "@/components/content/blog/BlogCardList.vue";
 import BlogDetailCardList from "@/components/content/blogDetail/BlogDetailCardList.vue";
 import AnimeCardList from "@/components/content/anime/AnimeCardList.vue";
+import { FriendCardList } from "@/components/content/friend";
 import VersionDataCardList from "@/components/content/version/VersionCardList.vue";
-import { siteConfig } from "@/config/program";
 
 export default defineComponent({
   components: { 
@@ -29,25 +29,8 @@ export default defineComponent({
   },
   setup() {
     const $process = inject<ProcessInterface>("$process")!;
-    const $window = inject<WindowInterface>("$window")!;
     const cardComponents = [AnnounceCard, InfoCard, OwnerCard];
-    const cardListComponents = [VideoCardList, ShuoCardList, BlogCardList, BlogDetailCardList, AnimeCardList, VersionDataCardList];
-
-    let sticky = ref("static");
-    let stickyHeight = ref("0px");
-
-    watch(
-      () => $process.sideCardFollow.value,
-      (value) => {
-        if(!value || $window.width.value < siteConfig.mpThreshold) return;
-        nextTick(() => {
-          if(document.querySelector(`#${siteConfig.followCardId}`)) {
-            sticky.value = "sticky";
-            stickyHeight.value = -((document.querySelector(`#${siteConfig.followCardId}`) as HTMLElement).offsetTop - 90) + "px";
-          }
-        })
-      }
-    )
+    const cardListComponents = [VideoCardList, ShuoCardList, BlogCardList, BlogDetailCardList, AnimeCardList, FriendCardList, VersionDataCardList];
 
     return {
       CardType,
@@ -55,9 +38,7 @@ export default defineComponent({
       cardListComponents,
       type: $process.sideCardType,
       cardChoices: $process.sideCardChoice,
-      cardListChoice: $process.sideCardList,
-      sticky,
-      stickyHeight
+      cardListChoice: $process.sideCardList
     };
   },
 });
@@ -69,10 +50,6 @@ export default defineComponent({
   padding-top: 0;
   .cards > .card {
     margin-bottom: 20px;
-  }
-  .cardList {
-    position: v-bind(sticky);
-	  top: v-bind(stickyHeight);
   }
 }
 </style>

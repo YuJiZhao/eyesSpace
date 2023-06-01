@@ -1,18 +1,18 @@
 <template>
-  <div class="shuoCard">
+  <div class="friendCard">
     <owner-card class="card" />
-    <shuo-data-card class="card" />
+    <friend-data-card class="card" />
     <info-card class="card" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ShuoDataCard from "@/components/content/shuoshuo/components/cards/ShuoDataCard.vue";
-import { InfoCard, OwnerCard } from "@/components/general/card";
+import { OwnerCard, InfoCard } from "@/components/general/card";
+import FriendDataCard from "./components/cards/FriendDataCard.vue";
 
 export default defineComponent({
-  components: { InfoCard, OwnerCard, ShuoDataCard },
+  components: { OwnerCard, InfoCard, FriendDataCard },
   setup() {
     return {
     };
@@ -21,7 +21,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.shuoCard {
+.friendCard {
   .card {
     margin-bottom: 20px;
   }

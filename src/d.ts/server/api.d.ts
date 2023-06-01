@@ -14,6 +14,7 @@ export declare interface ApiObject extends
     MusicInterface, 
     VideoInterface,
     AnimeInterface,
+    FriendInterface,
     VersionInterface
 {}
 
@@ -167,6 +168,24 @@ export declare interface AnimeInterface {
 }
 
 interface GetAnimeListReqInterface extends PageInterface {}
+
+/*
+ ***************************************************************************************
+ *                                    friend
+ ***************************************************************************************
+ */
+export declare interface FriendInterface {
+    applyFriendChain: (req: ApplyFriendChainReqInterface) => Promise<RespInterface>;
+    getFriendListData: () => Promise<RespInterface>;
+    getFriendList: (req: GetFriendListReqInterface) => Promise<RespInterface>;
+    getFriendPreamble: () => Promise<RespInterface>;
+}
+
+interface ApplyFriendChainReqInterface {
+
+}
+
+interface GetFriendListReqInterface extends PageInterface {}
 
 /*
  ***************************************************************************************

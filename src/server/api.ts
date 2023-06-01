@@ -8,6 +8,7 @@ import {
     MusicInterface, 
     VideoInterface,
     AnimeInterface,
+    FriendInterface,
     VersionInterface
 } from "@/d.ts/server/api";
 import { UrlReqType } from "@/constant";
@@ -141,6 +142,22 @@ const anime: AnimeInterface = {
     }
 }
 
+const friend: FriendInterface = {
+    applyFriendChain: async (req) => {
+        return await post("/friend/applyFriendChain", req);
+    },
+    getFriendListData: async () => {
+        return await get("/friend/getFriendListData");
+    },
+    getFriendList: async (req) => {
+        return await get("/friend/getFriendList", req);
+    },
+    getFriendPreamble: async () => {
+        return await get("/friend/getFriendPreamble");
+    }
+}
+
+
 const version: VersionInterface = {
     getVersionInfo: async () => {
         return await get("/version/getVersionInfo");
@@ -158,6 +175,7 @@ const api: ApiObject = {
     ...music,
     ...video,
     ...anime,
+    ...friend,
     ...version
 }
 

@@ -9,6 +9,7 @@ import com.eyes.eyesspace.sync.model.vo.ContextVO;
 import com.eyes.eyesspace.sync.service.ContextService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author eyesYeager
  */
 @Api(tags = "配置模块")
+@Validated
 @RestController
 @RequestMapping("/context")
 public class ContextController {

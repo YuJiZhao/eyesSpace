@@ -9,8 +9,8 @@ import com.eyes.eyesspace.queue.constant.QueueConstant;
 import com.eyes.eyesspace.queue.model.CommentNoticeModel;
 import com.eyes.eyesspace.queue.model.ReplyNoticeModel;
 import com.eyes.eyesspace.persistent.po.ReplyInfoPO;
-import com.eyes.eyesspace.queue.template.EmailCommentNotice;
-import com.eyes.eyesspace.queue.template.EmailCommentReplyNotice;
+import com.eyes.eyesspace.utils.email.EmailCommentNotice;
+import com.eyes.eyesspace.utils.email.EmailCommentReplyNotice;
 import com.eyes.eyesspace.persistent.mapper.CommentMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -29,9 +29,6 @@ import org.springframework.stereotype.Component;
 public class NoticeMonitor {
     @Value("${app.name-cn}")
     private String appName;
-
-    @Value("${app.logo}")
-    private String appLogo;
 
     @Value("${app.author-cn}")
     private String authorCN;
@@ -61,7 +58,6 @@ public class NoticeMonitor {
             appName + commentNoticeModel.getSubject(),
             new EmailCommentNotice(
                 appName + commentNoticeModel.getSubject(),
-                appLogo,
                 authorCN,
                 commentNoticeModel.getUrl(),
                 commentNoticeModel.getContent()
@@ -100,7 +96,6 @@ public class NoticeMonitor {
             appName + replyNoticeModel.getSubject(),
             new EmailCommentReplyNotice(
                 appName,
-                appLogo,
                 authorCN,
                 replyNoticeModel.getUrl(),
                 replyInfo.getContent()

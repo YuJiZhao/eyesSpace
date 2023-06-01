@@ -4,7 +4,7 @@ import com.eyes.eyesTools.service.email.EmailSender;
 import com.eyes.eyesspace.queue.constant.QueueConstant;
 import com.eyes.eyesspace.queue.model.DailyReportModel;
 import com.eyes.eyesspace.queue.model.MonthlyReportModel;
-import com.eyes.eyesspace.queue.template.EmailDailyReport;
+import com.eyes.eyesspace.utils.email.EmailDailyReport;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,9 +23,6 @@ import org.springframework.stereotype.Component;
 public class ReportMonitor {
   @Value("${app.name-cn}")
   private String appName;
-
-  @Value("${app.logo}")
-  private String appLogo;
 
   @Value("${app.author-cn}")
   private String authorCN;
@@ -46,7 +43,6 @@ public class ReportMonitor {
         appName + dailyReportModel.getSubject(),
         new EmailDailyReport(
             appName + dailyReportModel.getSubject(),
-            appLogo,
             authorCN,
             dailyReportModel.getVisitNum(),
             dailyReportModel.getVisitorNum(),

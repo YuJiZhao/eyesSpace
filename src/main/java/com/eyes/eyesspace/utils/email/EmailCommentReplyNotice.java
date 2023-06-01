@@ -1,4 +1,4 @@
-package com.eyes.eyesspace.queue.template;
+package com.eyes.eyesspace.utils.email;
 
 import lombok.AllArgsConstructor;
 
@@ -8,7 +8,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class EmailCommentReplyNotice {
     private final String title;
-    private final String logo;
     private final String name;
 
     private final String url;
@@ -31,8 +30,6 @@ public class EmailCommentReplyNotice {
                 "        <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"330\" style=\"border-collapse: collapse;\">\n" +
                 "          <tr style=\"border-bottom: 2px solid rgb(39, 88, 113);\">\n" +
                 "            <td style=\"font-size: 25px;color: rgb(39, 88, 113);\">" + title + "</td>\n" +
-                "            <td></td>\n" +
-                "            <td align=\"right\"><img style=\"border:none; outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;\" width=\"50\" height=\"50\" src=\"" + logo + "\" alt=\"logo\"></td>\n" +
                 "          </tr>\n" +
                 "        </table>\n" +
                 "      </tr>\n" +

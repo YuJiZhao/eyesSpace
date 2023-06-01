@@ -163,8 +163,8 @@ public class FriendServiceImpl implements FriendService {
     Map<Integer, Long> statusMap = statusList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     return new FriendListInfoVO(
         statusMap.getOrDefault(FriendChainConstant.NORMAL, 0L),
-        statusMap.getOrDefault(FriendChainConstant.VERIFYING, 0L),
-        statusMap.getOrDefault(FriendChainConstant.INVALID, 0L) + statusMap.getOrDefault(FriendChainConstant.STAGING, 0L)
+        statusMap.getOrDefault(FriendChainConstant.INVALID, 0L) + statusMap.getOrDefault(FriendChainConstant.STAGING, 0L),
+        statusMap.getOrDefault(FriendChainConstant.VERIFYING, 0L)
     );
   }
 

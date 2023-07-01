@@ -1,5 +1,6 @@
-package com.eyes.eyesspace.queue.monitor;
+package com.eyes.eyesspace.async.asynchronist.achieve;
 
+import com.eyes.eyesspace.async.asynchronist.asyncRestrict.SEOAsyncRestrict;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RefreshScope
 @Component
-public class SEOMonitor {
+public class SEOAchieve implements SEOAsyncRestrict {
 
   /**
    * TODO: 等前端用nuxt重构后再做

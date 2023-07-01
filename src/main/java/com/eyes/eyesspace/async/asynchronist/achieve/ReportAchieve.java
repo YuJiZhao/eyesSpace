@@ -1,12 +1,11 @@
-package com.eyes.eyesspace.queue.monitor;
+package com.eyes.eyesspace.async.asynchronist.achieve;
 
 import com.eyes.eyesTools.service.email.EmailSender;
-import com.eyes.eyesspace.queue.constant.QueueConstant;
-import com.eyes.eyesspace.queue.model.DailyReportModel;
-import com.eyes.eyesspace.queue.model.MonthlyReportModel;
-import com.eyes.eyesspace.utils.email.EmailDailyReport;
+import com.eyes.eyesspace.async.asynchronist.asyncRestrict.ReportAsyncRestrict;
+import com.eyes.eyesspace.async.model.DailyReportModel;
+import com.eyes.eyesspace.async.model.MonthlyReportModel;
+import com.eyes.eyesspace.async.template.EmailDailyReportTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
@@ -20,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RefreshScope
 @Component
-public class ReportMonitor {
+public class ReportAchieve implements ReportAsyncRestrict {
   @Value("${app.name-cn}")
   private String appName;
 
@@ -32,16 +31,16 @@ public class ReportMonitor {
 
   private final EmailSender emailSender;
 
-  public ReportMonitor(EmailSender emailSender) {
+  public ReportAchieve(EmailSender emailSender) {
     this.emailSender = emailSender;
   }
 
-  @RabbitListener(queues = QueueConstant.EMAIL_REPORT_DAILY)
+  @Override
   public void sendDailyReport(DailyReportModel dailyReportModel) {
     emailSender.sendMail(
         authorEmail,
         appName + dailyReportModel.getSubject(),
-        new EmailDailyReport(
+        new EmailDailyReportTemplate(
             appName + dailyReportModel.getSubject(),
             authorCN,
             dailyReportModel.getVisitNum(),
@@ -52,7 +51,7 @@ public class ReportMonitor {
     );
   }
 
-  @RabbitListener(queues = QueueConstant.EMAIL_REPORT_MONTHLY)
+  @Override
   public void sendMonthlyReport(MonthlyReportModel monthlyReportModel) {
 
   }

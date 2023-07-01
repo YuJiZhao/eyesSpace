@@ -1,4 +1,4 @@
-package com.eyes.eyesspace.utils.email;
+package com.eyes.eyesspace.async.template;
 
 import com.eyes.eyesspace.persistent.dto.FriendChainApplyDTO;
 import java.text.SimpleDateFormat;
@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
  * @date 2023/6/1 10:45
  */
 @AllArgsConstructor
-public class EmailFriendApplyNotice {
+public class EmailFriendApplyNoticeTemplate {
   private final String title;
   private final String name;
 

@@ -1,4 +1,4 @@
-package com.eyes.eyesspace.utils.email;
+package com.eyes.eyesspace.async.template;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
  * @date 2023/6/1 16:04
  */
 @AllArgsConstructor
-public class EmailFriendInvalid {
+public class EmailFriendInvalidTemplate {
   private final String title;
   private final String name;
 

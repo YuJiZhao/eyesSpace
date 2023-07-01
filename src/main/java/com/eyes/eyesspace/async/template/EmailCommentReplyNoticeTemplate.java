@@ -1,4 +1,4 @@
-package com.eyes.eyesspace.utils.email;
+package com.eyes.eyesspace.async.template;
 
 import lombok.AllArgsConstructor;
 
@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @AllArgsConstructor
-public class EmailCommentReplyNotice {
+public class EmailCommentReplyNoticeTemplate {
     private final String title;
     private final String name;
 

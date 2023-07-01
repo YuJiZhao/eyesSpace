@@ -1,20 +1,19 @@
 package com.eyes.eyesspace.job.report;
 
+import com.eyes.eyesspace.async.asynchronist.asyncRestrict.ReportAsyncRestrict;
+import com.eyes.eyesspace.async.model.MonthlyReportModel;
 import com.eyes.eyesspace.persistent.mapper.CommentMapper;
 import com.eyes.eyesspace.persistent.mapper.TrackMapper;
-import com.eyes.eyesspace.queue.constant.QueueConstant;
-import com.eyes.eyesspace.queue.model.MonthlyReportModel;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import javax.annotation.Resource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
  * 月报
- * @BUG: 没生效
  * @author eyesYeager
  * @date 2023/2/9 14:20
  */
@@ -22,14 +21,14 @@ import org.springframework.stereotype.Component;
 public class MonthlyReport {
   private static final String SUBJECT = " | 月报";
 
-  private final RabbitTemplate rabbitTemplate;
-
   private final TrackMapper trackMapper;
 
   private final CommentMapper commentMapper;
 
-  public MonthlyReport(RabbitTemplate rabbitTemplate, TrackMapper trackMapper, CommentMapper commentMapper) {
-    this.rabbitTemplate = rabbitTemplate;
+  @Resource
+  private ReportAsyncRestrict reportActuator;
+
+  public MonthlyReport(TrackMapper trackMapper, CommentMapper commentMapper) {
     this.trackMapper = trackMapper;
     this.commentMapper = commentMapper;
   }
@@ -53,7 +52,7 @@ public class MonthlyReport {
     String lastFirstDayStr = lastFirstDay.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
     // 邮件通知
-    rabbitTemplate.convertAndSend(QueueConstant.EMAIL_REPORT_MONTHLY, new MonthlyReportModel(
+    reportActuator.sendMonthlyReport(new MonthlyReportModel(
         SUBJECT,
         trackMapper.getVisitNumByTime(lastFirstDayStr, currentFirstDayStr),
         trackMapper.getVisitorNumByTime(lastFirstDayStr, currentFirstDayStr),

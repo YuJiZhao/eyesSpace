@@ -1,4 +1,4 @@
-package com.eyes.eyesspace.queue.model;
+package com.eyes.eyesspace.async.model;
 
 import java.io.Serializable;
 import lombok.AllArgsConstructor;

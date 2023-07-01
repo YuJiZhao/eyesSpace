@@ -1,4 +1,4 @@
-package com.eyes.eyesspace.utils.email;
+package com.eyes.eyesspace.async.template;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
  * @date 2023/2/9 14:53
  */
 @AllArgsConstructor
-public class EmailDailyReport {
+public class EmailDailyReportTemplate {
   private final String title;
   private final String name;
 

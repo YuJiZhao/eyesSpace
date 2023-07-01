@@ -7,26 +7,26 @@ import com.eyes.eyesAuth.thrift.config.TTSocket;
 import com.eyes.eyesAuth.thrift.generate.common.TTCustomException;
 import com.eyes.eyesAuth.thrift.generate.user.UserInfoReturnee;
 import com.eyes.eyesTools.common.exception.CustomException;
-import com.eyes.eyesspace.queue.constant.QueueConstant;
-import com.eyes.eyesspace.queue.model.CommentNoticeModel;
-import com.eyes.eyesspace.queue.model.ReplyNoticeModel;
+import com.eyes.eyesspace.async.asynchronist.asyncRestrict.NoticeAsyncRestrict;
+import com.eyes.eyesspace.async.model.CommentNoticeModel;
+import com.eyes.eyesspace.async.model.ReplyNoticeModel;
 import com.eyes.eyesspace.constant.StatusEnum;
-import com.eyes.eyesspace.sync.convert.CommentConvert;
 import com.eyes.eyesspace.persistent.mapper.CommentMapper;
-import com.eyes.eyesspace.sync.model.dto.CommentChildDTO;
-import com.eyes.eyesspace.sync.model.request.CommentAddRequest;
-import com.eyes.eyesspace.sync.model.vo.CommentListVO;
-import com.eyes.eyesspace.sync.model.dto.CommentReplyDTO;
 import com.eyes.eyesspace.persistent.po.CommentChildPO;
 import com.eyes.eyesspace.persistent.po.CommentIdPO;
 import com.eyes.eyesspace.persistent.po.CommentListPO;
+import com.eyes.eyesspace.sync.convert.CommentConvert;
+import com.eyes.eyesspace.sync.model.dto.CommentChildDTO;
+import com.eyes.eyesspace.sync.model.dto.CommentReplyDTO;
+import com.eyes.eyesspace.sync.model.request.CommentAddRequest;
+import com.eyes.eyesspace.sync.model.vo.CommentListVO;
 import com.eyes.eyesspace.sync.service.CommentService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
@@ -42,13 +42,13 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentMapper commentMapper;
 
-    private final RabbitTemplate rabbitTemplate;
-
     private final TTClientPool ttClientPool;
 
-    public CommentServiceImpl(CommentMapper commentMapper, RabbitTemplate rabbitTemplate, TTClientPool ttClientPool) {
+    @Resource
+    private NoticeAsyncRestrict noticeActuator;
+
+    public CommentServiceImpl(CommentMapper commentMapper, TTClientPool ttClientPool) {
         this.commentMapper = commentMapper;
-        this.rabbitTemplate = rabbitTemplate;
         this.ttClientPool = ttClientPool;
     }
 
@@ -77,18 +77,15 @@ public class CommentServiceImpl implements CommentService {
             commentAddRequest.getUrl(),
             commentAddRequest.getOriginalComment()
         );
-        rabbitTemplate.convertAndSend(QueueConstant.EMAIL_COMMENT_NOTICE, commentNoticeModel);
+        noticeActuator.sendUserCommentNotice(commentNoticeModel);
 
         // 如果是回复评论，则给被回复人发邮件
         if (noticeSwitch && Objects.nonNull(commentAddRequest.getReplyId())) {
-            rabbitTemplate.convertAndSend(
-                QueueConstant.EMAIL_COMMENT_REPLY_NOTICE,
-                new ReplyNoticeModel(
-                    COMMENT_SUBJECT,
-                    commentAddRequest.getReplyId(),
-                    commentAddRequest.getUrl()
-                )
-            );
+            noticeActuator.sendUserReplyCommentNotice(new ReplyNoticeModel(
+                COMMENT_SUBJECT,
+                commentAddRequest.getReplyId(),
+                commentAddRequest.getUrl()
+            ));
         }
     }
 

@@ -7,6 +7,12 @@ import com.eyes.eyesAuth.thrift.generate.common.TTCustomException;
 import com.eyes.eyesAuth.thrift.generate.user.UserInfoReturnee;
 import com.eyes.eyesTools.common.exception.CustomException;
 import com.eyes.eyesTools.service.email.EmailSender;
+import com.eyes.eyesspace.async.asynchronist.pool.ScheduledThreadPool;
+import com.eyes.eyesspace.async.asynchronist.pool.SingleThreadPool;
+import com.eyes.eyesspace.async.template.EmailFriendApplyNoticeTemplate;
+import com.eyes.eyesspace.async.template.EmailFriendApprovalTemplate;
+import com.eyes.eyesspace.async.template.EmailFriendInvalidTemplate;
+import com.eyes.eyesspace.async.template.EmailFriendRefuseTemplate;
 import com.eyes.eyesspace.constant.FriendChainConstant;
 import com.eyes.eyesspace.persistent.dto.FriendChainApplyDTO;
 import com.eyes.eyesspace.persistent.mapper.ContextMapper;
@@ -23,10 +29,6 @@ import com.eyes.eyesspace.sync.model.vo.FriendListInfoVO;
 import com.eyes.eyesspace.sync.model.vo.FriendListVO;
 import com.eyes.eyesspace.sync.model.vo.FriendPreambleVO;
 import com.eyes.eyesspace.sync.service.FriendService;
-import com.eyes.eyesspace.utils.email.EmailFriendApplyNotice;
-import com.eyes.eyesspace.utils.email.EmailFriendApproval;
-import com.eyes.eyesspace.utils.email.EmailFriendInvalid;
-import com.eyes.eyesspace.utils.email.EmailFriendRefuse;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +39,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -63,6 +64,10 @@ public class FriendServiceImpl implements FriendService {
   private static final int WAIT_TIME = 48;  // 单位为h
 
   private static final List<Integer> PREAMBLE_ID = Collections.singletonList(10);
+
+  private final ExecutorService singleThreadPool = SingleThreadPool.getExecutor();
+
+  private final ScheduledExecutorService scheduledThreadPool = ScheduledThreadPool.getExecutor();
 
   @Value("${app.name-cn}")
   private String appName;
@@ -92,12 +97,6 @@ public class FriendServiceImpl implements FriendService {
   private final EmailSender emailSender;
 
   private final TTClientPool ttClientPool;
-
-  @Resource
-  private ExecutorService singleThreadPool;
-
-  @Resource
-  private ScheduledExecutorService scheduledThreadPool;
 
   public FriendServiceImpl(FriendMapper friendMapper, ContextMapper contextMapper, EmailSender emailSender, TTClientPool ttClientPool) {
     this.friendMapper = friendMapper;
@@ -149,7 +148,7 @@ public class FriendServiceImpl implements FriendService {
     singleThreadPool.execute(() -> emailSender.sendMail(
         authorEmail,
         appName + APPLY_SUBJECT,
-        new EmailFriendApplyNotice(
+        new EmailFriendApplyNoticeTemplate(
             appName + APPLY_SUBJECT,
             authorCN,
             friendChainApplyDTO
@@ -197,7 +196,7 @@ public class FriendServiceImpl implements FriendService {
     singleThreadPool.execute(() -> emailSender.sendMail(
         friendOperatePO.getEmail(),
         appName + APPROVAL_SUBJECT,
-        new EmailFriendApproval(
+        new EmailFriendApprovalTemplate(
             appName,
             APPROVAL_SUBJECT,
             authorCN,
@@ -231,7 +230,7 @@ public class FriendServiceImpl implements FriendService {
     singleThreadPool.execute(() -> emailSender.sendMail(
         friendOperatePO.getEmail(),
         appName + REFUSE_SUBJECT,
-        new EmailFriendRefuse(
+        new EmailFriendRefuseTemplate(
             appName + REFUSE_SUBJECT,
             authorCN,
             friendChainRefuseRequest.getNotes()
@@ -273,7 +272,7 @@ public class FriendServiceImpl implements FriendService {
     singleThreadPool.execute(() -> emailSender.sendMail(
         friendOperatePO.getEmail(),
         appName + INVALID_SUBJECT,
-        new EmailFriendInvalid(
+        new EmailFriendInvalidTemplate(
             appName + INVALID_SUBJECT,
             authorCN,
             WAIT_TIME,

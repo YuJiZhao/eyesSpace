@@ -1,4 +1,4 @@
-package com.eyes.eyesspace.queue.model;
+package com.eyes.eyesspace.async.model;
 
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author eyesYeager
- * @date 2023/2/9 16:17
+ * @date 2023/2/9 20:38
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DailyReportModel implements Serializable {
+public class MonthlyReportModel implements Serializable {
   private String subject;
 
   private Integer visitNum;

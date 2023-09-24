@@ -84,6 +84,7 @@ export default defineComponent({
       }
       .child {
         margin-top: 20px;
+        backdrop-filter: blur(1px);
         cursor: pointer;
       }
     }

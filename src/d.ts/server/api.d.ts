@@ -160,10 +160,14 @@ interface DoVideoUserLikeReqInterface {
 export declare interface JokeInterface {
     getJokeNotice: () => Promise<RespInterface>;
     getJokeList: (req: GetJokeListReqInterface) => Promise<RespInterface>;
-    jokeVisit: () => Promise<RespInterface>;
+    jokeVisit: (req: JokeVisitReqInterface) => Promise<RespInterface>;
 }
 
 interface GetJokeListReqInterface extends PageInterface {}
+
+interface JokeVisitReqInterface {
+    id: number
+}
 
 /*
  ***************************************************************************************

@@ -126,8 +126,8 @@ const joke: JokeInterface = {
     getJokeList: async (req) => {
         return await get("/joke/getJokeList", req);
     },
-    jokeVisit: async () => {
-        return await get("/track/jokeVisit");
+    jokeVisit: async (req) => {
+        return await get("/track/jokeVisit", req);
     },
 }
 

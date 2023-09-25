@@ -24,4 +24,10 @@ public interface TrackMapper {
       + "values "
       + "(#{type}, #{uid}, #{method}, #{remarks}, now())")
   Boolean addFileLog(int type, long uid, int method, String remarks);
+
+  @Insert("insert into log_joke " +
+      "(joke_id, uid, ip, os, browser, create_time)" +
+      "values" +
+      "(#{jokeId}, #{uid}, #{ipAddr}, #{osName}, #{browserName}, now())")
+  Boolean addJokeLog(Long jokeId, Long uid, String ipAddr, String osName, String browserName);
 }

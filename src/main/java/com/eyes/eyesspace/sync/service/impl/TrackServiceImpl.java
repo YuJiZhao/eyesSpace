@@ -37,4 +37,17 @@ public class TrackServiceImpl implements TrackService {
         trackVisitAddRequest.getPath()
     )) { log.error("Website access data addition error"); }
   }
+
+  @Override
+  public void addJokeVisit(Long id) {
+    HttpServletRequest request = WebUtils.getRequest();
+
+    if (!trackMapper.addJokeLog(
+        id,
+        UserInfoHolder.getUid(),
+        IpUtils.getIpAddr(request),
+        OSUtils.osName(request),
+        BrowserUtils.browserName(request)
+    )) { log.error("joke visit data addition error"); }
+  }
 }

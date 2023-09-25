@@ -10,4 +10,6 @@ import com.eyes.eyesspace.sync.model.request.TrackVisitAddRequest;
 
 public interface TrackService {
   void addSpaceVisit(TrackVisitAddRequest trackVisitAddRequest) throws CustomException;
+
+  void addJokeVisit(Long id);
 }

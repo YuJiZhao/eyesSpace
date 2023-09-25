@@ -20,4 +20,6 @@ public class FileOperationLogConstant {
   public static final int VERSION = 6;
 
   public static final int ANIME = 7;
+
+  public static final int JOKE = 8;
 }

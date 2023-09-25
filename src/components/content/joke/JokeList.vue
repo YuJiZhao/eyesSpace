@@ -1,6 +1,6 @@
 <template>
   <div class="jokeList">
-    <div class="jokeItem" v-for="item in jokeListData" :key="item" @click.stop="handlePreview(item.id)">
+    <div class="jokeItem" v-for="item in jokeListData" :key="item" @click.stop="handlePreview(item)">
       <p>{{item.category}}</p>
     </div>
   </div>
@@ -16,14 +16,14 @@ export default defineComponent({
   setup(props) {
     const $api = inject<ApiObject>("$api")!;
 
-    function handlePreview(id: number) {
+    function handlePreview(item: any) {
       v3ImgPreviewFn({
-        images: <string[]>props.jokeListData.urlList,
+        images: <string[]>item.urlList,
         index: 0
       });
 
       // 埋点
-      $api.jokeVisit({id});
+      $api.jokeVisit({id: item.id});
     }
 
     return {

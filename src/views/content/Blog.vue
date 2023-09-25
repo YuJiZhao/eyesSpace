@@ -21,7 +21,7 @@ import { useRouter } from "vue-router";
 import { CardDirection, CardType, CardList } from "@/constant";
 import { codeConfig } from "@/config/program";
 import { Wait } from "@/components/general/popup";
-import BlogList from "@/components/content/blog/BlogList.vue";
+import { BlogList } from "@/components/content/blog";
 import { blogContext } from '@/components/content/blog/businessTs/blogContext';
 import Pagination from "@/components/general/Pagination/pagination.vue";
 import { goBoth, GoBothType } from "@/hooks/useGoBoth";

@@ -13,6 +13,7 @@ export declare interface ApiObject extends
     ShuoshuoInterface,
     MusicInterface, 
     VideoInterface,
+    JokeInterface,
     AnimeInterface,
     FriendInterface,
     VersionInterface
@@ -150,6 +151,19 @@ export declare interface VideoInterface {
 interface DoVideoUserLikeReqInterface {
     id: string;
 }
+
+/*
+ ***************************************************************************************
+ *                                    joke
+ ***************************************************************************************
+ */
+export declare interface JokeInterface {
+    getJokeNotice: () => Promise<RespInterface>;
+    getJokeList: (req: GetJokeListReqInterface) => Promise<RespInterface>;
+    jokeVisit: () => Promise<RespInterface>;
+}
+
+interface GetJokeListReqInterface extends PageInterface {}
 
 /*
  ***************************************************************************************

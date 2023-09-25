@@ -14,23 +14,24 @@ import { defineComponent, inject } from "vue";
 import { ProcessInterface } from "@/d.ts/plugin";
 import { CardType } from "@/constant";
 import { AnnounceCard, InfoCard, OwnerCard } from "@/components/general/card";
-import VideoCardList from "@/components/content/video/VideoCardList.vue";
-import ShuoCardList from "@/components/content/shuoshuo/ShuoCardList.vue";
-import BlogCardList from "@/components/content/blog/BlogCardList.vue";
-import BlogDetailCardList from "@/components/content/blogDetail/BlogDetailCardList.vue";
-import AnimeCardList from "@/components/content/anime/AnimeCardList.vue";
+import { VideoCardList } from "@/components/content/video";
+import { ShuoCardList } from "@/components/content/shuoshuo";
+import { BlogCardList } from "@/components/content/blog";
+import { BlogDetailCardList } from "@/components/content/blogDetail";
+import { AnimeCardList } from "@/components/content/anime";
 import { FriendCardList } from "@/components/content/friend";
-import VersionDataCardList from "@/components/content/version/VersionCardList.vue";
+import { VersionCardList } from "@/components/content/version";
+import { JokeCardList } from "@/components/content/joke";
 
 export default defineComponent({
   components: { 
     AnnounceCard, InfoCard, OwnerCard,
-    VideoCardList, ShuoCardList, BlogCardList, BlogDetailCardList, AnimeCardList, VersionDataCardList
+    VideoCardList, ShuoCardList, BlogCardList, BlogDetailCardList, AnimeCardList, VersionCardList, JokeCardList
   },
   setup() {
     const $process = inject<ProcessInterface>("$process")!;
     const cardComponents = [AnnounceCard, InfoCard, OwnerCard];
-    const cardListComponents = [VideoCardList, ShuoCardList, BlogCardList, BlogDetailCardList, AnimeCardList, FriendCardList, VersionDataCardList];
+    const cardListComponents = [VideoCardList, ShuoCardList, BlogCardList, BlogDetailCardList, AnimeCardList, FriendCardList, VersionCardList, JokeCardList];
 
     return {
       CardType,

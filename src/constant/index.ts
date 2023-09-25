@@ -32,7 +32,8 @@ export enum CardList {
     "BlogDetailCardList",
     "AnimeCardList",
     "FriendCardList",
-    "VersionCardList"
+    "VersionCardList",
+    "JokeCardList"
 }
 
 export enum Dialogs {

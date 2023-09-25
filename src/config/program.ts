@@ -22,7 +22,7 @@ const siteConfig: SiteConfigInterface = {
     aesKey: "",
     aesIV: "",
     enterURL: "enterURL",
-    keepAliveRoute: ["Home", "Blog", "Shuoshuo", "Music", "Video", "Anime", "Message", "Friend", "Version", "About"],
+    keepAliveRoute: ["Home", "Blog", "Shuoshuo", "Music", "Video", "Joke", "Anime", "Message", "Friend", "Version", "About"],
     avatarMaxSize: 5,
     avatarImgType: ["image/png", "image/jpg", "image/jpeg"],
     sideBarShowStorage: "isSideBarShow"

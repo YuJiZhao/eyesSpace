@@ -7,6 +7,7 @@ import {
     BlogInterface,
     MusicInterface, 
     VideoInterface,
+    JokeInterface,
     AnimeInterface,
     FriendInterface,
     VersionInterface
@@ -118,6 +119,18 @@ const video: VideoInterface = {
     }
 }
 
+const joke: JokeInterface = {
+    getJokeNotice: async () => {
+        return await get("/joke/getJokeNotice");
+    },
+    getJokeList: async (req) => {
+        return await get("/joke/getJokeList", req);
+    },
+    jokeVisit: async () => {
+        return await get("/track/jokeVisit");
+    },
+}
+
 const anime: AnimeInterface = {
     getAnimeNotice: async () => {
         return await get("/anime/getAnimeNotice");
@@ -174,6 +187,7 @@ const api: ApiObject = {
     ...shuoshuo,
     ...music,
     ...video,
+    ...joke,
     ...anime,
     ...friend,
     ...version

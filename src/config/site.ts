@@ -20,7 +20,7 @@ const siteContext: SiteContextInterface = {
     clientId: 198344,
     siteName: "耶瞳空间",
     siteNameEn: "eyesSpace",
-    spaceVersion: "3.4.0",
+    spaceVersion: "3.5.0",
     ownerEmail: "eyesyeager@gmail.com",
     siteVideoBV: "BV1fg411b7sF",
     commentMaxLen: 1000
@@ -78,6 +78,13 @@ const metaInfo = {
         data: [
             { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，视频` },
             { description: `这是${siteContext.siteName}，是一个个人网站，这是视频页面` }
+        ]
+    },
+    joke: {
+        title: siteContext.siteName + " | 梗图",
+        data: [
+            { keywords: `${siteContext.siteName}，耶瞳，eyes，eyesyeager，生活，梗图` },
+            { description: `这是${siteContext.siteName}，是一个个人网站，这是梗图页面` }
         ]
     },
     anime: {
@@ -183,6 +190,11 @@ const headerConfig: HeaderConfigType = [
                 path: pathConfig.video,
                 icon: resource.video,
                 word: "视频"
+            },
+            {
+                path: pathConfig.joke,
+                icon: resource.joke,
+                word: "梗图"
             }
         ]
     },

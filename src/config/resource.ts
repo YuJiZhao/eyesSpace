@@ -16,6 +16,7 @@ const icon = {
     entertainment: siteResource + "entertainment.png",
     music: siteResource + "music.png",
     video: siteResource + "video.png",
+    joke: siteResource + "joke.png",
     warehouse: siteResource + "warehouse.png",
     anime: siteResource + "anime.png",
     other: siteResource + "other.png",

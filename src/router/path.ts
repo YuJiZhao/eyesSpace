@@ -6,6 +6,7 @@ const publicPath = {
     shuoshuo: "/shuoshuo",
     music: "/music",
     video: "/video",
+    joke: "/joke",
     anime: "/anime",
     message: "/message",
     friend: "/friend",
@@ -80,6 +81,11 @@ const content: Array<RouteRecordRaw> = [
         path: publicPath.video,
         name: "video",
         component: () => import("@/views/content/Video.vue"),
+    },
+    {
+        path: publicPath.joke,
+        name: "joke",
+        component: () => import("@/views/content/Joke.vue"),
     },
     {
         path: publicPath.anime,

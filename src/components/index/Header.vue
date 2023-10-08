@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="space" @click="pageJump('/')">{{ spaceName }}</div>
-    <div class="left">
+    <div class="bar">
       <HeaderItem v-if="mpSwitch" />
       <div class="menuBar" :style="{backgroundImage: 'url(' + menuBar + ')' }" @click="openSideBar" v-else></div>
       <div class="avatar" @click="avatarClick" :style="{ backgroundImage: 'url(' + avatar + ')' }"></div>
@@ -123,7 +123,7 @@ export default defineComponent({
     font-size: 20px;
     cursor: pointer;
   }
-  .left {
+  .bar {
     display: flex;
     justify-content: space-between;
     .menuBar {

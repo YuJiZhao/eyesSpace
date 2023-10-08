@@ -23,6 +23,7 @@ export declare interface SiteConfigInterface {
     avatarMaxSize: number;
     avatarImgType: Array<string>;
     sideBarShowStorage: string;
+    stickyKey: string;
 }
 
 export declare interface CodeConfigInterface {

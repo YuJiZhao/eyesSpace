@@ -2,7 +2,7 @@
   <div class="blogDetailCardList">
     <owner-card class="card" />
     <blog-data-card class="card" />
-    <blog-catalog class="card" />
+    <blog-catalog class="card" :id="stickyKey" />
     <blog-c-r-card class="card" />
   </div>
 </template>
@@ -11,11 +11,13 @@
 import { defineComponent } from "vue";
 import { OwnerCard } from "@/components/general/card";
 import { BlogDataCard, BlogCRCard, BlogCatalog } from "@/components/content/blogDetail/components/cards";
+import { siteConfig } from "@/config/program";
 
 export default defineComponent({
   components: { OwnerCard, BlogDataCard, BlogCRCard, BlogCatalog },
   setup() {
     return {
+      stickyKey: siteConfig.stickyKey
     };
   },
 });

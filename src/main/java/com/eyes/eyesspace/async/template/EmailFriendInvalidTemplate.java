@@ -40,7 +40,7 @@ public class EmailFriendInvalidTemplate {
         + "      <tr>\n"
         + "        <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"340\" style=\"border-collapse: collapse;\">\n"
         + "          <tr style=\"height: 20px;\"></tr>\n"
-        + "          <tr><td>您的网站 <a href=\"" + siteUrl + "\">" + siteName + "</a> 似乎已经无法访问。</td></tr>\n"
+        + "          <tr><td>经系统检测，您的网站 <a href=\"" + siteUrl + "\">" + siteName + "</a> 似乎已经无法访问。</td></tr>\n"
         + "          <tr style=\"height: 10px;\"></tr>\n"
         + "          <tr><td><ul>\n"
         + "            <li>如果是地址变更，请回复新地址</li>\n"
